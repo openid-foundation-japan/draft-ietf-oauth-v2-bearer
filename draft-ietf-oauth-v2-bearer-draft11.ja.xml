@@ -12,7 +12,8 @@
   <?rfc subcompact='no' ?>
 
   <front>
-    <title abbrev='OAuth 2.0 Bearer Tokens'>The OAuth 2.0 Authorization Protocol: Bearer Tokens</title>
+    <!--title abbrev='OAuth 2.0 Bearer Tokens'>The OAuth 2.0 Authorization Protocol: Bearer Tokens</title-->
+    <title abbrev='OAuth 2.0 Bearer Tokens'>The OAuth 2.0 Authorization Protocol: Bearer Tokens(日本語)</title>
 
     <author fullname="Michael B. Jones" surname="Jones" initials="M.B."> <!-- role="editor" -->
       <organization>Microsoft</organization>
@@ -39,47 +40,72 @@
     <date year="2011" month="October" day="25" />
 
     <abstract>
-      <t>
+      <!--t>
         This specification describes how to use bearer tokens in HTTP
         requests to access OAuth 2.0 protected resources.  Any party
         in possession of a bearer token (a "bearer") can use it to get
         access to granted resources (without demonstrating possession
         of a cryptographic key).  To prevent misuse, the bearer token
         MUST be protected from disclosure in storage and in transport.
+      </t-->
+      <t>
+        この仕様書は、OAuth 2.0の保護リソースへアクセスするために、BearerトークンをHTTPリクエスト中でどのように利用するか記述したものである。
+        Bearerトークンを所有する任意のパーティ（bearer）は、認可済みリソースへアクセスするためにBearerトークンを利用できる。（暗号鍵の所有を明示す必要はない。）
+        誤った利用を避けるために、Bearerトークンは保存場所や流通経路で露見から守られなければならない（MUST)。
       </t>
     </abstract>
   </front>
 
   <middle>
 
-    <section title='Introduction'>
-      <t>
+    <!--section title='Introduction'-->
+    <section title='はじめに'>
+      <!--t>
         OAuth enables clients to access protected resources by
         obtaining an access token, which is defined in <xref
         target="I-D.ietf-oauth-v2"/> as "a string representing an access
         authorization issued to the client", rather than using the
         resource owner's credentials directly.
-      </t>
+      </t-->
       <t>
+        OAuthは、クライアントがアクセストークンを取得することで、保護リソースへのアクセスを可能にする。
+        アクセストークンは<xref target="I-D.ietf-oauth-v2"/>中で「クライアントに対するアクセス認可の文字列表現」と定義されており、
+        リソース所有者のクレデンシャルを直接利用することではない。
+      </t>
+      <!--t>
         Tokens are issued to clients by an authorization server with the approval of
         the resource owner. The client uses the access token to access the protected resources
         hosted by the resource server. This specification describes how to make protected resource
         requests when the OAuth access token is a bearer token.
-      </t>
+      </t-->
       <t>
+        トークンはリソース所有者の承認を伴い、認可サーバによってクライアントに対して発行される。
+        クライアントはアクセストークンを、リソースサーバが持つ保護リソースにアクセスするために利用する。
+        この仕様書では、アクセストークンがBearerトークンである場合に、保護リソースを要求する方法を記載する。
+      </t>
+      <!--t>
         This specification defines the use of bearer tokens with OAuth
         over <xref target='RFC2616'>HTTP</xref> using <xref
         target='RFC5246'>TLS</xref>. Other specifications may extend
         it for use with other transport protocols.
+      </t-->
+      <t>
+        この仕様書ではOAuthを<xref target='RFC2616'>HTTP</xref>及び<xref
+        target='RFC5246'>TLS</xref>で定義されたHTTP over TLSを用いるOAuthで、Bearerトークンを利用する方法を定める. 
+        他の仕様書がその他の転送プロトコルの元での利用について本仕様を拡張する可能性もある. 
       </t>
 
-      <section title='Notational Conventions'>
-        <t>
+      <!--section title='Notational Conventions'-->
+      <section title='要求記法および規則'>
+        <!--t>
           The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL NOT', 'SHOULD', 'SHOULD
           NOT', 'RECOMMENDED', 'MAY', and 'OPTIONAL' in this document are to be interpreted as
           described in <xref target='RFC2119' />.
-        </t>
+        </t-->
         <t>
+        本文書で用いられる各キーワード「MUST (しなければならない)」、「MUST NOT (してはならない)」、「REQUIRED (必須である)」、「SHALL (するものとする)」、「SHALL NOT (しないものとする)」、「SHOULD (すべきである)」、「SHOULD NOT (すべきではない)」、「RECOMMENDED (推奨される)」、「MAY (してもよい)」、「OPTIONAL (任意である)」は<xref target='RFC2119' />で述べられている通りに解釈されるべきものである。
+        </t>
+        <!--t>
           This document uses the Augmented Backus-Naur Form (ABNF)
           notation of <xref target='I-D.ietf-httpbis-p1-messaging' />,
           which is based upon the Augmented Backus-Naur Form (ABNF)
@@ -88,16 +114,27 @@
 	  from <xref target='I-D.ietf-httpbis-p7-auth' />: b64token, auth-param, and realm;
 	  from <xref target='I-D.ietf-httpbis-p1-messaging' />: quoted-string;
 	  and from <xref target='RFC3986' />: URI-Reference.
-        </t>
+        </t-->
         <t>
-          Unless otherwise noted, all the protocol parameter names and values are case sensitive.
+          このドキュメントでは<xref target='RFC5234' />におけるAugmented Backus-Naur Form (ABNF)表記法を元にした、<xref target='I-D.ietf-httpbis-p1-messaging' />におけるAugmented Backus-Naur Form(ABNF)表記法を利用している. 
+          加えて, 次の規則(<xref target='I-D.ietf-httpbis-p7-auth' /> 記載: b64token, auth-param, and realm; <xref target='I-D.ietf-httpbis-p1-messaging' />記載:  quoted-string; <xref target='RFC3986'/>記載: URI-Reference)に従う.
+
+
         </t>
+        <!--t>
+          Unless otherwise noted, all the protocol parameter names and values are case sensitive.
+        </t-->
+        <t>
+        特に記載が無い限り, 全てのプロトコルパラメーター名と値は, 大文字・小文字を区別する.
+        </t>
+
       </section>
 
-      <section title='Terminology'>
+      <!--section title='Terminology'-->
+      <section title='用語定義'>
         <t>
           <list style='hanging'>
-            <t hangText="Bearer Token">
+            <!--t hangText="Bearer Token">
               <vspace />
               A security token with the property that any party in
               possession of the token (a "bearer") can use the token
@@ -105,11 +142,20 @@
               Using a bearer token does not require a bearer to prove
               possession of cryptographic key material
               (proof-of-possession).
+            </t-->
+            <t hangText="Bearerトークン">
+              <vspace />
+              セキュリティトークン。
+              トークンを所有する任意のパーティ（bearer）は、それを所有する他の任意のパーティーにとって可能ないかなる方法でもトークンを利用することができるという特性を持っている。
+              Bearerトークンを利用する際、トークン保持者に対して、暗号鍵の所持を証明（proof-of-posession）するよう要求することはない。
             </t>
           </list>
         </t>
-        <t>
+        <!--t>
           All other terms are as defined in <xref target="I-D.ietf-oauth-v2" />.
+        </t-->
+        <t>
+          他の全ての用語は<xref target="I-D.ietf-oauth-v2" />で定義されている通りである。
         </t>
       </section>
 
