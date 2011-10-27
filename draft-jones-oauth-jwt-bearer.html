@@ -1,0 +1,664 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head><title>JSON Web Token (JWT) Bearer Profile for OAuth 2.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="JSON Web Token (JWT) Bearer Profile for OAuth 2.0">
+<meta name="generator" content="xml2rfc v1.35 (http://xml.resource.org/)">
+<style type='text/css'><!--
+        body {
+                font-family: verdana, charcoal, helvetica, arial, sans-serif;
+                font-size: small; color: #000; background-color: #FFF;
+                margin: 2em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+                font-family: helvetica, monaco, "MS Sans Serif", arial, sans-serif;
+                font-weight: bold; font-style: normal;
+        }
+        h1 { color: #900; background-color: transparent; text-align: right; }
+        h3 { color: #333; background-color: transparent; }
+
+        td.RFCbug {
+                font-size: x-small; text-decoration: none;
+                width: 30px; height: 30px; padding-top: 2px;
+                text-align: justify; vertical-align: middle;
+                background-color: #000;
+        }
+        td.RFCbug span.RFC {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: bold; color: #666;
+        }
+        td.RFCbug span.hotText {
+                font-family: charcoal, monaco, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: normal; text-align: center; color: #FFF;
+        }
+
+        table.TOCbug { width: 30px; height: 15px; }
+        td.TOCbug {
+                text-align: center; width: 30px; height: 15px;
+                color: #FFF; background-color: #900;
+        }
+        td.TOCbug a {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, sans-serif;
+                font-weight: bold; font-size: x-small; text-decoration: none;
+                color: #FFF; background-color: transparent;
+        }
+
+        td.header {
+                font-family: arial, helvetica, sans-serif; font-size: x-small;
+                vertical-align: top; width: 33%;
+                color: #FFF; background-color: #666;
+        }
+        td.author { font-weight: bold; font-size: x-small; margin-left: 4em; }
+        td.author-text { font-size: x-small; }
+
+        /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+        a.info {
+                /* This is the key. */
+                position: relative;
+                z-index: 24;
+                text-decoration: none;
+        }
+        a.info:hover {
+                z-index: 25;
+                color: #FFF; background-color: #900;
+        }
+        a.info span { display: none; }
+        a.info:hover span.info {
+                /* The span will display just on :hover state. */
+                display: block;
+                position: absolute;
+                font-size: smaller;
+                top: 2em; left: -5em; width: 15em;
+                padding: 2px; border: 1px solid #333;
+                color: #900; background-color: #EEE;
+                text-align: left;
+        }
+
+        a { font-weight: bold; }
+        a:link    { color: #900; background-color: transparent; }
+        a:visited { color: #633; background-color: transparent; }
+        a:active  { color: #633; background-color: transparent; }
+
+        p { margin-left: 2em; margin-right: 2em; }
+        p.copyright { font-size: x-small; }
+        p.toc { font-size: small; font-weight: bold; margin-left: 3em; }
+        table.toc { margin: 0 0 0 3em; padding: 0; border: 0; vertical-align: text-top; }
+        td.toc { font-size: small; font-weight: bold; vertical-align: text-top; }
+
+        ol.text { margin-left: 2em; margin-right: 2em; }
+        ul.text { margin-left: 2em; margin-right: 2em; }
+        li      { margin-left: 3em; }
+
+        /* RFC-2629 <spanx>s and <artwork>s. */
+        em     { font-style: italic; }
+        strong { font-weight: bold; }
+        dfn    { font-weight: bold; font-style: normal; }
+        cite   { font-weight: normal; font-style: normal; }
+        tt     { color: #036; }
+        tt, pre, pre dfn, pre em, pre cite, pre span {
+                font-family: "Courier New", Courier, monospace; font-size: small;
+        }
+        pre {
+                text-align: left; padding: 4px;
+                color: #000; background-color: #CCC;
+        }
+        pre dfn  { color: #900; }
+        pre em   { color: #66F; background-color: #FFC; font-weight: normal; }
+        pre .key { color: #33C; font-weight: bold; }
+        pre .id  { color: #900; }
+        pre .str { color: #000; background-color: #CFF; }
+        pre .val { color: #066; }
+        pre .rep { color: #909; }
+        pre .oth { color: #000; background-color: #FCF; }
+        pre .err { background-color: #FCC; }
+
+        /* RFC-2629 <texttable>s. */
+        table.all, table.full, table.headers, table.none {
+                font-size: small; text-align: center; border-width: 2px;
+                vertical-align: top; border-collapse: collapse;
+        }
+        table.all, table.full { border-style: solid; border-color: black; }
+        table.headers, table.none { border-style: none; }
+        th {
+                font-weight: bold; border-color: black;
+                border-width: 2px 2px 3px 2px;
+        }
+        table.all th, table.full th { border-style: solid; }
+        table.headers th { border-style: none none solid none; }
+        table.none th { border-style: none; }
+        table.all td {
+                border-style: solid; border-color: #333;
+                border-width: 1px 2px;
+        }
+        table.full td, table.headers td, table.none td { border-style: none; }
+
+        hr { height: 1px; }
+        hr.insert {
+                width: 80%; border-style: none; border-width: 0;
+                color: #CCC; background-color: #CCC;
+        }
+--></style>
+</head>
+<body>
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
+<tr><td class="header">Network Working Group</td><td class="header">M. Jones</td></tr>
+<tr><td class="header">Internet-Draft</td><td class="header">Microsoft</td></tr>
+<tr><td class="header">Intended status: Standards Track</td><td class="header">March 28, 2011</td></tr>
+<tr><td class="header">Expires: September 29, 2011</td><td class="header">&nbsp;</td></tr>
+</table></td></tr></table>
+<h1><br />JSON Web Token (JWT) Bearer Profile for OAuth 2.0<br />draft-jones-oauth-jwt-bearer-00</h1>
+
+<h3>Abstract</h3>
+
+<p>
+	This specification defines the use of a JSON Web Token (JWT)
+	bearer token as a means of requesting an OAuth 2.0 access
+	token.
+      
+</p>
+<h3>Status of this Memo</h3>
+<p>
+This Internet-Draft is submitted  in full
+conformance with the provisions of BCP&nbsp;78 and BCP&nbsp;79.</p>
+<p>
+Internet-Drafts are working documents of the Internet Engineering
+Task Force (IETF).  Note that other groups may also distribute
+working documents as Internet-Drafts.  The list of current
+Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
+<p>
+Internet-Drafts are draft documents valid for a maximum of six months
+and may be updated, replaced, or obsoleted by other documents at any time.
+It is inappropriate to use Internet-Drafts as reference material or to cite
+them other than as &ldquo;work in progress.&rdquo;</p>
+<p>
+This Internet-Draft will expire on September 29, 2011.</p>
+
+<h3>Copyright Notice</h3>
+<p>
+Copyright (c) 2011 IETF Trust and the persons identified as the
+document authors.  All rights reserved.</p>
+<p>
+This document is subject to BCP 78 and the IETF Trust's Legal
+Provisions Relating to IETF Documents
+(http://trustee.ietf.org/license-info) in effect on the date of
+publication of this document.  Please review these documents
+carefully, as they describe your rights and restrictions with respect
+to this document. Code Components extracted from this document must
+include Simplified BSD License text as described in Section 4.e of
+the Trust Legal Provisions and are provided without warranty as
+described in the Simplified BSD License.</p>
+<a name="toc"></a><br /><hr />
+<h3>Table of Contents</h3>
+<p class="toc">
+<a href="#anchor1">1.</a>&nbsp;
+Introduction<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor2">1.1.</a>&nbsp;
+Notational Conventions<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor3">1.2.</a>&nbsp;
+Terminology<br />
+<a href="#anchor4">2.</a>&nbsp;
+JWT Access Token Request<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor5">2.1.</a>&nbsp;
+Client Requests Access Token<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor6">2.2.</a>&nbsp;
+JWT Content and Processing Requirements<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor7">2.3.</a>&nbsp;
+Error Response<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor8">2.4.</a>&nbsp;
+Example (non-normative)<br />
+<a href="#sec-con">3.</a>&nbsp;
+Security Considerations<br />
+<a href="#anchor9">4.</a>&nbsp;
+IANA Considerations<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor10">4.1.</a>&nbsp;
+OAuth Parameters Registration<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor11">4.1.1.</a>&nbsp;
+The "jwt" OAuth Parameter<br />
+<a href="#rfc.references1">5.</a>&nbsp;
+References<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rfc.references1">5.1.</a>&nbsp;
+Normative References<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rfc.references2">5.2.</a>&nbsp;
+Informative References<br />
+<a href="#anchor14">Appendix&nbsp;A.</a>&nbsp;
+Acknowledgements<br />
+<a href="#anchor15">Appendix&nbsp;B.</a>&nbsp;
+Document History<br />
+<a href="#rfc.authors">&#167;</a>&nbsp;
+Author's Address<br />
+</p>
+<br clear="all" />
+
+<a name="anchor1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1"></a><h3>1.&nbsp;
+Introduction</h3>
+
+<p>
+	JSON Web Token (JWT) <a class='info' href='#JWT'>[JWT]<span> (</span><span class='info'>Jones, M., Balfanz, D., Bradley, J., Goland, Y., Panzer, J., Sakimura, N., and P. Tarjan, &ldquo;JSON Web Token (JWT),&rdquo; March&nbsp;2011.</span><span>)</span></a> is a JSON-based security token encoding that enables
+	identity and security information to be shared across security
+	domains.  JWTs utilize JSON data structures, as defined in
+	<a class='info' href='#RFC4627'>RFC 4627<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627].
+      
+</p>
+<p>
+	The OAuth 2.0 Authorization Protocol <a class='info' href='#I-D.ietf-oauth-v2'>[I&#8209;D.ietf&#8209;oauth&#8209;v2]<span> (</span><span class='info'>Hammer-Lahav, E., Recordon, D., and D. Hardt, &ldquo;The OAuth 2.0 Authorization Protocol,&rdquo; February&nbsp;2011.</span><span>)</span></a> provides a method for making
+	authenticated HTTP requests to a resource using an access
+	token.  Access tokens are issued to third-party clients by an
+	authorization server (AS) with the (sometimes implicit)
+	approval of the resource owner.  In OAuth, an authorization
+	grant is an abstract term used to describe intermediate
+	credentials that represent the resource owner authorization.
+	An authorization grant is used by the client to obtain an
+	access token.
+      
+</p>
+<p>
+	Several authorization grant types are defined to support a
+	wide range of client types and user experiences.  OAuth also
+	allows for the definition of new extension grant types to
+	support additional clients or to provide a bridge between
+	OAuth and other trust frameworks.
+      
+</p>
+<p>
+	This specification defines an extension grant type that
+	profiles the use of a JSON Web Token (JWT) in requesting
+	an OAuth 2.0 access token.
+      
+</p>
+<a name="anchor2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1.1"></a><h3>1.1.&nbsp;
+Notational Conventions</h3>
+
+<p>
+          The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL NOT', 'SHOULD', 'SHOULD
+          NOT', 'RECOMMENDED', 'MAY', and 'OPTIONAL' in this document are to be interpreted as
+          described in <a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a>.
+        
+</p>
+<p>
+          Unless otherwise noted, all the protocol parameter names and values are case sensitive.
+        
+</p>
+<a name="anchor3"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1.2"></a><h3>1.2.&nbsp;
+Terminology</h3>
+
+<p>
+          All terms are as defined in <a class='info' href='#I-D.ietf-oauth-v2'>[I&#8209;D.ietf&#8209;oauth&#8209;v2]<span> (</span><span class='info'>Hammer-Lahav, E., Recordon, D., and D. Hardt, &ldquo;The OAuth 2.0 Authorization Protocol,&rdquo; February&nbsp;2011.</span><span>)</span></a> and <a class='info' href='#JWT'>[JWT]<span> (</span><span class='info'>Jones, M., Balfanz, D., Bradley, J., Goland, Y., Panzer, J., Sakimura, N., and P. Tarjan, &ldquo;JSON Web Token (JWT),&rdquo; March&nbsp;2011.</span><span>)</span></a>.
+        
+</p>
+<a name="anchor4"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2"></a><h3>2.&nbsp;
+JWT Access Token Request</h3>
+
+<p>
+	A JSON Web Token (JWT) bearer token can be used to request an
+	access token when a client wishes to utilize an existing trust
+	relationship, expressed through the semantics of the JWT,
+	without a direct user approval step at the authorization
+	server.
+      
+</p>
+<p>
+	The process by which the client obtains the JWT, prior to
+	exchanging it with the authorization server, is out of scope.
+      
+</p><br /><hr class="insert" />
+<a name="Figure 1"></a>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
++--------+                               +---------------+
+|        |                               |               |
+|        |--(A)-- JSON Web Token (JWT) -&gt;| Authorization |
+| Client |                               |     Server    |
+|        |&lt;-(B)----- Access Token -------|               |
+|        |                               |               |
++--------+                               +---------------+
+</pre></div><table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;Figure&nbsp;1: Access Token Request using JWT Bearer Token&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
+
+<p>
+	The request/response flow illustrated in <a class='info' href='#Figure 1'>Figure&nbsp;1<span> (</span><span class='info'>Access Token Request using JWT Bearer Token</span><span>)</span></a> includes the following steps:
+	</p>
+<blockquote class="text">
+<p>
+	    (A) The client sends an access token request to the
+	    authorization server that includes a JWT bearer token and a grant_type
+	    of <tt>http://oauth.net/grant_type/jwt/1.0/bearer</tt>.
+	  
+</p>
+<p>
+	    (B) The authorization server validates the JWT per the
+	    processing rules defined in the JWT specification and in
+	    this specification and issues an access token.
+	  
+</p>
+</blockquote><p>
+      
+</p>
+<a name="anchor5"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.1"></a><h3>2.1.&nbsp;
+Client Requests Access Token</h3>
+
+<p>
+	  The client includes the JWT in the access token request, the
+	  core details of which are defined in OAuth <a class='info' href='#I-D.ietf-oauth-v2'>[I&#8209;D.ietf&#8209;oauth&#8209;v2]<span> (</span><span class='info'>Hammer-Lahav, E., Recordon, D., and D. Hardt, &ldquo;The OAuth 2.0 Authorization Protocol,&rdquo; February&nbsp;2011.</span><span>)</span></a>, by specifying
+	  <tt>http://oauth.net/grant_type/jwt/1.0/bearer</tt> as the absolute
+	  URI value of the <tt>grant_type</tt> parameter and by adding the
+	  following parameter:
+	
+</p>
+<p>
+	  </p>
+<blockquote class="text"><dl>
+<dt>jwt</dt>
+<dd>
+	      
+	      REQUIRED.  The value of the <tt>jwt</tt> parameter MUST be a single JWT
+	      that is represented using the Compact Serialization.
+	    
+</dd>
+<dt>scope</dt>
+<dd>
+	      
+	      OPTIONAL. The scope of the access request expressed as a
+	      list of space-delimited strings. The value is defined by
+	      the authorization server. If the value contains multiple
+	      space-delimited strings, their order does not matter,
+	      and each string adds an additional access range to the
+	      requested scope.
+	    
+</dd>
+</dl></blockquote><p>
+	
+</p>
+<a name="anchor6"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2"></a><h3>2.2.&nbsp;
+JWT Content and Processing Requirements</h3>
+
+<p>
+	  Prior to issuing an access token response as described in
+	  <a class='info' href='#I-D.ietf-oauth-v2'>[I&#8209;D.ietf&#8209;oauth&#8209;v2]<span> (</span><span class='info'>Hammer-Lahav, E., Recordon, D., and D. Hardt, &ldquo;The OAuth 2.0 Authorization Protocol,&rdquo; February&nbsp;2011.</span><span>)</span></a>, the authorization
+	  server MUST validate the JWT according to the criteria
+	  below.  If present, the authorization server MUST also
+	  validate the client credentials.  Application of additional
+	  restrictions and policy are at the discretion of the
+	  authorization server.
+	
+</p>
+<p>
+	  </p>
+<ul class="text">
+<li>
+	      The JWT MUST contain an <tt>iss</tt>
+	      (issuer) claim that contains a unique identifier for the
+	      entity that issued the JWT.
+	    
+</li>
+<li>
+	      The JWT MUST contain a <tt>prn</tt>
+	      (principal) claim.  The principal MUST identify the
+	      resource owner for whom the access token is being
+	      requested.
+	    
+</li>
+<li>
+	      The JWT MUST contain an <tt>aud</tt>
+	      (audience) claim containing a URI reference that
+	      identifies the authorization server as the intended
+	      audience.  The authorization server MUST verify that it
+	      is an intended audience for the JWT.
+	    
+</li>
+<li>
+	      The JWT MUST contain an <tt>exp</tt>
+	      (expiration) claim that limits the time window during
+	      which the JWT can be used.  The authorization server
+	      MUST verify that the expiration time has not passed,
+	      subject to allowable clock skew between systems.  The
+	      authorization server MAY reject JWTs with an <tt>exp</tt> claim value that is
+	      unreasonably far in the future.
+	    
+</li>
+<li>
+	      The JWT MAY contain an <tt>iat</tt>
+	      (issued at) claim containing the UTC time at which the
+	      JWT was issued.  This time is represented as an <tt>IntDate</tt>, as defined by <a class='info' href='#JWT'>[JWT]<span> (</span><span class='info'>Jones, M., Balfanz, D., Bradley, J., Goland, Y., Panzer, J., Sakimura, N., and P. Tarjan, &ldquo;JSON Web Token (JWT),&rdquo; March&nbsp;2011.</span><span>)</span></a>.
+	    
+</li>
+<li>
+	      The JWT MAY contain other claims.
+	    
+</li>
+<li>
+	      The JWT MUST be digitally signed by the issuer in the
+	      manner described in the JWT specification and the
+	      authorization server MUST verify the signature.
+	    
+</li>
+<li>
+	      The authorization server MUST verify that the JWT is
+	      valid in all other respects per <a class='info' href='#JWT'>[JWT]<span> (</span><span class='info'>Jones, M., Balfanz, D., Bradley, J., Goland, Y., Panzer, J., Sakimura, N., and P. Tarjan, &ldquo;JSON Web Token (JWT),&rdquo; March&nbsp;2011.</span><span>)</span></a>.
+	    
+</li>
+</ul><p>
+	
+</p>
+<a name="anchor7"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.3"></a><h3>2.3.&nbsp;
+Error Response</h3>
+
+<p>
+	  If the JWT is not valid or has expired, the authorization
+	  server MUST construct an error response as defined in <a class='info' href='#I-D.ietf-oauth-v2'>[I&#8209;D.ietf&#8209;oauth&#8209;v2]<span> (</span><span class='info'>Hammer-Lahav, E., Recordon, D., and D. Hardt, &ldquo;The OAuth 2.0 Authorization Protocol,&rdquo; February&nbsp;2011.</span><span>)</span></a>.  The value of the error
+	  parameter MUST be the <tt>invalid_grant</tt> error code.  The
+	  authorization server MAY include additional information
+	  regarding the reasons the JWT was considered invalid using
+	  the <tt>error_description</tt> or <tt>error_uri</tt> parameters.
+	
+</p>
+<p>
+	    For example:
+	  
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+Cache-Control: no-store
+
+{
+  "error":"invalid_grant",
+  "error_description":"Audience validation failed"
+}
+</pre></div>
+<a name="anchor8"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.4"></a><h3>2.4.&nbsp;
+Example (non-normative)</h3>
+
+<p>
+	  Though non-normative, the following examples illustrate what
+	  a conforming JWT and access token request would look like.
+	
+</p><br /><hr class="insert" />
+<a name="Figure 2"></a>
+
+<p>
+	    Below is an example JSON object that could be encoded to
+	    produce the JWT Claims Object for a JWT:
+	  
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>{"iss":"https://jwt-idp.example.com",
+ "prn":"mailto:mike@example.com",
+ "aud":"https://jwt-rp.example.net",
+ "iat":1300815780,
+ "exp":1300819380,
+ "http://claims.example.com/member":true}</pre></div><table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;Figure&nbsp;2: Example JWT Claims Object&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
+<br /><hr class="insert" />
+<a name="Figure 3"></a>
+
+<p>
+	    The following example JSON object, used as the header of a
+	    JWT, declares that the JWT is signed with the ECDSA P-256
+	    SHA-256 algorithm.
+	  
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>{"alg":"ES256"}</pre></div><table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;Figure&nbsp;3: Example JWT Header Object&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
+<br /><hr class="insert" />
+<a name="Figure 4"></a>
+
+<p>
+	    To present a JWT with the claims and header shown above as
+	    part of an access token request, for example, the client
+	    might make the following HTTPS request (line breaks are
+	    for display purposes only):
+	  
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+POST /token.oauth2 HTTP/1.1
+Host: authz.example.net
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=http%3A%2F%2Foauth.net%2Fgrant_type%2Fjwt%2F1.0%2Fbearer&amp;
+jwt=eyJhbGciOiJFUzI1NiJ9.eyJpc3Mi[...omitted for brevity...].
+J9l-ZhwP_2n[...omitted for brevity...]
+</pre></div><table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;Figure&nbsp;4: Example Request&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
+
+<a name="sec-con"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3"></a><h3>3.&nbsp;
+Security Considerations</h3>
+
+<p>
+	Authorization servers SHOULD issue access tokens with a
+	limited lifetime and require clients to refresh them by
+	requesting a new access token using the same JWT, if it is
+	still valid, or with a new JWT.  The authorization server
+	SHOULD NOT issue a refresh token.
+      
+</p>
+<a name="anchor9"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4"></a><h3>4.&nbsp;
+IANA Considerations</h3>
+
+<a name="anchor10"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.1"></a><h3>4.1.&nbsp;
+OAuth Parameters Registration</h3>
+
+<p>
+          This specification registers the following parameters in the OAuth Parameters Registry
+          established by <a class='info' href='#I-D.ietf-oauth-v2'>[I&#8209;D.ietf&#8209;oauth&#8209;v2]<span> (</span><span class='info'>Hammer-Lahav, E., Recordon, D., and D. Hardt, &ldquo;The OAuth 2.0 Authorization Protocol,&rdquo; February&nbsp;2011.</span><span>)</span></a>.
+        
+</p>
+<a name="anchor11"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.1.1"></a><h3>4.1.1.&nbsp;
+The "jwt" OAuth Parameter</h3>
+
+<p>
+            </p>
+<blockquote class="text"><dl>
+<dt>Parameter name:</dt>
+<dd>
+                jwt
+              
+</dd>
+<dt>Parameter usage location:</dt>
+<dd>
+                token request
+              
+</dd>
+<dt>Change controller:</dt>
+<dd>
+                IETF
+              
+</dd>
+<dt>Specification document(s):</dt>
+<dd>
+                [[ this document ]]
+              
+</dd>
+<dt>Related information:</dt>
+<dd>
+                None
+              
+</dd>
+</dl></blockquote><p>
+          
+</p>
+<a name="rfc.references"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5"></a><h3>5.&nbsp;
+References</h3>
+
+<a name="rfc.references1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>5.1.&nbsp;Normative References</h3>
+<table width="99%" border="0">
+<tr><td class="author-text" valign="top"><a name="I-D.ietf-oauth-v2">[I-D.ietf-oauth-v2]</a></td>
+<td class="author-text">Hammer-Lahav, E., Recordon, D., and D. Hardt, &ldquo;<a href="http://www.ietf.org/internet-drafts/draft-ietf-oauth-v2-13.txt">The OAuth 2.0 Authorization Protocol</a>,&rdquo; draft-ietf-oauth-v2-13 (work in progress), February&nbsp;2011 (<a href="http://www.ietf.org/internet-drafts/draft-ietf-oauth-v2-13.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="JWT">[JWT]</a></td>
+<td class="author-text"><a href="mailto:mbj@microsoft.com">Jones, M.</a>, <a href="mailto:balfanz@google.com">Balfanz, D.</a>, <a href="mailto:ve7jtb@ve7jtb.com">Bradley, J.</a>, <a href="mailto:yarong@microsoft.com">Goland, Y.</a>, <a href="mailto:jpanzer@google.com">Panzer, J.</a>, <a href="mailto:n-sakimura@nri.co.jp">Sakimura, N.</a>, and <a href="mailto:pt@fb.com">P. Tarjan</a>, &ldquo;<a href="http://self-issued.info/docs/draft-jones-json-web-token.html">JSON Web Token (JWT)</a>,&rdquo; March&nbsp;2011.</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2119">[RFC2119]</a></td>
+<td class="author-text"><a href="mailto:sob@harvard.edu">Bradner, S.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>,&rdquo; BCP&nbsp;14, RFC&nbsp;2119, March&nbsp;1997 (<a href="http://www.rfc-editor.org/rfc/rfc2119.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2119.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2119.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC4627">[RFC4627]</a></td>
+<td class="author-text">Crockford, D., &ldquo;<a href="http://tools.ietf.org/html/rfc4627">The application/json Media Type for JavaScript Object Notation (JSON)</a>,&rdquo; RFC&nbsp;4627, July&nbsp;2006 (<a href="http://www.rfc-editor.org/rfc/rfc4627.txt">TXT</a>).</td></tr>
+</table>
+
+<a name="rfc.references2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>5.2.&nbsp;Informative References</h3>
+<table width="99%" border="0">
+<tr><td class="author-text" valign="top"><a name="I-D.ietf-oauth-saml2-bearer">[I-D.ietf-oauth-saml2-bearer]</a></td>
+<td class="author-text">Campbell, B. and C. Mortimore, &ldquo;<a href="http://www.ietf.org/internet-drafts/draft-ietf-oauth-saml2-bearer-03.txt">SAML 2.0 Bearer Assertion Grant Type Profile for OAuth 2.0</a>,&rdquo; draft-ietf-oauth-saml2-bearer-03 (work in progress), February&nbsp;2011 (<a href="http://www.ietf.org/internet-drafts/draft-ietf-oauth-saml2-bearer-03.txt">TXT</a>).</td></tr>
+</table>
+
+<a name="anchor14"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.A"></a><h3>Appendix A.&nbsp;
+Acknowledgements</h3>
+
+<p>
+	This profile was derived from the SAML2 Bearer Assertion Grant
+	Type Profile for OAuth 2.0 <a class='info' href='#I-D.ietf-oauth-saml2-bearer'>[I&#8209;D.ietf&#8209;oauth&#8209;saml2&#8209;bearer]<span> (</span><span class='info'>Campbell, B. and C. Mortimore, &ldquo;SAML 2.0 Bearer Assertion Grant Type Profile for OAuth 2.0,&rdquo; February&nbsp;2011.</span><span>)</span></a> by Brian
+	Campbell and Chuck Mortimore.
+      
+</p>
+<a name="anchor15"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.B"></a><h3>Appendix B.&nbsp;
+Document History</h3>
+
+<p>
+        [[ to be removed by RFC editor before publication as an RFC ]]
+      
+</p>
+<p>
+        -00
+        </p>
+<ul class="text">
+<li>
+            Initial draft.
+          
+</li>
+</ul><p>
+      
+</p>
+<a name="rfc.authors"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>Author's Address</h3>
+<table width="99%" border="0" cellpadding="0" cellspacing="0">
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Michael B. Jones</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Microsoft</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:mbj@microsoft.com">mbj@microsoft.com</a></td></tr>
+<tr><td class="author" align="right">URI:&nbsp;</td>
+<td class="author-text"><a href="http://self-issued.info/">http://self-issued.info/</a></td></tr>
+</table>
+</body></html>
