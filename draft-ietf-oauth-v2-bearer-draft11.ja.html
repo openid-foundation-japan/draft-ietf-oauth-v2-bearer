@@ -200,7 +200,7 @@ described in the Simplified BSD License.</p>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor3">1.2.</a>&nbsp;
 用語定義<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor4">1.3.</a>&nbsp;
-Overview<br />
+概要<br />
 <a href="#anchor5">2.</a>&nbsp;
 Authenticated Requests<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#authz-header">2.1.</a>&nbsp;
@@ -314,30 +314,21 @@ Authors' Addresses<br />
 <a name="anchor4"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.1.3"></a><h3>1.3.&nbsp;
-Overview</h3>
+概要</h3>
 
 <p>
-          OAuth provides a method for clients to access a protected resource on behalf of a
-          resource owner. In the general case,
-	  before a client can access a protected resource, it must first obtain
-          an authorization grant from the resource owner and then exchange the authorization grant for
-          an access token.
-	  The access token represents the grant's scope, duration, and
-	  other attributes granted by the authorization grant. The
-	  client accesses the protected resource by presenting the
-	  access token to the resource server.
-	  In some cases, a client can directly present its own
-	  credentials to an authorization server to obtain an access
-	  token without having to first obtain an authorization grant from a
-	  resource owner.
+          OAuthはリソースオーナーの代わりに保護リソースにアクセスする方法をクライアントに提供する.
+          一般的なケースにおいて, クライアントが保護リソースにアクセスする前に, クライアントは初めにリソースオーナーの認可を取得し, アクセス認可とアクセストークンを交換しなけばならない.
+          アクセストークンは, 与えられた権限の範囲, 期間とその他の属性を示している.
+          クライアントはリソースサーバーにアクセストークンを渡すことにより, 保護リソースにアクセスする.
+          いくつかのケースにおいては, クライアントは, 最初にリソースオーナーから認可を得ずに認可サーバからアクセストークンを得るために, 自らのクレデンシャルを認可サーバに直接渡すことができる.
+        
         
 </p>
 <p>
-          The access token provides an abstraction layer, replacing different authorization
-          constructs (e.g. username and password, assertion) for a single token understood by the
-          resource server. This abstraction enables issuing access tokens valid for a short time
-          period, as well as removing the resource server's need to understand a wide range of
-          authentication schemes.
+          アクセストークンはほかの認証方法(例: ユーザ名とパスワード, アサーション)をリソースサーバが理解しうる一つのトークンに置き換えるような抽象レイヤーを提供する.
+          この抽象レイヤーは有効期間の短いアクセストークンを発行することを可能にするとともに, リソースサーバから広範囲に渡る認証スキームを理解する必要を取り除く.
+        
         
 </p><br /><hr class="insert" />
 <a name="Figure-1"></a>
@@ -359,22 +350,23 @@ Overview</h3>
 |        |                               |     Server    |
 |        |&lt;-(F)--- Protected Resource ---|               |
 +--------+                               +---------------+
-</pre></div><table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;Figure&nbsp;1: Abstract Protocol Flow&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
+</pre></div><table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;Figure&nbsp;1: プロトコルフロー概要&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
 
 <p>
-          The abstract flow illustrated in <a class='info' href='#Figure-1'>Figure&nbsp;1<span> (</span><span class='info'>Abstract Protocol Flow</span><span>)</span></a> describes the overall
-          OAuth 2.0 protocol architecture. The following steps are specified within this
-          document:
+          <a class='info' href='#Figure-1'>Figure&nbsp;1<span> (</span><span class='info'>プロトコルフロー概要</span><span>)</span></a> で示されたフロー概要は, OAuth 2.0プロトコルのアーキテクチャの全体を説明したものである.
+          以下のステップはこの文章中で定義される.
+        
 
           </p>
 <blockquote class="text">
 <p>
-              E) The client makes a protected resource request to the resource server by presenting
-              the access token.
+              E) クライアントはリソースサーバにアクセストークンを示し, 保護リソースへのリクエストを発行する.
+            
             
 </p>
 <p>
-              F) The resource server validates the access token, and if valid, serves the request.
+              F) リソースサーバーはアクセストークンの正当性を確認し, 有効な場合はリクエストに対し応答する.
+            
             
 </p>
 </blockquote><p>

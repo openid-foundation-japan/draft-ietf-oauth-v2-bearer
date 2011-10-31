@@ -159,8 +159,15 @@
         </t>
       </section>
 
-      <section title='Overview'>
+      <!--section title='概要'-->
+      <section title='概要'>
         <t>
+          OAuthはリソースオーナーの代わりに保護リソースにアクセスする方法をクライアントに提供する.
+          一般的なケースにおいて, クライアントが保護リソースにアクセスする前に, クライアントは初めにリソースオーナーの認可を取得し, アクセス認可とアクセストークンを交換しなけばならない.
+          アクセストークンは, 与えられた権限の範囲, 期間とその他の属性を示している.
+          クライアントはリソースサーバーにアクセストークンを渡すことにより, 保護リソースにアクセスする.
+          いくつかのケースにおいては, クライアントは, 最初にリソースオーナーから認可を得ずに認可サーバからアクセストークンを得るために, 自らのクレデンシャルを認可サーバに直接渡すことができる.
+        <!--
           OAuth provides a method for clients to access a protected resource on behalf of a
           resource owner. In the general case,
 	  before a client can access a protected resource, it must first obtain
@@ -174,15 +181,21 @@
 	  credentials to an authorization server to obtain an access
 	  token without having to first obtain an authorization grant from a
 	  resource owner.
+      -->
         </t>
         <t>
+          アクセストークンはほかの認証方法(例: ユーザ名とパスワード, アサーション)をリソースサーバが理解しうる一つのトークンに置き換えるような抽象レイヤーを提供する.
+          この抽象レイヤーは有効期間の短いアクセストークンを発行することを可能にするとともに, リソースサーバから広範囲に渡る認証スキームを理解する必要を取り除く.
+        <!--
           The access token provides an abstraction layer, replacing different authorization
           constructs (e.g. username and password, assertion) for a single token understood by the
           resource server. This abstraction enables issuing access tokens valid for a short time
           period, as well as removing the resource server's need to understand a wide range of
           authentication schemes.
+          -->
         </t>
-        <figure title='Abstract Protocol Flow' anchor='Figure-1'>
+        <!--figure title='Abstract Protocol Flow' anchor='Figure-1'-->
+        <figure title='プロトコルフロー概要' anchor='Figure-1'>
           <artwork>
 <![CDATA[+--------+                               +---------------+
 |        |--(A)- Authorization Request ->|   Resource    |
@@ -204,17 +217,27 @@
           </artwork>
         </figure>
         <t>
+          <xref target='Figure-1' /> で示されたフロー概要は, OAuth 2.0プロトコルのアーキテクチャの全体を説明したものである.
+          以下のステップはこの文章中で定義される.
+        <!--
           The abstract flow illustrated in <xref target='Figure-1' /> describes the overall
           OAuth 2.0 protocol architecture. The following steps are specified within this
           document:
+        -->
 
           <list>
             <t>
+              E) クライアントはリソースサーバにアクセストークンを示し, 保護リソースへのリクエストを発行する.
+            <!--
               E) The client makes a protected resource request to the resource server by presenting
               the access token.
+              -->
             </t>
             <t>
+              F) リソースサーバーはアクセストークンの正当性を確認し, 有効な場合はリクエストに対し応答する.
+            <!--
               F) The resource server validates the access token, and if valid, serves the request.
+              -->
             </t>
           </list>
         </t>
