@@ -357,7 +357,7 @@ Authorization: Bearer vF9dft4qmT]]>
         </t>
         <t>
           エンティティボディにはリクエストに固有なパラメータを含んでもよい (MAY).
-          この場合、<spanx style='verb'>access_token</spanx>パラメータは文字<spanx style='verb'>&amp;</spanx> (ASCIIコード38) を用いてリクエスト固有なパラメーから適切に分離されなければならない (MUST).b
+          この場合、<spanx style='verb'>access_token</spanx>パラメータは文字<spanx style='verb'>&amp;</spanx> (ASCIIコード38) を用いてリクエスト固有なパラメーから適切に分離されなければならない (MUST).
 <!--
           The entity-body MAY include other request-specific
           parameters, in which case, the <spanx
