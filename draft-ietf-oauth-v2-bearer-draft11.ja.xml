@@ -244,26 +244,39 @@
       </section>
     </section>
 
-    <section title='Authenticated Requests'>
+    <!--section title='Authenticated Requests'-->
+    <section title='認証されたリクエスト'>
       <t>
+	クライアントは保護されたリソースへの認証されたアクセス要求を行うためにBearerトークンを用いてもよい (MAY).
+	この章では, リソースの要求においてBearerトークンをリソースサーバに送信する3つの方法を定義する.
+	クライアントは一度のリクエストにおいて, トークンを送信する方法を複数同時に用いてはならない (MUST NOT).
+<!--
 	Clients MAY use bearer tokens to make authenticated requests
 	to access protected resources.  This section defines three
 	methods of sending bearer access tokens in resource requests
 	to resource servers.  Clients MUST NOT use more than one
 	method to transmit the token in each request.
+-->
       </t>
 
-      <section title='The Authorization Request Header Field' anchor='authz-header'>
+      <!--section title='The Authorization Request Header Field' anchor='authz-header'-->
+      <section title='Authorizationリクエストヘッダフィールド' anchor='authz-header'>
         <t>
+	  <xref target='I-D.ietf-httpbis-p7-auth' />によって定義される<spanx style='verb'>Authorization</spanx>リクエストヘッダフィールド中でアクセストークンを送信する際, クライアントは<spanx style='verb'>Bearer</spanx>認証スキームを用いる.
+<!--
 	  When sending the access token in the <spanx
 	  style='verb'>Authorization</spanx> request header field
 	  defined by <xref target='I-D.ietf-httpbis-p7-auth' />, the
 	  client uses the <spanx style='verb'>Bearer</spanx>
 	  authentication scheme to transmit the access token.
+-->
         </t>
         <figure>
           <preamble>
+            例:
+<!--
             For example:
+-->
           </preamble>
           <artwork>
 <![CDATA[GET /resource HTTP/1.1
@@ -272,8 +285,11 @@ Authorization: Bearer vF9dft4qmT]]>
           </artwork>
         </figure>
         <t>
+          <spanx style='verb'>Authorization</spanx>ヘッダフィールドは<xref target='I-D.ietf-httpbis-p7-auth' />により定義されるフレームワークを以下のように用いる:
+<!--
           The <spanx style='verb'>Authorization</spanx> header field uses the framework defined by
           <xref target='I-D.ietf-httpbis-p7-auth' /> follows:
+-->
         </t>
         <figure>
           <artwork>
@@ -281,53 +297,82 @@ Authorization: Bearer vF9dft4qmT]]>
           </artwork>
         </figure>
 	<t>
+	  クライアントがBearerトークンを伴う認証されたリクエストを送信する際には, <spanx style='verb'>Bearer</spanx> HTTP認可スキームを用いた<spanx style='verb'>Authorization</spanx>リクエストヘッダフィールドを使用すべきである (SHOULD).
+	  リソースサーバはこの方法をサポートしなければならない (MUST).
+<!--
 	  Clients SHOULD make authenticated requests with a bearer
 	  token using the <spanx style='verb'>Authorization</spanx>
 	  request header field with the <spanx
 	  style='verb'>Bearer</spanx> HTTP authorization scheme.
 	  Resource servers MUST support this method.
+-->
 	</t>
       </section>
 
-      <section title='Form-Encoded Body Parameter' anchor='body-param'>
+      <!--section title='Form-Encoded Body Parameter' anchor='body-param'-->
+      <section title='Formエンコードされたボディパラメータ' anchor='body-param'>
         <t>
+          HTTPリクエストのエンティティボディ中でアクセストークンを送信する際, クライアントは<spanx style='verb'>access_token</spanx>パラメータを用いてアクセストークンをリクエストボディに付加する.
+          クライアントは以下の条件のすべてを満たさない限りこの方法を用いてはならない (MUST NOT):
+<!--
           When sending the access token in the HTTP request
           entity-body, the client adds the access token to the request
           body using the <spanx style='verb'>access_token</spanx>
           parameter.  The client MUST NOT use this method unless
 	  all of the following conditions are met:
+-->
           <list style='symbols'>
             <t>
+              HTTPリクエストのエンティティボディが単一パートである.
+<!--
               The HTTP request entity-body is single-part.
+-->
             </t>
             <t>
+              エンティティボディが<xref target='W3C.REC-html401-19991224' />によって定義される<spanx style='verb'>application/x-www-form-urlencoded</spanx>コンテントタイプのエンコード要求を満たす.
+<!--
               The entity-body follows the encoding requirements of the
               <spanx style='verb'>application/x-www-form-urlencoded</spanx> content-type as
               defined by <xref target='W3C.REC-html401-19991224' />.
+-->
             </t>
             <t>
+              HTTPリクエストのエンティティヘッダに<spanx style='verb'>application/x-www-form-urlencoded</spanx>にセットされた<spanx style='verb'>Content-Type</spanx>ヘッダフィールドを含む.
+<!--
               The HTTP request entity-header includes the <spanx style='verb'>Content-Type</spanx>
               header field set to <spanx style='verb'>application/x-www-form-urlencoded</spanx>.
+-->
             </t>
             <t>
+              リクエストボディが定義されたセマンティクスを持つHTTPリクエストメソッドである.
+              特に、これは<spanx style='verb'>GET</spanx>メソッドを用いてはならない (MUST NOT) ことを意味する.
+<!--
               The HTTP request method is one for which the request
               body has defined semantics.  In particular,
               this means that the <spanx style='verb'>GET</spanx>
               method MUST NOT be used.
+-->
             </t>
           </list>
         </t>
         <t>
+          エンティティボディにはリクエストに固有なパラメータを含んでもよい (MAY).
+          この場合、<spanx style='verb'>access_token</spanx>パラメータは文字<spanx style='verb'>&amp;</spanx> (ASCIIコード38) を用いてリクエスト固有なパラメーから適切に分離されなければならない (MUST).b
+<!--
           The entity-body MAY include other request-specific
           parameters, in which case, the <spanx
           style='verb'>access_token</spanx> parameter MUST be properly
           separated from the request-specific parameters using <spanx
           style='verb'>&amp;</spanx> character(s) (ASCII code 38).
+-->
         </t>
         <figure>
           <preamble>
+            例えば, クライアントは以下のHTTPリクエストをセキュリティ保護されたトランスポート層から送信する:
+<!--
             For example, the client makes the following HTTP request using transport-layer
             security:
+-->
           </preamble>
           <artwork>
 <![CDATA[POST /resource HTTP/1.1
@@ -338,11 +383,14 @@ access_token=vF9dft4qmT]]>
           </artwork>
         </figure>
 	<t>
+	  この<spanx style='verb'>application/x-www-form-urlencoded</spanx>を用いる方法は, 関与しているブラウザが<spanx style='verb'>Authorization</spanx>リクエストヘッダにアクセスできない場合を除いて使用すべきではない (SHOULD NOT). リソースサーバはこの方法をサポートしてもよい (MAY).
+<!--
 	  The <spanx style='verb'>application/x-www-form-urlencoded</spanx>
 	  method SHOULD NOT be used except in application contexts
 	  where participating browsers do not have access to the
 	  <spanx style='verb'>Authorization</spanx> request header
 	  field.  Resource servers MAY support this method.
+-->
 	</t>
       </section>
 

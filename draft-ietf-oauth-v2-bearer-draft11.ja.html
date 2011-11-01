@@ -202,11 +202,11 @@ described in the Simplified BSD License.</p>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor4">1.3.</a>&nbsp;
 概要<br />
 <a href="#anchor5">2.</a>&nbsp;
-Authenticated Requests<br />
+認証されたリクエスト<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#authz-header">2.1.</a>&nbsp;
-The Authorization Request Header Field<br />
+Authorizationリクエストヘッダフィールド<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#body-param">2.2.</a>&nbsp;
-Form-Encoded Body Parameter<br />
+Formエンコードされたボディパラメータ<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#query-param">2.3.</a>&nbsp;
 URI Query Parameter<br />
 <a href="#authn-header">3.</a>&nbsp;
@@ -375,30 +375,28 @@ Authors' Addresses<br />
 <a name="anchor5"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2"></a><h3>2.&nbsp;
-Authenticated Requests</h3>
+認証されたリクエスト</h3>
 
 <p>
-	Clients MAY use bearer tokens to make authenticated requests
-	to access protected resources.  This section defines three
-	methods of sending bearer access tokens in resource requests
-	to resource servers.  Clients MUST NOT use more than one
-	method to transmit the token in each request.
+	クライアントは保護されたリソースへの認証されたアクセス要求を行うためにBearerトークンを用いてもよい (MAY).
+	この章では, リソースの要求においてBearerトークンをリソースサーバに送信する3つの方法を定義する.
+	クライアントは一度のリクエストにおいて, トークンを送信する方法を複数同時に用いてはならない (MUST NOT).
+
       
 </p>
 <a name="authz-header"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2.1"></a><h3>2.1.&nbsp;
-The Authorization Request Header Field</h3>
+Authorizationリクエストヘッダフィールド</h3>
 
 <p>
-	  When sending the access token in the <tt>Authorization</tt> request header field
-	  defined by <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>, the
-	  client uses the <tt>Bearer</tt>
-	  authentication scheme to transmit the access token.
+	  <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>によって定義される<tt>Authorization</tt>リクエストヘッダフィールド中でアクセストークンを送信する際, クライアントは<tt>Bearer</tt>認証スキームを用いる.
+
         
 </p>
 <p>
-            For example:
+            例:
+
           
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 GET /resource HTTP/1.1
@@ -406,66 +404,62 @@ Host: server.example.com
 Authorization: Bearer vF9dft4qmT
 </pre></div>
 <p>
-          The <tt>Authorization</tt> header field uses the framework defined by
-          <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a> follows:
+          <tt>Authorization</tt>ヘッダフィールドは<a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>により定義されるフレームワークを以下のように用いる:
+
         
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 credentials = "Bearer" 1*SP b64token
 </pre></div>
 <p>
-	  Clients SHOULD make authenticated requests with a bearer
-	  token using the <tt>Authorization</tt>
-	  request header field with the <tt>Bearer</tt> HTTP authorization scheme.
-	  Resource servers MUST support this method.
+	  クライアントがBearerトークンを伴う認証されたリクエストを送信する際には, <tt>Bearer</tt> HTTP認可スキームを用いた<tt>Authorization</tt>リクエストヘッダフィールドを使用すべきである (SHOULD).
+	  リソースサーバはこの方法をサポートしなければならない (MUST).
+
 	
 </p>
 <a name="body-param"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2.2"></a><h3>2.2.&nbsp;
-Form-Encoded Body Parameter</h3>
+Formエンコードされたボディパラメータ</h3>
 
 <p>
-          When sending the access token in the HTTP request
-          entity-body, the client adds the access token to the request
-          body using the <tt>access_token</tt>
-          parameter.  The client MUST NOT use this method unless
-	  all of the following conditions are met:
+          HTTPリクエストのエンティティボディ中でアクセストークンを送信する際, クライアントは<tt>access_token</tt>パラメータを用いてアクセストークンをリクエストボディに付加する.
+          クライアントは以下の条件のすべてを満たさない限りこの方法を用いてはならない (MUST NOT):
+
           </p>
 <ul class="text">
 <li>
-              The HTTP request entity-body is single-part.
+              HTTPリクエストのエンティティボディが単一パートである.
+
             
 </li>
 <li>
-              The entity-body follows the encoding requirements of the
-              <tt>application/x-www-form-urlencoded</tt> content-type as
-              defined by <a class='info' href='#W3C.REC-html401-19991224'>[W3C.REC&#8209;html401&#8209;19991224]<span> (</span><span class='info'>Raggett, D., Jacobs, I., and A. Hors, &ldquo;HTML 4.01 Specification,&rdquo; December&nbsp;1999.</span><span>)</span></a>.
+              エンティティボディが<a class='info' href='#W3C.REC-html401-19991224'>[W3C.REC&#8209;html401&#8209;19991224]<span> (</span><span class='info'>Raggett, D., Jacobs, I., and A. Hors, &ldquo;HTML 4.01 Specification,&rdquo; December&nbsp;1999.</span><span>)</span></a>によって定義される<tt>application/x-www-form-urlencoded</tt>コンテントタイプのエンコード要求を満たす.
+
             
 </li>
 <li>
-              The HTTP request entity-header includes the <tt>Content-Type</tt>
-              header field set to <tt>application/x-www-form-urlencoded</tt>.
+              HTTPリクエストのエンティティヘッダに<tt>application/x-www-form-urlencoded</tt>にセットされた<tt>Content-Type</tt>ヘッダフィールドを含む.
+
             
 </li>
 <li>
-              The HTTP request method is one for which the request
-              body has defined semantics.  In particular,
-              this means that the <tt>GET</tt>
-              method MUST NOT be used.
+              リクエストボディが定義されたセマンティクスを持つHTTPリクエストメソッドである.
+              特に、これは<tt>GET</tt>メソッドを用いてはならない (MUST NOT) ことを意味する.
+
             
 </li>
 </ul><p>
         
 </p>
 <p>
-          The entity-body MAY include other request-specific
-          parameters, in which case, the <tt>access_token</tt> parameter MUST be properly
-          separated from the request-specific parameters using <tt>&amp;</tt> character(s) (ASCII code 38).
+          エンティティボディにはリクエストに固有なパラメータを含んでもよい (MAY).
+          この場合、<tt>access_token</tt>パラメータは文字<tt>&amp;</tt> (ASCIIコード38) を用いてリクエスト固有なパラメーから適切に分離されなければならない (MUST).b
+
         
 </p>
 <p>
-            For example, the client makes the following HTTP request using transport-layer
-            security:
+            例えば, クライアントは以下のHTTPリクエストをセキュリティ保護されたトランスポート層から送信する:
+
           
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 POST /resource HTTP/1.1
@@ -475,11 +469,8 @@ Content-Type: application/x-www-form-urlencoded
 access_token=vF9dft4qmT
 </pre></div>
 <p>
-	  The <tt>application/x-www-form-urlencoded</tt>
-	  method SHOULD NOT be used except in application contexts
-	  where participating browsers do not have access to the
-	  <tt>Authorization</tt> request header
-	  field.  Resource servers MAY support this method.
+	  この<tt>application/x-www-form-urlencoded</tt>を用いる方法は, 関与しているブラウザが<tt>Authorization</tt>リクエストヘッダにアクセスできない場合を除いて使用すべきではない (SHOULD NOT). リソースサーバはこの方法をサポートしてもよい (MAY).
+
 	
 </p>
 <a name="query-param"></a><br /><hr />
