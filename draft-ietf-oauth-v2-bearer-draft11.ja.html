@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en"><head><title>The OAuth 2.0 Authorization Protocol: Bearer Tokens(日本語)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -154,9 +155,9 @@
 <h3>Abstract</h3>
 
 <p>
-        この仕様書は、OAuth 2.0の保護リソースへアクセスするために、BearerトークンをHTTPリクエスト中でどのように利用するか記述したものである。
-        Bearerトークンを所有する任意のパーティ（bearer）は、認可済みリソースへアクセスするためにBearerトークンを利用できる。（暗号鍵の所有を明示す必要はない。）
-        誤った利用を避けるために、Bearerトークンは保存場所や流通経路で露見から守られなければならない（MUST)。
+        この仕様書は、OAuth 2.0の保護リソースへアクセスするために、無記名トークンをHTTPリクエスト中でどのように利用するか記述したものである。
+        無記名トークンを所有する任意のパーティ（持参人）は、認可済みリソースへアクセスするために無記名トークンを利用できる。（暗号鍵の所有を示す必要はない。）
+        誤った利用を避けるために、無記名トークンは保存場所や流通経路での値の露見から守られなければならない（MUST)。
       
 </p>
 <h3>Status of this Memo</h3>
@@ -208,7 +209,7 @@ Authorizationリクエストヘッダフィールド<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#body-param">2.2.</a>&nbsp;
 Formエンコードされたボディパラメータ<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#query-param">2.3.</a>&nbsp;
-URI Query Parameter<br />
+URIクエリパラメータ<br />
 <a href="#authn-header">3.</a>&nbsp;
 WWW-Authenticate レスポンスヘッダーフィールド<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#resource-error-codes">3.1.</a>&nbsp;
@@ -216,7 +217,7 @@ Error Codes<br />
 <a href="#sec-con">4.</a>&nbsp;
 Security Considerations<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#threats">4.1.</a>&nbsp;
-Security Threats<br />
+セキュリティ上の脅威<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#mitigation">4.2.</a>&nbsp;
 Threat Mitigation<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor6">4.3.</a>&nbsp;
@@ -260,11 +261,11 @@ Authors' Addresses<br />
 <p>
         トークンはリソース所有者の承認を伴い、認可サーバによってクライアントに対して発行される。
         クライアントはアクセストークンを、リソースサーバが持つ保護リソースにアクセスするために利用する。
-        この仕様書では、アクセストークンがBearerトークンである場合に、保護リソースを要求する方法を記載する。
+        この仕様書では、アクセストークンが無記名トークンである場合に、保護リソースを要求する方法を記載する。
       
 </p>
 <p>
-        この仕様書ではOAuthを<a class='info' href='#RFC2616'>HTTP<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P., and T. Berners-Lee, &ldquo;Hypertext Transfer Protocol -- HTTP/1.1,&rdquo; June&nbsp;1999.</span><span>)</span></a> [RFC2616]及び<a class='info' href='#RFC5246'>TLS<span> (</span><span class='info'>Dierks, T. and E. Rescorla, &ldquo;The Transport Layer Security (TLS) Protocol Version 1.2,&rdquo; August&nbsp;2008.</span><span>)</span></a> [RFC5246]で定義されたHTTP over TLSを用いるOAuthで、Bearerトークンを利用する方法を定める. 
+        この仕様書では<a class='info' href='#RFC2616'>HTTP<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P., and T. Berners-Lee, &ldquo;Hypertext Transfer Protocol -- HTTP/1.1,&rdquo; June&nbsp;1999.</span><span>)</span></a> [RFC2616]及び<a class='info' href='#RFC5246'>TLS<span> (</span><span class='info'>Dierks, T. and E. Rescorla, &ldquo;The Transport Layer Security (TLS) Protocol Version 1.2,&rdquo; August&nbsp;2008.</span><span>)</span></a> [RFC5246]で定義された、TLSを用いたHTTP上でのOAuthで、無記名トークンを利用する方法を定める. 
         他の仕様書がその他の転送プロトコルの元での利用について本仕様を拡張する可能性もある. 
       
 </p>
@@ -279,7 +280,7 @@ Authors' Addresses<br />
 </p>
 <p>
           このドキュメントでは<a class='info' href='#RFC5234'>[RFC5234]<span> (</span><span class='info'>Crocker, D. and P. Overell, &ldquo;Augmented BNF for Syntax Specifications: ABNF,&rdquo; January&nbsp;2008.</span><span>)</span></a>におけるAugmented Backus-Naur Form (ABNF)表記法を元にした、<a class='info' href='#I-D.ietf-httpbis-p1-messaging'>[I&#8209;D.ietf&#8209;httpbis&#8209;p1&#8209;messaging]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 1: URIs, Connections, and Message Parsing,&rdquo; August&nbsp;2011.</span><span>)</span></a>におけるAugmented Backus-Naur Form(ABNF)表記法を利用している. 
-          加えて, 次の規則(<a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a> 記載: b64token, auth-param, and realm; <a class='info' href='#I-D.ietf-httpbis-p1-messaging'>[I&#8209;D.ietf&#8209;httpbis&#8209;p1&#8209;messaging]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 1: URIs, Connections, and Message Parsing,&rdquo; August&nbsp;2011.</span><span>)</span></a>記載:  quoted-string; <a class='info' href='#RFC3986'>[RFC3986]<span> (</span><span class='info'>Berners-Lee, T., Fielding, R., and L. Masinter, &ldquo;Uniform Resource Identifier (URI): Generic Syntax,&rdquo; January&nbsp;2005.</span><span>)</span></a>記載: URI-Reference)に従う.
+          加えて, 次の規則(<a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a> 記載: b64token, auth-param および realm; <a class='info' href='#I-D.ietf-httpbis-p1-messaging'>[I&#8209;D.ietf&#8209;httpbis&#8209;p1&#8209;messaging]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 1: URIs, Connections, and Message Parsing,&rdquo; August&nbsp;2011.</span><span>)</span></a>記載:  quoted-string; <a class='info' href='#RFC3986'>[RFC3986]<span> (</span><span class='info'>Berners-Lee, T., Fielding, R., and L. Masinter, &ldquo;Uniform Resource Identifier (URI): Generic Syntax,&rdquo; January&nbsp;2005.</span><span>)</span></a>記載: URI-Reference)に従う.
 
 
         
@@ -296,12 +297,12 @@ Authors' Addresses<br />
 <p>
           </p>
 <blockquote class="text"><dl>
-<dt>Bearerトークン</dt>
+<dt>無記名トークン</dt>
 <dd>
               
               セキュリティトークン。
-              トークンを所有する任意のパーティ（bearer）は、それを所有する他の任意のパーティーにとって可能ないかなる方法でもトークンを利用することができるという特性を持っている。
-              Bearerトークンを利用する際、トークン保持者に対して、暗号鍵の所持を証明（proof-of-posession）するよう要求することはない。
+              トークンを所有する任意のパーティ（持参人）は、それを所有する他の任意のパーティーにとって可能ないかなる方法でもトークンを利用することができるという特性を持っている。
+              無記名トークンを利用する際、持参人は、暗号鍵の所持を証明（proof-of-posession）するよう要求されない。
             
 </dd>
 </dl></blockquote><p>
@@ -476,26 +477,28 @@ access_token=vF9dft4qmT
 <a name="query-param"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2.3"></a><h3>2.3.&nbsp;
-URI Query Parameter</h3>
+URIクエリパラメータ</h3>
 
 <p>
+        
+          HTTPリクエストURIの中でアクセストークンを送信する際、クライアントは<tt>access_token</tt>パラメータを用いてアクセストークンを<a class='info' href='#RFC3986'>[RFC3986]<span> (</span><span class='info'>Berners-Lee, T., Fielding, R., and L. Masinter, &ldquo;Uniform Resource Identifier (URI): Generic Syntax,&rdquo; January&nbsp;2005.</span><span>)</span></a>で定義されているURIクエリコンポーネントに追加する。
           When sending the access token in the HTTP request URI, the client adds the access
           token to the request URI query component as defined by <a class='info' href='#RFC3986'>[RFC3986]<span> (</span><span class='info'>Berners-Lee, T., Fielding, R., and L. Masinter, &ldquo;Uniform Resource Identifier (URI): Generic Syntax,&rdquo; January&nbsp;2005.</span><span>)</span></a> using
           the <tt>access_token</tt> parameter.
         
 </p>
 <p>
-            For example, the client makes the following HTTP request using transport-layer
-            security:
+          
+            たとえば、クライアントは次のようなHTTPリクエストをトランスポートレイヤセキュリティを利用して送信する:
           
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 GET /resource?access_token=vF9dft4qmT HTTP/1.1
 Host: server.example.com
 </pre></div>
 <p>
-          The HTTP request URI query can include other
-          request-specific parameters, in which case, the <tt>access_token</tt> parameter MUST be properly
-          separated from the request-specific parameters using <tt>&amp;</tt> character(s) (ASCII code 38).
+        
+          HTTPリクエストURIはリクエストに特化した他のパラメータを含むことができる。
+          その場合、<tt>access_token</tt>パラメータは<tt>&amp;</tt> 文字 (ASCII コード 38)を使い、他のリクエストに特化したパラメータと適切に分離されていなければならない（MUST）。
         
 </p>
 <p>
@@ -505,10 +508,8 @@ Host: server.example.com
 https://server.example.com/resource?x=y&amp;access_token=vF9dft4qmT&amp;p=q
 </pre></div>
 <p>
-	  Because of the <a class='info' href='#sec-con'>Security
-	  Considerations<span> (</span><span class='info'>Security Considerations</span><span>)</span></a> associated with the URI method, it
-	  SHOULD NOT be used unless it is the only feasible method.
-	  Resource servers MAY support this method.
+	
+	  URI方式に関係する<a class='info' href='#sec-con'>セキュリティに関する考慮事項<span> (</span><span class='info'>Security Considerations</span><span>)</span></a>のため、この方法は単に実現可能な方法であるということを除いては利用すべきではない（SHOULD NOT）。リソースサーバはこの方式をサポートしても良い（MAY）。
 	
 </p>
 <a name="authn-header"></a><br /><hr />
@@ -634,57 +635,44 @@ WWW-Authenticate: Bearer realm="example"
 Security Considerations</h3>
 
 <p>
-	This section describes the relevant security threats regarding
-	token handling when using bearer tokens and describes how to
-	mitigate these threats.
+      
+	本章では、無記名トークン利用時におけるトークンの取り扱い方法に関するセキュリティ上の脅威、およびこれらの脅威をどのように軽減するかを記述する。
       
 </p>
 <a name="threats"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.4.1"></a><h3>4.1.&nbsp;
-Security Threats</h3>
+セキュリティ上の脅威</h3>
 
 <p>
-	  The following list presents several common threats against
-	  protocols utilizing some form of tokens. This list of
-	  threats is based on NIST Special Publication 800-63 <a class='info' href='#NIST800-63'>[NIST800&#8209;63]<span> (</span><span class='info'>Burr, W., Dodson, D., Perlner, R., Polk, T., Gupta, S., and E. Nabbus, &ldquo;NIST Special Publication 800-63-1, INFORMATION SECURITY,&rdquo; December&nbsp;2008.</span><span>)</span></a>. Since this document builds on the
-	  OAuth 2.0 specification, we exclude a discussion of threats
-	  that are described there or in related documents.
+	
+	  次のリストは何らかのトークン形式を取り扱うプロトコルにおける共通の脅威を表したものである。
+	  この脅威リストはNIST Special Publication 800-63 <a class='info' href='#NIST800-63'>[NIST800&#8209;63]<span> (</span><span class='info'>Burr, W., Dodson, D., Perlner, R., Polk, T., Gupta, S., and E. Nabbus, &ldquo;NIST Special Publication 800-63-1, INFORMATION SECURITY,&rdquo; December&nbsp;2008.</span><span>)</span></a>をベースにしたものである。この文書はOAuth 2.0仕様を前提として作成されたものであるため、その仕様や関連文章中に記載されている脅威に関する議論は行わないものとする。
 	
 </p>
 <p>
 	  </p>
 <blockquote class="text"><dl>
-<dt>Token manufacture/modification:</dt>
+<dt>トークン偽装/改ざん:</dt>
 <dd>
-	      An attacker may generate a bogus token or modify the
-	      token contents (such as the authentication or attribute
-	      statements) of an existing token, causing the resource
-	      server to grant inappropriate access to the client.
-	      For example, an attacker may modify the token to extend
-	      the validity period; a malicious client may modify the
-	      assertion to gain access to information that they
-	      should not be able to view.
+	    攻撃者が偽装トークンを生成したり、既存のトークンの（認証や属性の記述内容といった）コンテンツを改ざんすることで、リソースサーバはクライアントに対して不適切なアクセス権限を許してしまう可能性がある。
+	    例えば、攻撃者はトークンが妥当である期間を拡張するようにトークンを改ざんするかもしれない。悪意のあるクライアントは本来見ることができるべきではない情報へのアクセスを得るためのアサーションを改ざんするかもしれない。
 	    
 </dd>
-<dt>Token disclosure:</dt>
+<dt>トークン露見:</dt>
 <dd>
-	      Tokens may contain authentication and attribute
-	      statements that include sensitive information.
+	    トークンは認証や属性の記述など機微情報を含む可能性がある。
 	    
 </dd>
-<dt>Token redirect:</dt>
+<dt>トークンリダイレクト:</dt>
 <dd>
-	      An attacker uses a token generated for consumption by 
-	      one resource server to gain access to a different
-	      resource server that mistakenly believes the token to be
-	      for it.
+	    攻撃者はあるリソースサーバで利用することを目的として生成されたトークンを、
+	    別のリソースサーバが誤ってそのトークンが自身で利用できるものと思い込ませてアクセスを行うために利用する。
 	    
 </dd>
-<dt>Token replay:</dt>
+<dt>トークンリプレイ:</dt>
 <dd>
-	      An attacker attempts to use a token that has already
-	      been used with that resource server in the past.
+	    攻撃者は過去にリソースサーバで利用済みのトークンの再利用を試みる。
 	    
 </dd>
 </dl></blockquote><p> 
