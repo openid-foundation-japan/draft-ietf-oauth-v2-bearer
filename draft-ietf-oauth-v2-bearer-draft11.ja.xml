@@ -49,9 +49,9 @@
         MUST be protected from disclosure in storage and in transport.
       </t-->
       <t>
-        この仕様書は、OAuth 2.0の保護リソースへアクセスするために、BearerトークンをHTTPリクエスト中でどのように利用するか記述したものである。
-        Bearerトークンを所有する任意のパーティ（bearer）は、認可済みリソースへアクセスするためにBearerトークンを利用できる。（暗号鍵の所有を明示す必要はない。）
-        誤った利用を避けるために、Bearerトークンは保存場所や流通経路で露見から守られなければならない（MUST)。
+        この仕様書は、OAuth 2.0の保護リソースへアクセスするために、無記名トークンをHTTPリクエスト中でどのように利用するか記述したものである。
+        無記名トークンを所有する任意のパーティ（持参人）は、認可済みリソースへアクセスするために無記名トークンを利用できる。（暗号鍵の所有を示す必要はない。）
+        誤った利用を避けるために、無記名トークンは保存場所や流通経路での値の露見から守られなければならない（MUST)。
       </t>
     </abstract>
   </front>
@@ -81,7 +81,7 @@
       <t>
         トークンはリソース所有者の承認を伴い、認可サーバによってクライアントに対して発行される。
         クライアントはアクセストークンを、リソースサーバが持つ保護リソースにアクセスするために利用する。
-        この仕様書では、アクセストークンがBearerトークンである場合に、保護リソースを要求する方法を記載する。
+        この仕様書では、アクセストークンが無記名トークンである場合に、保護リソースを要求する方法を記載する。
       </t>
       <!--t>
         This specification defines the use of bearer tokens with OAuth
@@ -90,8 +90,8 @@
         it for use with other transport protocols.
       </t-->
       <t>
-        この仕様書ではOAuthを<xref target='RFC2616'>HTTP</xref>及び<xref
-        target='RFC5246'>TLS</xref>で定義されたHTTP over TLSを用いるOAuthで、Bearerトークンを利用する方法を定める. 
+        この仕様書では<xref target='RFC2616'>HTTP</xref>及び<xref
+        target='RFC5246'>TLS</xref>で定義された、TLSを用いたHTTP上でのOAuthで、無記名トークンを利用する方法を定める. 
         他の仕様書がその他の転送プロトコルの元での利用について本仕様を拡張する可能性もある. 
       </t>
 
@@ -117,7 +117,7 @@
         </t-->
         <t>
           このドキュメントでは<xref target='RFC5234' />におけるAugmented Backus-Naur Form (ABNF)表記法を元にした、<xref target='I-D.ietf-httpbis-p1-messaging' />におけるAugmented Backus-Naur Form(ABNF)表記法を利用している. 
-          加えて, 次の規則(<xref target='I-D.ietf-httpbis-p7-auth' /> 記載: b64token, auth-param, and realm; <xref target='I-D.ietf-httpbis-p1-messaging' />記載:  quoted-string; <xref target='RFC3986'/>記載: URI-Reference)に従う.
+          加えて, 次の規則(<xref target='I-D.ietf-httpbis-p7-auth' /> 記載: b64token, auth-param および realm; <xref target='I-D.ietf-httpbis-p1-messaging' />記載:  quoted-string; <xref target='RFC3986'/>記載: URI-Reference)に従う.
 
 
         </t>
@@ -143,11 +143,11 @@
               possession of cryptographic key material
               (proof-of-possession).
             </t-->
-            <t hangText="Bearerトークン">
+            <t hangText="無記名トークン">
               <vspace />
               セキュリティトークン。
-              トークンを所有する任意のパーティ（bearer）は、それを所有する他の任意のパーティーにとって可能ないかなる方法でもトークンを利用することができるという特性を持っている。
-              Bearerトークンを利用する際、トークン保持者に対して、暗号鍵の所持を証明（proof-of-posession）するよう要求することはない。
+              トークンを所有する任意のパーティ（持参人）は、それを所有する他の任意のパーティーにとって可能ないかなる方法でもトークンを利用することができるという特性を持っている。
+              無記名トークンを利用する際、持参人は、暗号鍵の所持を証明（proof-of-posession）するよう要求されない。
             </t>
           </list>
         </t>
@@ -266,45 +266,69 @@ Authorization: Bearer vF9dft4qmT]]>
 	</t>
       </section>
 
-      <section title='Form-Encoded Body Parameter' anchor='body-param'>
+      <!--section title='Form-Encoded Body Parameter' anchor='body-param'-->
+      <section title='フォームエンコードされたボディパラメータ' anchor='body-param'>
         <t>
+        <!--
           When sending the access token in the HTTP request
           entity-body, the client adds the access token to the request
           body using the <spanx style='verb'>access_token</spanx>
           parameter.  The client MUST NOT use this method unless
-	  all of the following conditions are met:
+	  all of the following conditions are met: -->
+	  HTTPリクエストのエンティティボディの中でアクセストークンを送信する際、クライアントは<spanx style='verb'>access_token</spanx>パラメータを用いてアクセストークンをリクエストボディに追加する。クライアントは下記のすべての条件を満たさなければこの方法を利用してはならない（MUST NOT）:
           <list style='symbols'>
             <t>
+            <!--
               The HTTP request entity-body is single-part.
+              -->
+              HTTPリクエストのエンティティボディはシングルパートである。
             </t>
             <t>
+            <!--
               The entity-body follows the encoding requirements of the
               <spanx style='verb'>application/x-www-form-urlencoded</spanx> content-type as
               defined by <xref target='W3C.REC-html401-19991224' />.
+              -->
+              エンティティボディは<xref target='W3C.REC-html401-19991224' />で定義されたコンテントタイプ<spanx style='verb'>application/x-www-form-urlencoded</spanx>のエンコーディング要件に従う。
             </t>
             <t>
+            <!--
               The HTTP request entity-header includes the <spanx style='verb'>Content-Type</spanx>
               header field set to <spanx style='verb'>application/x-www-form-urlencoded</spanx>.
+              -->
+              HTTPリクエストのエンティティヘッダは<spanx style='verb'>Content-Type</spanx>ヘッダを含み、フィールドの値は<spanx style='verb'>application/x-www-form-urlencoded</spanx>にセットされている。
             </t>
             <t>
+            <!--
               The HTTP request method is one for which the request
               body has defined semantics.  In particular,
               this means that the <spanx style='verb'>GET</spanx>
               method MUST NOT be used.
+              -->
+              HTTPリクエストメソッドはそのリクエストボディが定義しているうちのどれか一つである。
+              これは特に<spanx style='verb'>GET</spanx>を利用してはならない（MUST NOT）ことを意味する。
             </t>
           </list>
         </t>
         <t>
+        <!--
           The entity-body MAY include other request-specific
           parameters, in which case, the <spanx
           style='verb'>access_token</spanx> parameter MUST be properly
           separated from the request-specific parameters using <spanx
           style='verb'>&amp;</spanx> character(s) (ASCII code 38).
+          -->
+          エンティティボディはリクエストに特化した他のパラメータを含んでも良い（MAY）。
+          その場合、<spanx style='verb'>access_token</spanx>パラメータは<spanx
+          style='verb'>&amp;</spanx> 文字 (ASCII コード 38)を使い、他のリクエストに特化したパラメータと適切に分離されていなければならない（MUST）。
         </t>
         <figure>
           <preamble>
+          <!--
             For example, the client makes the following HTTP request using transport-layer
             security:
+            -->
+            たとえば、クライアントは次のようなHTTPリクエストをトランスポートレイヤセキュリティを利用して送信する:
           </preamble>
           <artwork>
 <![CDATA[POST /resource HTTP/1.1
@@ -315,6 +339,16 @@ access_token=vF9dft4qmT]]>
           </artwork>
         </figure>
 	<t>
+	<--
+	  The <spanx style='verb'>application/x-www-form-urlencoded</spanx>
+	  method SHOULD NOT be used except in application contexts
+	  where participating browsers do not have access to the
+	  <spanx style='verb'>Authorization</spanx> request header
+	  field.  Resource servers MAY support this method.
+	  -->
+	  <spanx style='verb'>application/x-www-form-urlencoded</spanx>方式は、アクセスしてくるブラウザが<spanx style='verb'>Authorization</spanx>リクエストヘッダフィールドにアクセスすることが出来ないようなアプリケーションの事情を除いて利用すべきではない（SHOULD NOT）
+	  リソースサーバはこの方法をサポートしても良い（MAY）。
+	  
 	  The <spanx style='verb'>application/x-www-form-urlencoded</spanx>
 	  method SHOULD NOT be used except in application contexts
 	  where participating browsers do not have access to the
