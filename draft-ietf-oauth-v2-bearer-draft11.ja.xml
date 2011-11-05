@@ -357,16 +357,25 @@ access_token=vF9dft4qmT]]>
 	</t>
       </section>
 
-      <section title='URI Query Parameter' anchor='query-param'>
+      <section title='URIクエリパラメータ' anchor='query-param'>
         <t>
+        <!--
+          When sending the access token in the HTTP request URI, the client adds the access
+          token to the request URI query component as defined by <xref target='RFC3986' /> using
+          the <spanx style='verb'>access_token</spanx> parameter.
+          -->
+          HTTPリクエストURIの中でアクセストークンを送信する際、クライアントは<spanx style='verb'>access_token</spanx>パラメータを用いてアクセストークンを<xref target='RFC3986' />で定義されているURIクエリコンポーネントに追加する。
           When sending the access token in the HTTP request URI, the client adds the access
           token to the request URI query component as defined by <xref target='RFC3986' /> using
           the <spanx style='verb'>access_token</spanx> parameter.
         </t>
         <figure>
           <preamble>
+          <!--
             For example, the client makes the following HTTP request using transport-layer
             security:
+            -->
+            たとえば、クライアントは次のようなHTTPリクエストをトランスポートレイヤセキュリティを利用して送信する:
           </preamble>
           <artwork>
 <![CDATA[GET /resource?access_token=vF9dft4qmT HTTP/1.1
@@ -374,11 +383,15 @@ Host: server.example.com]]>
           </artwork>
         </figure>
         <t>
+        <!--
           The HTTP request URI query can include other
           request-specific parameters, in which case, the <spanx
           style='verb'>access_token</spanx> parameter MUST be properly
           separated from the request-specific parameters using <spanx
           style='verb'>&amp;</spanx> character(s) (ASCII code 38).
+          -->
+          HTTPリクエストURIはリクエストに特化した他のパラメータを含むことができる。
+          その場合、<spanx style='verb'>access_token</spanx>パラメータは<spanx style='verb'>&amp;</spanx> 文字 (ASCII コード 38)を使い、他のリクエストに特化したパラメータと適切に分離されていなければならない（MUST）。
         </t>
         <figure>
           <preamble>
@@ -389,10 +402,13 @@ Host: server.example.com]]>
           </artwork>
         </figure>
 	<t>
+	<!--
 	  Because of the <xref target="sec-con">Security
 	  Considerations</xref> associated with the URI method, it
 	  SHOULD NOT be used unless it is the only feasible method.
 	  Resource servers MAY support this method.
+	  -->
+	  URI方式に関係する<xref target="sec-con">セキュリティに関する考慮事項</xref>のため、この方法は単に実現可能な方法であるということを除いては利用すべきではない（SHOULD NOT）。リソースサーバはこの方式をサポートしても良い（MAY）。
 	</t>
       </section>
 
@@ -523,27 +539,38 @@ WWW-Authenticate: Bearer realm="example"]]>
 
     </section>
 
-    <section title='Security Considerations' anchor="sec-con">
+    <!-- section title='Security Considerations' anchor="sec-con" -->
+    <section title='セキュリティに関する考慮事項' anchor="sec-con">
 
       <t>
+      <!--
 	This section describes the relevant security threats regarding
 	token handling when using bearer tokens and describes how to
 	mitigate these threats.
+	-->
+	本章では、無記名トークン利用時におけるトークンの取り扱い方法に関するセキュリティ上の脅威、およびこれらの脅威をどのように軽減するかを記述する。
       </t>
 
-      <section title="Security Threats" anchor="threats">
+      <!-- section title="Security Threats" anchor="threats" -->
+      <section title="セキュリティ上の脅威" anchor="threats">
 
 	<t>
+	<!--
 	  The following list presents several common threats against
 	  protocols utilizing some form of tokens. This list of
 	  threats is based on NIST Special Publication 800-63 <xref
 	  target="NIST800-63"/>. Since this document builds on the
 	  OAuth 2.0 specification, we exclude a discussion of threats
 	  that are described there or in related documents.
+	  -->
+	  次のリストは何らかのトークン形式を取り扱うプロトコルにおける共通の脅威を表したものである。
+	  この脅威リストはNIST Special Publication 800-63 <xref
+	  target="NIST800-63"/>をベースにしたものである。この文書はOAuth 2.0仕様を前提として作成されたものであるため、その仕様や関連文章中に記載されている脅威に関する議論は行わないものとする。
 	</t>
 
 	<t>
 	  <list style="hanging">
+	  <!--
 	    <t hangText="Token manufacture/modification:">
 	      An attacker may generate a bogus token or modify the
 	      token contents (such as the authentication or attribute
@@ -553,20 +580,40 @@ WWW-Authenticate: Bearer realm="example"]]>
 	      the validity period; a malicious client may modify the
 	      assertion to gain access to information that they
 	      should not be able to view.
+	      -->
+	    <t hangText="トークン偽装/改ざん:">
+	    攻撃者が偽装トークンを生成したり、既存のトークンの（認証や属性の記述内容といった）コンテンツを改ざんすることで、リソースサーバはクライアントに対して不適切なアクセス権限を許してしまう可能性がある。
+	    例えば、攻撃者はトークンが妥当である期間を拡張するようにトークンを改ざんするかもしれない。悪意のあるクライアントは本来見ることができるべきではない情報へのアクセスを得るためのアサーションを改ざんするかもしれない。
 	    </t>
+	    <!--
 	    <t hangText="Token disclosure:">
 	      Tokens may contain authentication and attribute
 	      statements that include sensitive information.
 	    </t>
+	    -->
+	    <t hangText="トークン露見:">
+	    トークンは認証や属性の記述など機微情報を含む可能性がある。
+	    </t>
+	    <!--
 	    <t hangText="Token redirect:">
 	      An attacker uses a token generated for consumption by 
 	      one resource server to gain access to a different
 	      resource server that mistakenly believes the token to be
 	      for it.
 	    </t>
+	    -->
+	    <t hangText="トークンリダイレクト:">
+	    攻撃者はあるリソースサーバで利用することを目的として生成されたトークンを、
+	    別のリソースサーバが誤ってそのトークンが自身で利用できるものと思い込ませてアクセスを行うために利用する。
+	    </t>
+	    <!--
 	    <t hangText="Token replay:">
 	      An attacker attempts to use a token that has already
 	      been used with that resource server in the past.
+	    </t>
+	    -->
+	    <t hangText="トークンリプレイ:">
+	    攻撃者は過去にリソースサーバで利用済みのトークンの再利用を試みる。
 	    </t>
 	  </list> 
 	</t>
