@@ -210,7 +210,7 @@ Formエンコードされたボディパラメータ<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#query-param">2.3.</a>&nbsp;
 URI Query Parameter<br />
 <a href="#authn-header">3.</a>&nbsp;
-The WWW-Authenticate Response Header Field<br />
+WWW-Authenticate レスポンスヘッダーフィールド<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#resource-error-codes">3.1.</a>&nbsp;
 Error Codes<br />
 <a href="#sec-con">4.</a>&nbsp;
@@ -354,13 +354,13 @@ Authors' Addresses<br />
 
 <p>
           <a class='info' href='#Figure-1'>Figure&nbsp;1<span> (</span><span class='info'>プロトコルフロー概要</span><span>)</span></a> で示されたフロー概要は, OAuth 2.0プロトコルのアーキテクチャの全体を説明したものである.
-          以下のステップはこの文章中で定義される.
+          以下のステップはこの文書中で定義される.
         
 
           </p>
 <blockquote class="text">
 <p>
-              E) クライアントはリソースサーバにアクセストークンを示し, 保護リソースへのリクエストを発行する.
+              E) クライアントはリソースサーバにアクセストークンを示し, 保護リソースへのリクエストを行う.
             
             
 </p>
@@ -514,17 +514,12 @@ https://server.example.com/resource?x=y&amp;access_token=vF9dft4qmT&amp;p=q
 <a name="authn-header"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.3"></a><h3>3.&nbsp;
-The WWW-Authenticate Response Header Field</h3>
+WWW-Authenticate レスポンスヘッダーフィールド</h3>
 
 <p>
-	If the protected resource request does not include
-	authentication credentials or does not contain an access
-	token that enables access to the protected resource,
-	the resource server MUST include the HTTP <tt>WWW-Authenticate</tt> response header field;
-	it MAY include it in response to other conditions as well.
-	The <tt>WWW-Authenticate</tt> header
-	field uses the framework defined by
-	<a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a> as follows:
+        保護リソースへのリクエストが, 認証クレデンシャルを含んでいない, または保護リソースへアクセスすることができるアクセストークンを含んでいない場合, リソースサーバーはHTTP <tt>WWW-Authenticate</tt> レスポンスヘッダーフィールドを含めなければならない (MUST). 同様に, その他の条件下でもリソースサーバはそれをレスポンスに含めてよい (MAY)
+        <tt>WWW-Authenticate</tt> ヘッダーフィールドは, <a class='info' href='#RFC2617'>[RFC2617]<span> (</span><span class='info'>Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S., Leach, P., Luotonen, A., and L. Stewart, &ldquo;HTTP Authentication: Basic and Digest Access Authentication,&rdquo; June&nbsp;1999.</span><span>)</span></a> により定義されている以下のフレームワークを使用する.
+      
       
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 challenge       = "Bearer" [ 1*SP 1#param ]
@@ -544,40 +539,33 @@ error-desc-char = SP / VCHAR
 error-uri       = "error_uri" "=" DQUOTE URI-reference DQUOTE
 </pre></div>
 <p>
-	The <tt>scope</tt> attribute is a space-delimited list of scope values
-	indicating the required scope of the access token for accessing the requested resource.
-	The <tt>scope</tt> attribute MUST NOT appear more than once.
-	The <tt>scope</tt> value is intended for
-	programmatic use and is not meant to be displayed to
-	end users.
+          <tt>scope</tt> 属性は, 要求されたリソースにアクセスするために必要なアクセストークンに求められるスコープを示す, スペース区切りのスコープ値リストである.
+          <tt>scope</tt> 属性は, 二度以上現れてはならない(MUST NOT).
+          <tt>scope</tt> の値は, プログラム中で用いられることを目的とし, エンドユーザーへ表示することは意図されていない.
+      
       
 </p>
 <p>
-	If the protected resource request included an access token and failed authentication, the
-	resource server SHOULD include the <tt>error</tt> attribute to provide
-	the client with the reason why the access request was declined. The parameter value is
-	described in <a class='info' href='#resource-error-codes'>Section&nbsp;3.1<span> (</span><span class='info'>Error Codes</span><span>)</span></a>.
-	In addition, the resource server MAY include the <tt>error_description</tt> attribute to provide
-	developers a human-readable explanation that is not meant
-	to be displayed to end users.
-	It also MAY include
-	the <tt>error_uri</tt> attribute with
-	an absolute URI identifying a human-readable web page explaining the error.
-	The <tt>error</tt>, <tt>error_description</tt>, and
-	<tt>error_uri</tt> attribute MUST NOT appear more than once.
+          アクセストークンを含んだ保護リソースへのリクエストがあり, 認証に失敗した場合, リソースサーバはクライアントにアクセスリクエストが拒否された理由を示すために, <tt>error</tt> 属性を含むべきである(SHOULD).
+          パラメータの値は <a class='info' href='#resource-error-codes'>Section&nbsp;3.1<span> (</span><span class='info'>Error Codes</span><span>)</span></a> に記載されている.
+          さらに, リソースサーバは, 開発者に人間の読みやすい説明を提供するために, エンドユーザに表示する目的ではない <tt>error_description</tt> 属性を含んでもよい(MAY).
+          発生したエラーを説明する, 人間が読みやすいウェブページを指す絶対URIを提供する, <tt>error_uri</tt> 属性を含んでもよい(MAY).
+          <tt>error</tt>, <tt>error_description</tt>, そして <tt>error_uri</tt> 属性は, 二度以上現れてはならない(MUST NOT).
+      
 
       
 </p>
 <p>
-	  For example, in response to a protected resource request without authentication:
+      例えば, 認証されていない場合の保護リソースへのリクエストに対するレスポンスは以下のようになる:
+      
 	
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 HTTP/1.1 401 Unauthorized
 WWW-Authenticate: Bearer realm="example"
 </pre></div>
 <p>
-            And in response to a protected resource request with an authentication attempt using an
-            expired access token:
+            また, 有効期限の切れたアクセストークンを用いて認証を試みた場合の保護リソースへのリクエストに対するレスポンスは以下のようになる:
+            
           
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 HTTP/1.1 401 Unauthorized

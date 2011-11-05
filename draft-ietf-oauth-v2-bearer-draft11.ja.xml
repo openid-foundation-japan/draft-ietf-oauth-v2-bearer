@@ -218,7 +218,7 @@
         </figure>
         <t>
           <xref target='Figure-1' /> で示されたフロー概要は, OAuth 2.0プロトコルのアーキテクチャの全体を説明したものである.
-          以下のステップはこの文章中で定義される.
+          以下のステップはこの文書中で定義される.
         <!--
           The abstract flow illustrated in <xref target='Figure-1' /> describes the overall
           OAuth 2.0 protocol architecture. The following steps are specified within this
@@ -227,7 +227,7 @@
 
           <list>
             <t>
-              E) クライアントはリソースサーバにアクセストークンを示し, 保護リソースへのリクエストを発行する.
+              E) クライアントはリソースサーバにアクセストークンを示し, 保護リソースへのリクエストを行う.
             <!--
               E) The client makes a protected resource request to the resource server by presenting
               the access token.
@@ -435,8 +435,12 @@ Host: server.example.com]]>
 
     </section>
 
-    <section title='The WWW-Authenticate Response Header Field' anchor='authn-header'>
+    <section title='WWW-Authenticate レスポンスヘッダーフィールド' anchor='authn-header'>
+    <!--section title='The WWW-Authenticate Response Header Field' anchor='authn-header'-->
       <t>
+        保護リソースへのリクエストが, 認証クレデンシャルを含んでいない, または保護リソースへアクセスすることができるアクセストークンを含んでいない場合, リソースサーバーはHTTP <spanx style='verb'>WWW-Authenticate</spanx> レスポンスヘッダーフィールドを含めなければならない (MUST). 同様に, その他の条件下でもリソースサーバはそれをレスポンスに含めてよい (MAY)
+        <spanx style='verb'>WWW-Authenticate</spanx> ヘッダーフィールドは, <xref target='RFC2617' /> により定義されている以下のフレームワークを使用する.
+      <!--
 	If the protected resource request does not include
 	authentication credentials or does not contain an access
 	token that enables access to the protected resource,
@@ -446,6 +450,7 @@ Host: server.example.com]]>
 	The <spanx style='verb'>WWW-Authenticate</spanx> header
 	field uses the framework defined by
 	<xref target='I-D.ietf-httpbis-p7-auth' /> as follows:
+        -->
       </t>
       <figure>
 	<artwork>
@@ -467,14 +472,25 @@ error-uri       = "error_uri" "=" DQUOTE URI-reference DQUOTE]]>
 	</artwork>
       </figure>
       <t>
+          <spanx style='verb'>scope</spanx> 属性は, 要求されたリソースにアクセスするために必要なアクセストークンに求められるスコープを示す, スペース区切りのスコープ値リストである.
+          <spanx style='verb'>scope</spanx> 属性は, 二度以上現れてはならない(MUST NOT).
+          <spanx style='verb'>scope</spanx> の値は, プログラム中で用いられることを目的とし, エンドユーザーへ表示することは意図されていない.
+      <!--
 	The <spanx style='verb'>scope</spanx> attribute is a space-delimited list of scope values
 	indicating the required scope of the access token for accessing the requested resource.
 	The <spanx style='verb'>scope</spanx> attribute MUST NOT appear more than once.
 	The <spanx style='verb'>scope</spanx> value is intended for
 	programmatic use and is not meant to be displayed to
 	end users.
+        -->
       </t>
       <t>
+          アクセストークンを含んだ保護リソースへのリクエストがあり, 認証に失敗した場合, リソースサーバはクライアントにアクセスリクエストが拒否された理由を示すために, <spanx style='verb'>error</spanx> 属性を含むべきである(SHOULD).
+          パラメータの値は <xref target='resource-error-codes' /> に記載されている.
+          さらに, リソースサーバは, 開発者に人間の読みやすい説明を提供するために, エンドユーザに表示する目的ではない <spanx style='verb'>error_description</spanx> 属性を含んでもよい(MAY).
+          発生したエラーを説明する, 人間が読みやすいウェブページを指す絶対URIを提供する, <spanx style='verb'>error_uri</spanx> 属性を含んでもよい(MAY).
+          <spanx style='verb'>error</spanx>, <spanx style='verb'>error_description</spanx>, そして <spanx style='verb'>error_uri</spanx> 属性は, 二度以上現れてはならない(MUST NOT).
+      <!--
 	If the protected resource request included an access token and failed authentication, the
 	resource server SHOULD include the <spanx style='verb'>error</spanx> attribute to provide
 	the client with the reason why the access request was declined. The parameter value is
@@ -488,11 +504,15 @@ error-uri       = "error_uri" "=" DQUOTE URI-reference DQUOTE]]>
 	an absolute URI identifying a human-readable web page explaining the error.
 	The <spanx style='verb'>error</spanx>, <spanx style='verb'>error_description</spanx>, and
 	<spanx style='verb'>error_uri</spanx> attribute MUST NOT appear more than once.
+        -->
 
       </t>
       <figure>
 	<preamble>
+      例えば, 認証されていない場合の保護リソースへのリクエストに対するレスポンスは以下のようになる:
+      <!--
 	  For example, in response to a protected resource request without authentication:
+      -->
 	</preamble>
 	<artwork>
 <![CDATA[HTTP/1.1 401 Unauthorized
@@ -501,8 +521,11 @@ WWW-Authenticate: Bearer realm="example"]]>
         </figure>
         <figure>
           <preamble>
+            また, 有効期限の切れたアクセストークンを用いて認証を試みた場合の保護リソースへのリクエストに対するレスポンスは以下のようになる:
+            <!--
             And in response to a protected resource request with an authentication attempt using an
             expired access token:
+            -->
           </preamble>
           <artwork>
 <![CDATA[HTTP/1.1 401 Unauthorized
