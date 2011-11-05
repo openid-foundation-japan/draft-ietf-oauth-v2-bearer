@@ -576,8 +576,8 @@ WWW-Authenticate: Bearer realm="example"]]>
 
     </section>
 
-    <!-- section title='Security Considerations' anchor="sec-con" -->
-    <section title='セキュリティに関する考慮事項' anchor="sec-con">
+    <section title='Security Considerations' anchor="sec-con">
+    <!-- section title='セキュリティに関する考慮事項' anchor="sec-con" -->
 
       <t>
       <!--
