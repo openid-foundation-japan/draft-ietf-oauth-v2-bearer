@@ -339,7 +339,7 @@ access_token=vF9dft4qmT]]>
           </artwork>
         </figure>
 	<t>
-	<--
+	<!--
 	  The <spanx style='verb'>application/x-www-form-urlencoded</spanx>
 	  method SHOULD NOT be used except in application contexts
 	  where participating browsers do not have access to the
