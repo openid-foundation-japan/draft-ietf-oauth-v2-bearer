@@ -554,7 +554,7 @@ WWW-Authenticate: Bearer realm="example",
       <!--section title='Error Codes' anchor='resource-error-codes'-->
       <section title='エラーコード' anchor='resource-error-codes'>
 	<t>
-	  リクエストが失敗した場合, リソースサーバーは適切なHTTPステータスコード (典型的には 400, 401, もしくは 403) を用いて応答し, 下記のうち1つのエラーコードをレスポンスに含める:
+	  リクエストが失敗した場合, リソースサーバは適切なHTTPステータスコード (典型的には 400, 401, もしくは 403) を用いて応答し, 下記のうち1つのエラーコードをレスポンスに含める:
 <!--
 	  When a request fails, the resource server responds using the appropriate HTTP status
 	  code (typically, 400, 401, or 403), and includes one of the following error codes in
@@ -564,7 +564,7 @@ WWW-Authenticate: Bearer realm="example",
 	  <list style='hanging' hangIndent='6'>
 	    <t hangText='invalid_request'>
 	      <vspace />
-	      リクエストに必要なパラメータが不足している, 対応していないパラメータもしくはパラメータの値が含まれている, 同じパラメータが複数回現れている, アクセストークンを含む方法を複数用いている, もしくはリクエストがその他不正(TODO)になっている.
+	      リクエストに必要なパラメータが不足している, 対応していないパラメータもしくはパラメータの値が含まれている, 同じパラメータが複数回現れている, アクセストークンを含む方法を複数用いている, もしくはリクエストがその他不正な形式になっている.
 	      リソースサーバはHTTPステータスコード400 (Bad Request) の応答を返すべきである (SHOULD).
 <!--
 	      The request is missing a required parameter, includes an unsupported parameter or
@@ -575,7 +575,7 @@ WWW-Authenticate: Bearer realm="example",
 	    </t>
 	    <t hangText='invalid_token'>
 	      <vspace />
-	      提供されたアクセストークンが期限切れである, 無効化(TODO)されている, 不正な値である, もしくはその他の理由により無効である.
+	      提供されたアクセストークンが期限切れである, 取り消されている, 不正な値である, もしくはその他の理由により無効である.
 	      リソースサーバはHTTPステータスコード401 (Unauthorized) の応答を返すべきである (SHOULD).
 	      クライアントは新しいアクセストークンを要求して保護されたリソースへのアクセスを再試行してもよい (MAY).
 <!--
@@ -587,8 +587,8 @@ WWW-Authenticate: Bearer realm="example",
 	    </t>
 	    <t hangText='insufficient_scope'>
 	      <vspace />
-	      リクエストには提供されたアクセストークンよりも高い権限が必要である.
-	      リソースサーバはHTTPステータスコード403 (Forbidden) の応答を返すべきであり (SHOULD), 保護されたリソースへのアクセスに必要となるスコープを <spanx style='verb'>scope</spanx> 属性に含めて応答してもよい (MAY).
+	      リクエストにはアクセストークンにより提供されるよりも高い権限が必要である.
+	      リソースサーバはHTTPステータスコード403 (Forbidden) の応答を返すべきであり (SHOULD), 保護されたリソースへのアクセスに必要となるスコープを示した <spanx style='verb'>scope</spanx> 属性を含めてもよい (MAY).
 <!--
 	      The request requires higher privileges than provided by the access token. The
 	      resource server SHOULD respond with the HTTP 403 (Forbidden) status code and MAY
@@ -599,7 +599,7 @@ WWW-Authenticate: Bearer realm="example",
 	  </list>
 	</t>
 	<t>
-	  リクエストが一切の認証情報を含まない場合 (つまり, 認証が必要であることをクライアントが認識していなかった場合か, 対応していない認証方法をクライアントが試行していた場合), リソースサーバはエラーコードやその他のエラー情報を応答に含めるべきではない (SHOULD NOT).
+	  リクエストが一切の認証情報を含まない場合 (つまり, 認証が必要であることをクライアントが認識していなかった場合か, 対応していない認証方法をクライアントが試行した場合), リソースサーバはエラーコードやその他のエラー情報を応答に含めるべきではない (SHOULD NOT).
 <!--
 	  If the request lacks any authentication information (i.e. the client was unaware
 	  authentication is necessary or attempted using an unsupported authentication method),
