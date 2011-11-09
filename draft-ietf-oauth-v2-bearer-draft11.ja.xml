@@ -571,7 +571,7 @@ WWW-Authenticate: Bearer realm="example",
 	      parameter value, repeats the same parameter, uses more than one method for
 	      including an access token, or is otherwise malformed. The resource server SHOULD
 	      respond with the HTTP 400 (Bad Request) status code.
--->>
+-->
 	    </t>
 	    <t hangText='invalid_token'>
 	      <vspace />
