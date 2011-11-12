@@ -49,9 +49,9 @@
         MUST be protected from disclosure in storage and in transport.
       </t-->
       <t>
-        この仕様書は、OAuth 2.0の保護リソースへアクセスするために、無記名トークンをHTTPリクエスト中でどのように利用するか記述したものである。
-        無記名トークンを所有する任意のパーティ（持参人）は、認可済みリソースへアクセスするために無記名トークンを利用できる。（暗号鍵の所有を示す必要はない。）
-        誤った利用を避けるために、無記名トークンは保存場所や流通経路での値の露見から守られなければならない（MUST)。
+        この仕様書は、OAuth 2.0の保護リソースへアクセスするために、署名無しトークンをHTTPリクエスト中でどのように利用するか記述したものである。
+        署名無しトークンを所有する任意のパーティ（持参人）は、認可済みリソースへアクセスするために署名無しトークンを利用できる。（暗号鍵の所有を示す必要はない。）
+        誤った利用を避けるために、署名無しトークンは保存場所や流通経路での値の露見から守られなければならない（MUST)。
       </t>
     </abstract>
   </front>
@@ -81,7 +81,7 @@
       <t>
         トークンはリソース所有者の承認を伴い、認可サーバによってクライアントに対して発行される。
         クライアントはアクセストークンを、リソースサーバが持つ保護リソースにアクセスするために利用する。
-        この仕様書では、アクセストークンが無記名トークンである場合に、保護リソースを要求する方法を記載する。
+        この仕様書では、アクセストークンが署名無しトークンである場合に、保護リソースを要求する方法を記載する。
       </t>
       <!--t>
         This specification defines the use of bearer tokens with OAuth
@@ -91,7 +91,7 @@
       </t-->
       <t>
         この仕様書では<xref target='RFC2616'>HTTP</xref>及び<xref
-        target='RFC5246'>TLS</xref>で定義された、TLSを用いたHTTP上でのOAuthで、無記名トークンを利用する方法を定める. 
+        target='RFC5246'>TLS</xref>で定義された、TLSを用いたHTTP上でのOAuthで、署名無しトークンを利用する方法を定める. 
         他の仕様書がその他の転送プロトコルの元での利用について本仕様を拡張する可能性もある. 
       </t>
 
@@ -143,11 +143,11 @@
               possession of cryptographic key material
               (proof-of-possession).
             </t-->
-            <t hangText="無記名トークン">
+            <t hangText="署名無しトークン">
               <vspace />
               セキュリティトークン。
               トークンを所有する任意のパーティ（持参人）は、それを所有する他の任意のパーティーにとって可能ないかなる方法でもトークンを利用することができるという特性を持っている。
-              無記名トークンを利用する際、持参人は、暗号鍵の所持を証明（proof-of-posession）するよう要求されない。
+              署名無しトークンを利用する際、持参人は、暗号鍵の所持を証明（proof-of-posession）するよう要求されない。
             </t>
           </list>
         </t>
@@ -247,8 +247,8 @@
     <!--section title='Authenticated Requests'-->
     <section title='認証されたリクエスト'>
       <t>
-	クライアントは保護されたリソースへの認証されたアクセス要求を行うためにBearerトークンを用いてもよい (MAY).
-	この章では, リソースの要求においてBearerトークンをリソースサーバに送信する3つの方法を定義する.
+	クライアントは保護されたリソースへの認証されたアクセス要求を行うために署名無しトークンを用いてもよい (MAY).
+	この章では, リソースの要求において署名無しトークンをリソースサーバに送信する3つの方法を定義する.
 	クライアントは一度のリクエストにおいて, トークンを送信する方法を複数同時に用いてはならない (MUST NOT).
 <!--
 	Clients MAY use bearer tokens to make authenticated requests
@@ -297,7 +297,7 @@ Authorization: Bearer vF9dft4qmT]]>
           </artwork>
         </figure>
 	<t>
-	  クライアントがBearerトークンを伴う認証されたリクエストを送信する際には, <spanx style='verb'>Bearer</spanx> HTTP認可スキームを用いた<spanx style='verb'>Authorization</spanx>リクエストヘッダフィールドを使用すべきである (SHOULD).
+	  クライアントが署名無しトークンを伴う認証されたリクエストを送信する際には, <spanx style='verb'>Bearer</spanx> HTTP認可スキームを用いた<spanx style='verb'>Authorization</spanx>リクエストヘッダフィールドを使用すべきである (SHOULD).
 	  リソースサーバはこの方法をサポートしなければならない (MUST).
 <!--
 	  Clients SHOULD make authenticated requests with a bearer
@@ -368,7 +368,7 @@ Authorization: Bearer vF9dft4qmT]]>
         </t>
         <figure>
           <preamble>
-            例えば, クライアントは以下のHTTPリクエストをセキュリティ保護されたトランスポート層から送信する:
+            例えば, クライアントは以下のHTTPリクエストをトランスポートレイヤセキュリティを利用して送信する:
 <!--
             For example, the client makes the following HTTP request using transport-layer
             security:
@@ -628,7 +628,7 @@ WWW-Authenticate: Bearer realm="example"]]>
 	token handling when using bearer tokens and describes how to
 	mitigate these threats.
 	-->
-	本章では、無記名トークン利用時におけるトークンの取り扱い方法に関するセキュリティ上の脅威、およびこれらの脅威をどのように軽減するかを記述する。
+	本章では、署名無しトークン利用時におけるトークンの取り扱い方法に関するセキュリティ上の脅威、およびこれらの脅威をどのように軽減するかを記述する。
       </t>
 
       <!-- section title="Security Threats" anchor="threats" -->
@@ -645,7 +645,7 @@ WWW-Authenticate: Bearer realm="example"]]>
 	  -->
 	  次のリストは何らかのトークン形式を取り扱うプロトコルにおける共通の脅威を表したものである。
 	  この脅威リストはNIST Special Publication 800-63 <xref
-	  target="NIST800-63"/>をベースにしたものである。この文書はOAuth 2.0仕様を前提として作成されたものであるため、その仕様や関連文章中に記載されている脅威に関する議論は行わないものとする。
+	  target="NIST800-63"/>をベースにしたものである。この文書はOAuth 2.0仕様を前提として作成されたものであるため、その仕様や関連文書中に記載されている脅威に関する議論は行わないものとする。
 	</t>
 
 	<t>
@@ -704,7 +704,7 @@ WWW-Authenticate: Bearer realm="example"]]>
 
     <t>
       デジタル署名またはメッセージ認証コード(MAC)を用いてトークンの内容を保護することにより, 多くの脅威は軽減することができる
-      あるいは, Bearerトークンはエンコードされた認可情報を直接含むのではなく, 認可情報に対する参照を含むことができる.
+      あるいは, 署名無しトークンはエンコードされた認可情報を直接含むのではなく, 認可情報に対する参照を含むことができる.
       その参照は, 攻撃者が推測不可能でなければならない(MUST). 参照を用いた場合, 認可情報への参照を解決するために, 認証サーバとトークン発行者の間における追加の通信が必要になることがある.
       そのような通信の方法は, この仕様では定義されない.
     </t>
@@ -725,7 +725,7 @@ WWW-Authenticate: Bearer realm="example"]]>
 	</t>
     -->
     <t>
-      このドキュメントでは, エンコード方法やトークンの内容に関しては定義しない. そのため, トークンの整合性を保護するための詳細に関しての提言は, この文章の範囲外である.
+      このドキュメントでは, エンコード方法やトークンの内容に関しては定義しない. そのため, トークンの整合性を保護するための詳細に関しての提言は, この文書の範囲外である.
       トークンの整合性を保護することが, トークンが改変されることを防ぐのに十分であると仮定する.
     </t>
 	<!--
@@ -879,63 +879,94 @@ WWW-Authenticate: Bearer realm="example"]]>
       </section>
     </section>
 
-    <section title='IANA Considerations'>   
+    <!-- section title='IANA Considerations' -->   
+    <section title='IANAに関する考慮事項'>   
 
-      <section title='OAuth Access Token Type Registration'>
+      <!-- section title='OAuth Access Token Type Registration' -->
+      <section title='OAuthアクセストークンタイプの登録'>
         <t>
+	<!--
           This specification registers the following access token type in the OAuth Access Token
           Type Registry.
+	-->
+	  本仕様は, OAuthアクセストークンタイプの登録において, 次のアクセストークンのタイプを登録する.
         </t>
 
-        <section title='The "Bearer" OAuth Access Token Type'>
+        <!-- section title='The "Bearer" OAuth Access Token Type' -->
+        <section title='「署名無し」OAuthアクセストークンタイプ'>
           <t>
             <list style='hanging'>
-              <t hangText='Type name:'>
+              <!-- t hangText='Type name:' -->
+              <t hangText='タイプ名:'>
                 <vspace />
                 Bearer
               </t>
-              <t hangText='Additional Token Endpoint Response Parameters:'>
+              <!-- t hangText='Additional Token Endpoint Response Parameters:' -->
+              <t hangText='トークンエンドポイントで追加となるレスポンスパラメータ:'>
                 <vspace />
+		<!--
                 (none)
+		-->
+                (無し)
               </t>
-              <t hangText='HTTP Authentication Scheme(s):'>
+              <!-- t hangText='HTTP Authentication Scheme(s):' -->
+              <t hangText='HTTP認証スキーム:'>
                 <vspace />
                 Bearer
               </t>
-              <t hangText='Change controller:'>
+              <!-- t hangText='Change controller:' -->
+              <t hangText='変更管理者:'>
                 <vspace />
                 IETF
               </t>
-              <t hangText='Specification document(s):'>
+              <!-- t hangText='Specification document(s):' -->
+              <t hangText='仕様文書:'>
                 <vspace />
+		<!--
                 [[ this document ]]
+		-->
+                [[ 本文書 ]]
               </t>
             </list>
           </t>
         </section>
       </section>
 
-      <section title='Authentication Scheme Registration'>
+      <!-- section title='Authentication Scheme Registration' -->
+      <section title='認証スキームの登録'>
         <t>
+	<!--
           This specification registers the following authentication
           scheme in the Authentication Scheme Registry defined in
           <xref target='I-D.ietf-httpbis-p7-auth' />.
+	-->
+	  本仕様は, <xref target='I-D.ietf-httpbis-p7-auth' />で定義される認証スキーム登録において, 次の認証スキームを登録する. 
         </t>
 
-        <section title='The "Bearer" Authentication Scheme'>
+        <!-- section title='The "Bearer" Authentication Scheme' -->
+        <section title='「署名無し」認証スキーム'>
           <t>
             <list style='hanging'>
-              <t hangText='Authentication Scheme Name:'>
+              <!-- t hangText='Authentication Scheme Name:' -->
+              <t hangText='認証スキーム名:'>
                 <vspace />
                 Bearer
               </t>
-              <t hangText='Pointer to specification text:'>
+              <!-- t hangText='Pointer to specification text:' -->
+              <t hangText='仕様書の参照:'>
                 <vspace />
+		<!--
                 [[ this document ]]
+		-->
+                [[ 本文書 ]]
               </t>
-              <t hangText='Notes (optional):'>
+              <!-- t hangText='Notes (optional):' -->
+              <t hangText='備考 (オプション):'>
                 <vspace />
+		<!--
                 (none)
+		-->
+                (無し)
               </t>
             </list>
           </t>
@@ -996,28 +1027,38 @@ WWW-Authenticate: Bearer realm="example"]]>
 
     </references> 
 
-    <section title='Acknowledgements'>
+    <!-- section title='Acknowledgements' -->
+    <section title='謝辞'>
       <t>
+	<!--
         The following people contributed to preliminary versions of this document:
         Blaine Cook (BT), Brian Eaton (Google), Yaron Y. Goland (Microsoft), Brent Goldman (Facebook),
         Raffi Krikorian (Twitter), Luke Shepard (Facebook), and Allen Tom (Yahoo!). The content and
         concepts within are a product of the OAuth community, the WRAP community, and the OAuth Working
         Group.
-      </t>
+	-->
+        以下の人々は本文書の前身となる版に対して貢献を行った:
+        Blaine Cook (BT), Brian Eaton (Google), Yaron Y. Goland (Microsoft), Brent Goldman (Facebook),
+        Raffi Krikorian (Twitter), Luke Shepard (Facebook), and Allen Tom (Yahoo!). 
+	本仕様の内容及びコンセプトはOAuthコミュニティ, WRAPコミュニティ, OAuthワーキンググループによって生み出されたものである.       </t>
       <t>
+	<!--
         The OAuth Working Group has dozens of very active contributors who proposed ideas and
         wording for this document, including:
+	-->
+	OAuthワーキンググループには本文書のアイデアと文書の記述を提案した多くの貢献者がおり, 以下の人々が含まれる:
         Michael Adams, Amanda Anganes, Andrew Arnott, Dirk Balfanz, Brian Campbell, Leah Culver, Bill de hÓra,
         Brian Ellin, Igor Faynberg, George Fletcher, Tim Freeman, Evan Gilbert, Justin Hart,
         John Kemp, Eran Hammer-Lahav, Chasen Le Hara, Michael B. Jones, Torsten Lodderstedt,
 	Eve Maler, James Manger, Laurence Miao,
         Chuck Mortimore, Anthony Nadalin, Justin Richer, Peter Saint-Andre, Nat Sakimura, Rob Sayre,
         Marius Scurtescu, Naitik Shah, Justin Smith, Jeremy Suriel, Christian Stübner, Paul Tarjan,
-        and Franklin Tse.
+        及び Franklin Tse.
       </t>
     </section>
 
-    <section title='Document History'>
+    <!-- section title='Document History' -->
+    <section title='文書履歴'>
       <t>
         [[ to be removed by the RFC editor before publication as an RFC ]]
       </t>
