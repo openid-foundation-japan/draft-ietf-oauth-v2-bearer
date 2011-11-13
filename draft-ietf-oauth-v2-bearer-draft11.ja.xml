@@ -165,7 +165,7 @@
           OAuthはリソースオーナーの代わりに保護リソースにアクセスする方法をクライアントに提供する.
           一般的なケースにおいて, クライアントが保護リソースにアクセスする前に, クライアントは初めにリソースオーナーの認可を取得し, アクセス認可とアクセストークンを交換しなけばならない.
           アクセストークンは, 与えられた権限の範囲, 期間とその他の属性を示している.
-          クライアントはリソースサーバーにアクセストークンを渡すことにより, 保護リソースにアクセスする.
+          クライアントはリソースサーバにアクセストークンを渡すことにより, 保護リソースにアクセスする.
           いくつかのケースにおいては, クライアントは, 最初にリソースオーナーから認可を得ずに認可サーバからアクセストークンを得るために, 自らのクレデンシャルを認可サーバに直接渡すことができる.
         <!--
           OAuth provides a method for clients to access a protected resource on behalf of a
@@ -234,7 +234,7 @@
               -->
             </t>
             <t>
-              F) リソースサーバーはアクセストークンの正当性を確認し, 有効な場合はリクエストに対し応答する.
+              F) リソースサーバはアクセストークンの正当性を確認し, 有効な場合はリクエストに対し応答する.
             <!--
               F) The resource server validates the access token, and if valid, serves the request.
               -->
@@ -451,11 +451,11 @@ Host: server.example.com]]>
 
     </section>
 
-    <section title='WWW-Authenticate レスポンスヘッダーフィールド' anchor='authn-header'>
+    <section title='WWW-Authenticate レスポンスヘッダフィールド' anchor='authn-header'>
     <!--section title='The WWW-Authenticate Response Header Field' anchor='authn-header'-->
       <t>
-        保護リソースへのリクエストが, 認証クレデンシャルを含んでいない, または保護リソースへアクセスすることができるアクセストークンを含んでいない場合, リソースサーバーはHTTP <spanx style='verb'>WWW-Authenticate</spanx> レスポンスヘッダーフィールドを含めなければならない (MUST). 同様に, その他の条件下でもリソースサーバはそれをレスポンスに含めてよい (MAY)
-        <spanx style='verb'>WWW-Authenticate</spanx> ヘッダーフィールドは, <xref target='RFC2617' /> により定義されている以下のフレームワークを使用する.
+        保護リソースへのリクエストが, 認証クレデンシャルを含んでいない, または保護リソースへアクセスすることができるアクセストークンを含んでいない場合, リソースサーバはHTTP <spanx style='verb'>WWW-Authenticate</spanx> レスポンスヘッダフィールドを含めなければならない (MUST). 同様に, その他の条件下でもリソースサーバはそれをレスポンスに含めてよい (MAY).
+        <spanx style='verb'>WWW-Authenticate</spanx> ヘッダフィールドは, <xref target='RFC2617' /> により定義されている以下のフレームワークを使用する.
       <!--
 	If the protected resource request does not include
 	authentication credentials or does not contain an access
@@ -488,9 +488,9 @@ error-uri       = "error_uri" "=" DQUOTE URI-reference DQUOTE]]>
 	</artwork>
       </figure>
       <t>
-          <spanx style='verb'>scope</spanx> 属性は, 要求されたリソースにアクセスするために必要なアクセストークンに求められるスコープを示す, スペース区切りのスコープ値リストである.
-          <spanx style='verb'>scope</spanx> 属性は, 二度以上現れてはならない(MUST NOT).
-          <spanx style='verb'>scope</spanx> の値は, プログラム中で用いられることを目的とし, エンドユーザーへ表示することは意図されていない.
+          <spanx style='verb'>scope</spanx> 属性は, スペース区切りのスコープ値のリストであり, 要求されたリソースへのアクセスに必要なアクセストークンのスコープを示す.
+          <spanx style='verb'>scope</spanx> 属性は, 2回以上現れてはならない(MUST NOT).
+          <spanx style='verb'>scope</spanx> の値は, プログラム中で用いられることを目的とし, エンドユーザへ表示することは意図されていない.
       <!--
 	The <spanx style='verb'>scope</spanx> attribute is a space-delimited list of scope values
 	indicating the required scope of the access token for accessing the requested resource.
@@ -501,11 +501,11 @@ error-uri       = "error_uri" "=" DQUOTE URI-reference DQUOTE]]>
         -->
       </t>
       <t>
-          アクセストークンを含んだ保護リソースへのリクエストがあり, 認証に失敗した場合, リソースサーバはクライアントにアクセスリクエストが拒否された理由を示すために, <spanx style='verb'>error</spanx> 属性を含むべきである(SHOULD).
+          保護リソースへのリクエストにアクセストークンが含まれているが認証に失敗した場合, リソースサーバはアクセス要求を拒否した理由をクライアントに対して示すために, <spanx style='verb'>error</spanx> 属性を含むべきである(SHOULD).
           パラメータの値は <xref target='resource-error-codes' /> に記載されている.
-          さらに, リソースサーバは, 開発者に人間の読みやすい説明を提供するために, エンドユーザに表示する目的ではない <spanx style='verb'>error_description</spanx> 属性を含んでもよい(MAY).
-          発生したエラーを説明する, 人間が読みやすいウェブページを指す絶対URIを提供する, <spanx style='verb'>error_uri</spanx> 属性を含んでもよい(MAY).
-          <spanx style='verb'>error</spanx>, <spanx style='verb'>error_description</spanx>, そして <spanx style='verb'>error_uri</spanx> 属性は, 二度以上現れてはならない(MUST NOT).
+          さらに, リソースサーバは, 開発者にとって可読性のある説明を提供するために, エンドユーザに表示する目的ではない <spanx style='verb'>error_description</spanx> 属性を含んでもよい(MAY).
+          また, エラーについての可読性のある説明ウェブページを指し示す, 絶対URIで記載された<spanx style='verb'>error_uri</spanx> 属性を含んでもよい(MAY).
+          <spanx style='verb'>error</spanx>, <spanx style='verb'>error_description</spanx>, そして <spanx style='verb'>error_uri</spanx> 属性は, 2回以上現れてはならない(MUST NOT).
       <!--
 	If the protected resource request included an access token and failed authentication, the
 	resource server SHOULD include the <spanx style='verb'>error</spanx> attribute to provide
@@ -564,7 +564,7 @@ WWW-Authenticate: Bearer realm="example",
 	  <list style='hanging' hangIndent='6'>
 	    <t hangText='invalid_request'>
 	      <vspace />
-	      リクエストに必要なパラメータが不足している, 対応していないパラメータもしくはパラメータの値が含まれている, 同じパラメータが複数回現れている, アクセストークンを含む方法を複数用いている, もしくはリクエストがその他不正な形式になっている.
+	      リクエストに必要なパラメータが不足している, 対応していないパラメータもしくはパラメータの値が含まれている, 同じパラメータが複数回現れている, 1つのアクセストークンを含むために複数の方法を用いている, もしくはリクエストがその他不正な形式になっている.
 	      リソースサーバはHTTPステータスコード400 (Bad Request) の応答を返すべきである (SHOULD).
 <!--
 	      The request is missing a required parameter, includes an unsupported parameter or
@@ -588,7 +588,7 @@ WWW-Authenticate: Bearer realm="example",
 	    <t hangText='insufficient_scope'>
 	      <vspace />
 	      リクエストにはアクセストークンにより提供されるよりも高い権限が必要である.
-	      リソースサーバはHTTPステータスコード403 (Forbidden) の応答を返すべきであり (SHOULD), 保護されたリソースへのアクセスに必要となるスコープを示した <spanx style='verb'>scope</spanx> 属性を含めてもよい (MAY).
+	      リソースサーバはHTTPステータスコード403 (Forbidden) の応答を返すべき(SHOULD)であり, 保護されたリソースへのアクセスに必要となるスコープを示した <spanx style='verb'>scope</spanx> 属性を含めてもよい (MAY).
 <!--
 	      The request requires higher privileges than provided by the access token. The
 	      resource server SHOULD respond with the HTTP 403 (Forbidden) status code and MAY
