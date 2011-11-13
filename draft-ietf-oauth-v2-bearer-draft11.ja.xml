@@ -818,9 +818,15 @@ WWW-Authenticate: Bearer realm="example"]]>
     -->
       </section> 
  
-      <section title="Summary of Recommendations">
+      <!--section title="Summary of Recommendations"-->
+      <section title="推奨事項のまとめ">
 	<t>
 	  <list style="hanging">
+	    <t hangText="署名無しトークンを保護する">
+	      クライアントの実装は, 保護されたリソースへのアクセスを可能とするために署名無しトークンを使う際には, それが意図されていない相手に漏洩していないことを確実にしなければならない (MUST).
+	      これは署名無しトークンを用いる際に最も重要なセキュリティに関する考慮事項であり, 後述の詳細な推奨事項すべての基礎となる.
+	    </t>
+<!--
 	    <t hangText="Safeguard bearer tokens">
 	      Client implementations MUST ensure that bearer tokens
 	      are not leaked to unintended parties, as they will be
@@ -829,12 +835,24 @@ WWW-Authenticate: Bearer realm="example"]]>
 	      bearer tokens and underlies all the more
 	      specific recommendations that follow.
 	    </t>
+-->
+	    <t hangText="SSL証明書チェインを検証する">
+	      クライアントが保護リソースのリクエストを送信する際には, TLS証明書のチェインを検証しなければならない (MUST).
+	      このことに失敗した場合, DNSハイジャック攻撃によるトークンの盗難および意図しないアクセスを可能としてしまう.
+	    </t>
+<!--
 	    <t hangText="Validate SSL certificate chains">
 	      The client MUST validate the TLS certificate chain when
 	      making requests to protected resources.  Failing to do
 	      so may enable DNS hijacking attacks to steal the token
 	      and gain unintended access.
 	    </t>
+-->
+	    <t hangText="常に TLS (https) を用いる">
+	      クライアントが署名無しトークンを用いたリクエストを送信する際には, 常に <xref target='RFC5246'>TLS</xref> (https) もしくは同等なトランスポートセキュリティを用いなければならない.
+	      このことに失敗した場合, 攻撃者に意図しないアクセスを可能とするさまざまな攻撃にトークンが晒されてしまう.
+	    </t>
+<!--
 	    <t hangText="Always use TLS (https)">
 	      Clients MUST always use <xref target='RFC5246'>TLS</xref>
 	      (https) or equivalent transport security when making requests
@@ -842,6 +860,12 @@ WWW-Authenticate: Bearer realm="example"]]>
 	      to numerous attacks that could give attackers unintended
 	      access.
 	    </t>
+-->
+	    <t hangText="クッキーに署名無しトークンを保存しない">
+	      平文で送信されうるクッキーに署名無しトークンを保存する実装を行ってはならない (MUST NOT). (平文での送信はクッキーのデフォルト送信モードである)
+	      署名無しトークンをクッキーに保存する実装では, クロスサイトリクエストフォージェリへの対処をしなければならない (MUST).
+	    </t>
+<!--
 	    <t hangText="Don't store bearer tokens in cookies">
 	      Implementations MUST NOT store bearer tokens within
 	      cookies that can be sent in the clear (which is the
@@ -849,6 +873,12 @@ WWW-Authenticate: Bearer realm="example"]]>
 	      Implementations that do store bearer tokens in cookies
 	      MUST take precautions against cross site request forgery.
 	    </t>
+-->
+	    <t hangText="有効期間の短い署名無しトークンを発行する">
+	      トークンサーバは, 特にブラウザやその他の情報漏洩の起こりやすい環境の中で実行されるクライアントに対してトークンを発行する際には, 有効期間の短い (1時間ないしそれ以下) 署名無しトークンを発行すべきである (SHOULD).
+	      有効期間の短い署名無しトークンを用いることにより, 漏洩した際の影響を減らすことができる.
+	    </t>
+<!--
 	    <t hangText="Issue short-lived bearer tokens">
 	      Token servers SHOULD issue short-lived (one hour or
 	      less) bearer tokens, particularly when issuing tokens to
@@ -857,11 +887,24 @@ WWW-Authenticate: Bearer realm="example"]]>
 	      short-lived bearer tokens can reduce the impact of them
 	      being leaked.
 	    </t>
+-->
+	    <t hangText="スコープの設定された署名無しトークンを発行する">
+	      トークンサーバは, 1つまたは複数の意図されたリライングパーティによる使用に限定されるよう, オーディエンスの制限を含んだ署名無しトークンを発行すべきである (SHOULD).
+	    </t>
+<!--
 	    <t hangText="Issue scoped bearer tokens">
 	      Token servers SHOULD issue bearer tokens that contain an audience
 	      restriction, scoping their use to the intended relying
 	      party or set of relying parties.
 	    </t>
+-->
+	    <t hangText="署名無しトークンをページURL中で渡さない">
+	      署名無しトークンはページURL中で渡されるべきではない (SHOULD NOT). (たとえばクエリ文字列のパラメータとして)
+	      代わりに, 機密性対策の講じられたHTTPメッセージヘッダもしくはメッセージボディ中で渡されるべきである (SHOULD).
+	      ブラウザやウェブサーバその他のソフトウェアは, ブラウザの履歴やウェブサーバのログその他のデータ構造において, 適切にURLを保護していないかもしれない.
+	      署名無しトークンがページURLとして渡された場合, 攻撃者は履歴情報やログ, その他の保護されていない場所から盗み取ることができるかもしれない.
+	    </t>
+<!--
 	    <t hangText="Don't pass bearer tokens in page URLs">
 	      Bearer tokens SHOULD NOT be passed in page URLs (for
 	      example as query string parameters). Instead, bearer
@@ -874,6 +917,7 @@ WWW-Authenticate: Bearer realm="example"]]>
 	      steal them from the history data, logs, or other
 	      unsecured locations.
 	    </t>
+-->
 	  </list>
 	</t>
       </section>

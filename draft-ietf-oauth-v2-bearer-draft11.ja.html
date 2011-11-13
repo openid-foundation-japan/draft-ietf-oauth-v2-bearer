@@ -143,7 +143,6 @@
 <table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
 <tr><td class="header">Network Working Group</td><td class="header">M. Jones</td></tr>
 <tr><td class="header">Internet-Draft</td><td class="header">Microsoft</td></tr>
-
 <tr><td class="header">Intended status: Standards Track</td><td class="header">D. Hardt</td></tr>
 <tr><td class="header">Expires: April 27, 2012</td><td class="header">independent</td></tr>
 <tr><td class="header">&nbsp;</td><td class="header">D. Recordon</td></tr>
@@ -169,7 +168,6 @@ Internet-Drafts are working documents of the Internet Engineering
 Task Force (IETF).  Note that other groups may also distribute
 working documents as Internet-Drafts.  The list of current
 Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
-
 <p>
 Internet-Drafts are draft documents valid for a maximum of six months
 and may be updated, replaced, or obsoleted by other documents at any time.
@@ -193,7 +191,6 @@ include Simplified BSD License text as described in Section 4.e of
 the Trust Legal Provisions and are provided without warranty as
 described in the Simplified BSD License.</p>
 <a name="toc"></a><br /><hr />
-
 <h3>Table of Contents</h3>
 <p class="toc">
 <a href="#anchor1">1.</a>&nbsp;
@@ -203,7 +200,6 @@ described in the Simplified BSD License.</p>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor3">1.2.</a>&nbsp;
 用語定義<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor4">1.3.</a>&nbsp;
-
 概要<br />
 <a href="#anchor5">2.</a>&nbsp;
 認証されたリクエスト<br />
@@ -213,7 +209,6 @@ Authorizationリクエストヘッダフィールド<br />
 Formエンコードされたボディパラメータ<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#query-param">2.3.</a>&nbsp;
 URIクエリパラメータ<br />
-
 <a href="#authn-header">3.</a>&nbsp;
 WWW-Authenticate レスポンスヘッダーフィールド<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#resource-error-codes">3.1.</a>&nbsp;
@@ -223,17 +218,15 @@ Security Considerations<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#threats">4.1.</a>&nbsp;
 セキュリティ上の脅威<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#mitigation">4.2.</a>&nbsp;
-
 脅威の軽減<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor6">4.3.</a>&nbsp;
-Summary of Recommendations<br />
+推奨事項のまとめ<br />
 <a href="#anchor7">5.</a>&nbsp;
 IANAに関する考慮事項<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor8">5.1.</a>&nbsp;
 OAuthアクセストークンタイプの登録<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor9">5.1.1.</a>&nbsp;
 「署名無し」OAuthアクセストークンタイプ<br />
-
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor10">5.2.</a>&nbsp;
 認証スキームの登録<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor11">5.2.1.</a>&nbsp;
@@ -243,7 +236,6 @@ References<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#rfc.references1">6.1.</a>&nbsp;
 Normative References<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#rfc.references2">6.2.</a>&nbsp;
-
 Informative References<br />
 <a href="#anchor14">Appendix&nbsp;A.</a>&nbsp;
 謝辞<br />
@@ -264,7 +256,6 @@ Authors' Addresses<br />
         アクセストークンは<a class='info' href='#I-D.ietf-oauth-v2'>[I&#8209;D.ietf&#8209;oauth&#8209;v2]<span> (</span><span class='info'>Hammer-Lahav, E., Recordon, D., and D. Hardt, &ldquo;The OAuth 2.0 Authorization Protocol,&rdquo; September&nbsp;2011.</span><span>)</span></a>中で「クライアントに対するアクセス認可の文字列表現」と定義されており、
         リソース所有者のクレデンシャルを直接利用することではない。
       
-
 </p>
 <p>
         トークンはリソース所有者の承認を伴い、認可サーバによってクライアントに対して発行される。
@@ -276,7 +267,6 @@ Authors' Addresses<br />
         この仕様書では<a class='info' href='#RFC2616'>HTTP<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P., and T. Berners-Lee, &ldquo;Hypertext Transfer Protocol -- HTTP/1.1,&rdquo; June&nbsp;1999.</span><span>)</span></a> [RFC2616]及び<a class='info' href='#RFC5246'>TLS<span> (</span><span class='info'>Dierks, T. and E. Rescorla, &ldquo;The Transport Layer Security (TLS) Protocol Version 1.2,&rdquo; August&nbsp;2008.</span><span>)</span></a> [RFC5246]で定義された、TLSを用いたHTTP上でのOAuthで、署名無しトークンを利用する方法を定める. 
         他の仕様書がその他の転送プロトコルの元での利用について本仕様を拡張する可能性もある. 
       
-
 </p>
 <a name="anchor2"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -286,7 +276,6 @@ Authors' Addresses<br />
 <p>
         本文書で用いられる各キーワード「MUST (しなければならない)」、「MUST NOT (してはならない)」、「REQUIRED (必須である)」、「SHALL (するものとする)」、「SHALL NOT (しないものとする)」、「SHOULD (すべきである)」、「SHOULD NOT (すべきではない)」、「RECOMMENDED (推奨される)」、「MAY (してもよい)」、「OPTIONAL (任意である)」は<a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a>で述べられている通りに解釈されるべきものである。
         
-
 </p>
 <p>
           このドキュメントでは<a class='info' href='#RFC5234'>[RFC5234]<span> (</span><span class='info'>Crocker, D. and P. Overell, &ldquo;Augmented BNF for Syntax Specifications: ABNF,&rdquo; January&nbsp;2008.</span><span>)</span></a>におけるAugmented Backus-Naur Form (ABNF)表記法を元にした、<a class='info' href='#I-D.ietf-httpbis-p1-messaging'>[I&#8209;D.ietf&#8209;httpbis&#8209;p1&#8209;messaging]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 1: URIs, Connections, and Message Parsing,&rdquo; August&nbsp;2011.</span><span>)</span></a>におけるAugmented Backus-Naur Form(ABNF)表記法を利用している. 
@@ -294,7 +283,6 @@ Authors' Addresses<br />
 
 
         
-
 </p>
 <p>
         特に記載が無い限り, 全てのプロトコルパラメーター名と値は, 大文字・小文字を区別する.
@@ -308,7 +296,6 @@ Authors' Addresses<br />
 <p>
           </p>
 <blockquote class="text"><dl>
-
 <dt>署名無しトークン</dt>
 <dd>
               
@@ -323,7 +310,6 @@ Authors' Addresses<br />
 <p>
           他の全ての用語は<a class='info' href='#I-D.ietf-oauth-v2'>[I&#8209;D.ietf&#8209;oauth&#8209;v2]<span> (</span><span class='info'>Hammer-Lahav, E., Recordon, D., and D. Hardt, &ldquo;The OAuth 2.0 Authorization Protocol,&rdquo; September&nbsp;2011.</span><span>)</span></a>で定義されている通りである。
         
-
 </p>
 <a name="anchor4"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -345,7 +331,6 @@ Authors' Addresses<br />
         
         
 </p><br /><hr class="insert" />
-
 <a name="Figure-1"></a>
 <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 +--------+                               +---------------+
@@ -373,7 +358,6 @@ Authors' Addresses<br />
         
 
           </p>
-
 <blockquote class="text">
 <p>
               E) クライアントはリソースサーバにアクセストークンを示し, 保護リソースへのリクエストを行う.
@@ -391,7 +375,6 @@ Authors' Addresses<br />
 <a name="anchor5"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2"></a><h3>2.&nbsp;
-
 認証されたリクエスト</h3>
 
 <p>
@@ -410,7 +393,6 @@ Authorizationリクエストヘッダフィールド</h3>
 	  <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>によって定義される<tt>Authorization</tt>リクエストヘッダフィールド中でアクセストークンを送信する際, クライアントは<tt>Bearer</tt>認証スキームを用いる.
 
         
-
 </p>
 <p>
             例:
@@ -425,7 +407,6 @@ Authorization: Bearer vF9dft4qmT
           <tt>Authorization</tt>ヘッダフィールドは<a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>により定義されるフレームワークを以下のように用いる:
 
         
-
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 credentials = "Bearer" 1*SP b64token
 </pre></div>
@@ -438,7 +419,6 @@ credentials = "Bearer" 1*SP b64token
 <a name="body-param"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2.2"></a><h3>2.2.&nbsp;
-
 Formエンコードされたボディパラメータ</h3>
 
 <p>
@@ -456,7 +436,6 @@ Formエンコードされたボディパラメータ</h3>
               エンティティボディが<a class='info' href='#W3C.REC-html401-19991224'>[W3C.REC&#8209;html401&#8209;19991224]<span> (</span><span class='info'>Raggett, D., Jacobs, I., and A. Hors, &ldquo;HTML 4.01 Specification,&rdquo; December&nbsp;1999.</span><span>)</span></a>によって定義される<tt>application/x-www-form-urlencoded</tt>コンテントタイプのエンコード要求を満たす.
 
             
-
 </li>
 <li>
               HTTPリクエストのエンティティヘッダに<tt>application/x-www-form-urlencoded</tt>にセットされた<tt>Content-Type</tt>ヘッダフィールドを含む.
@@ -471,7 +450,6 @@ Formエンコードされたボディパラメータ</h3>
 </li>
 </ul><p>
         
-
 </p>
 <p>
           エンティティボディにはリクエストに固有なパラメータを含んでもよい (MAY).
@@ -494,7 +472,6 @@ access_token=vF9dft4qmT
 	  この<tt>application/x-www-form-urlencoded</tt>を用いる方法は, 関与しているブラウザが<tt>Authorization</tt>リクエストヘッダにアクセスできない場合を除いて使用すべきではない (SHOULD NOT). リソースサーバはこの方法をサポートしてもよい (MAY).
 
 	
-
 </p>
 <a name="query-param"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -508,7 +485,6 @@ URIクエリパラメータ</h3>
           token to the request URI query component as defined by <a class='info' href='#RFC3986'>[RFC3986]<span> (</span><span class='info'>Berners-Lee, T., Fielding, R., and L. Masinter, &ldquo;Uniform Resource Identifier (URI): Generic Syntax,&rdquo; January&nbsp;2005.</span><span>)</span></a> using
           the <tt>access_token</tt> parameter.
         
-
 </p>
 <p>
           
@@ -527,7 +503,6 @@ Host: server.example.com
 <p>
             For example:
           
-
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 https://server.example.com/resource?x=y&amp;access_token=vF9dft4qmT&amp;p=q
 </pre></div>
@@ -538,7 +513,6 @@ https://server.example.com/resource?x=y&amp;access_token=vF9dft4qmT&amp;p=q
 </p>
 <a name="authn-header"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-
 <a name="rfc.section.3"></a><h3>3.&nbsp;
 WWW-Authenticate レスポンスヘッダーフィールド</h3>
 
@@ -547,7 +521,6 @@ WWW-Authenticate レスポンスヘッダーフィールド</h3>
         <tt>WWW-Authenticate</tt> ヘッダーフィールドは, <a class='info' href='#RFC2617'>[RFC2617]<span> (</span><span class='info'>Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S., Leach, P., Luotonen, A., and L. Stewart, &ldquo;HTTP Authentication: Basic and Digest Access Authentication,&rdquo; June&nbsp;1999.</span><span>)</span></a> により定義されている以下のフレームワークを使用する.
       
       
-
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 challenge       = "Bearer" [ 1*SP 1#param ]
 
@@ -581,7 +554,6 @@ error-uri       = "error_uri" "=" DQUOTE URI-reference DQUOTE
       
 
       
-
 </p>
 <p>
       例えば, 認証されていない場合の保護リソースへのリクエストに対するレスポンスは以下のようになる:
@@ -604,7 +576,6 @@ WWW-Authenticate: Bearer realm="example",
 <a name="resource-error-codes"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.3.1"></a><h3>3.1.&nbsp;
-
 エラーコード</h3>
 
 <p>
@@ -623,7 +594,6 @@ WWW-Authenticate: Bearer realm="example",
 </dd>
 <dt>invalid_token</dt>
 <dd>
-
 	      
 	      提供されたアクセストークンが期限切れである, 取り消されている, 不正な値である, もしくはその他の理由により無効である.
 	      リソースサーバはHTTPステータスコード401 (Unauthorized) の応答を返すべきである (SHOULD).
@@ -646,7 +616,6 @@ WWW-Authenticate: Bearer realm="example",
 	  リクエストが一切の認証情報を含まない場合 (つまり, 認証が必要であることをクライアントが認識していなかった場合か, 対応していない認証方法をクライアントが試行した場合), リソースサーバはエラーコードやその他のエラー情報を応答に含めるべきではない (SHOULD NOT).
 
 	
-
 </p>
 <p>
 	    For example:
@@ -664,7 +633,6 @@ Security Considerations</h3>
       
 	本章では、署名無しトークン利用時におけるトークンの取り扱い方法に関するセキュリティ上の脅威、およびこれらの脅威をどのように軽減するかを記述する。
       
-
 </p>
 <a name="threats"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -676,7 +644,6 @@ Security Considerations</h3>
 	  次のリストは何らかのトークン形式を取り扱うプロトコルにおける共通の脅威を表したものである。
 	  この脅威リストはNIST Special Publication 800-63 <a class='info' href='#NIST800-63'>[NIST800&#8209;63]<span> (</span><span class='info'>Burr, W., Dodson, D., Perlner, R., Polk, T., Gupta, S., and E. Nabbus, &ldquo;NIST Special Publication 800-63-1, INFORMATION SECURITY,&rdquo; December&nbsp;2008.</span><span>)</span></a>をベースにしたものである。この文書はOAuth 2.0仕様を前提として作成されたものであるため、その仕様や関連文書中に記載されている脅威に関する議論は行わないものとする。
 	
-
 </p>
 <p>
 	  </p>
@@ -692,7 +659,6 @@ Security Considerations</h3>
 	    トークンは認証や属性の記述など機微情報を含む可能性がある。
 	    
 </dd>
-
 <dt>トークンリダイレクト:</dt>
 <dd>
 	    攻撃者はあるリソースサーバで利用することを目的として生成されたトークンを、
@@ -709,7 +675,6 @@ Security Considerations</h3>
 </p>
 <a name="mitigation"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-
 <a name="rfc.section.4.2"></a><h3>4.2.&nbsp;
 脅威の軽減</h3>
 
@@ -730,7 +695,6 @@ Security Considerations</h3>
       トークンの利用できる範囲を特定の範囲に制限することも推奨される.
     
 </p>
-
 <p>
       トークン露見に対する保護を提供するために, 機密性保護は, 機密性保護を提供する暗号スイートによる <a class='info' href='#RFC5246'>TLS<span> (</span><span class='info'>Dierks, T. and E. Rescorla, &ldquo;The Transport Layer Security (TLS) Protocol Version 1.2,&rdquo; August&nbsp;2008.</span><span>)</span></a> [RFC5246]を通じて適用される.
       これは, クライアントと資源サーバ間と同様に, クライアントと認可サーバ間の通信においてもまた, 機密性保護を利用することを必要とする.
@@ -749,84 +713,56 @@ Security Considerations</h3>
       保護リソースにリクエストを送信するとき, クライアントがTLS証明書のチェインを確認しなければならない(MUST)ことに注意すべきである.
       未認証かつ未認可な資源サーバにトークンを送信すること, あるいは証明書チェインの確認に失敗することは, 攻撃者に対して, トークンを盗み, 保護リソースへの認可されていないアクセスを許すことになる.
     
-
 </p>
 <a name="anchor6"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.4.3"></a><h3>4.3.&nbsp;
-Summary of Recommendations</h3>
+推奨事項のまとめ</h3>
 
 <p>
 	  </p>
 <blockquote class="text"><dl>
-<dt>Safeguard bearer tokens</dt>
+<dt>署名無しトークンを保護する</dt>
 <dd>
-	      Client implementations MUST ensure that bearer tokens
-	      are not leaked to unintended parties, as they will be
-	      able to use them to gain access to protected resources.
-	      This is the primary security consideration when using
-	      bearer tokens and underlies all the more
-	      specific recommendations that follow.
-	    
-
-</dd>
-<dt>Validate SSL certificate chains</dt>
-<dd>
-	      The client MUST validate the TLS certificate chain when
-	      making requests to protected resources.  Failing to do
-	      so may enable DNS hijacking attacks to steal the token
-	      and gain unintended access.
+	      クライアントの実装は, 保護されたリソースへのアクセスを可能とするために署名無しトークンを使う際には, それが意図されていない相手に漏洩していないことを確実にしなければならない (MUST).
+	      これは署名無しトークンを用いる際に最も重要なセキュリティに関する考慮事項であり, 後述の詳細な推奨事項すべての基礎となる.
 	    
 </dd>
-<dt>Always use TLS (https)</dt>
+<dt>SSL証明書チェインを検証する</dt>
 <dd>
-	      Clients MUST always use <a class='info' href='#RFC5246'>TLS<span> (</span><span class='info'>Dierks, T. and E. Rescorla, &ldquo;The Transport Layer Security (TLS) Protocol Version 1.2,&rdquo; August&nbsp;2008.</span><span>)</span></a> [RFC5246]
-	      (https) or equivalent transport security when making requests
-	      with bearer tokens.  Failing to do so exposes the token
-	      to numerous attacks that could give attackers unintended
-	      access.
-	    
-
-</dd>
-<dt>Don't store bearer tokens in cookies</dt>
-<dd>
-	      Implementations MUST NOT store bearer tokens within
-	      cookies that can be sent in the clear (which is the
-	      default transmission mode for cookies).
-	      Implementations that do store bearer tokens in cookies
-	      MUST take precautions against cross site request forgery.
+	      クライアントが保護リソースのリクエストを送信する際には, TLS証明書のチェインを検証しなければならない (MUST).
+	      このことに失敗した場合, DNSハイジャック攻撃によるトークンの盗難および意図しないアクセスを可能としてしまう.
 	    
 </dd>
-<dt>Issue short-lived bearer tokens</dt>
+<dt>常に TLS (https) を用いる</dt>
 <dd>
-	      Token servers SHOULD issue short-lived (one hour or
-	      less) bearer tokens, particularly when issuing tokens to
-	      clients that run within a web browser or other
-	      environments where information leakage may occur.  Using
-	      short-lived bearer tokens can reduce the impact of them
-	      being leaked.
+	      クライアントが署名無しトークンを用いたリクエストを送信する際には, 常に <a class='info' href='#RFC5246'>TLS<span> (</span><span class='info'>Dierks, T. and E. Rescorla, &ldquo;The Transport Layer Security (TLS) Protocol Version 1.2,&rdquo; August&nbsp;2008.</span><span>)</span></a> [RFC5246] (https) もしくは同等なトランスポートセキュリティを用いなければならない.
+	      このことに失敗した場合, 攻撃者に意図しないアクセスを可能とするさまざまな攻撃にトークンが晒されてしまう.
 	    
 </dd>
-<dt>Issue scoped bearer tokens</dt>
+<dt>クッキーに署名無しトークンを保存しない</dt>
 <dd>
-	      Token servers SHOULD issue bearer tokens that contain an audience
-	      restriction, scoping their use to the intended relying
-	      party or set of relying parties.
+	      平文で送信されうるクッキーに署名無しトークンを保存する実装を行ってはならない (MUST NOT). (平文での送信はクッキーのデフォルト送信モードである)
+	      署名無しトークンをクッキーに保存する実装では, クロスサイトリクエストフォージェリへの対処をしなければならない (MUST).
 	    
-
 </dd>
-<dt>Don't pass bearer tokens in page URLs</dt>
+<dt>有効期間の短い署名無しトークンを発行する</dt>
 <dd>
-	      Bearer tokens SHOULD NOT be passed in page URLs (for
-	      example as query string parameters). Instead, bearer
-	      tokens SHOULD be passed in HTTP message headers or
-	      message bodies for which confidentiality measures are
-	      taken. Browsers, web servers, and other software may not
-	      adequately secure URLs in the browser history, web
-	      server logs, and other data structures. If bearer tokens
-	      are passed in page URLs, attackers might be able to
-	      steal them from the history data, logs, or other
-	      unsecured locations.
+	      トークンサーバは, 特にブラウザやその他の情報漏洩の起こりやすい環境の中で実行されるクライアントに対してトークンを発行する際には, 有効期間の短い (1時間ないしそれ以下) 署名無しトークンを発行すべきである (SHOULD).
+	      有効期間の短い署名無しトークンを用いることにより, 漏洩した際の影響を減らすことができる.
+	    
+</dd>
+<dt>スコープの設定された署名無しトークンを発行する</dt>
+<dd>
+	      トークンサーバは, 1つまたは複数の意図されたリライングパーティによる使用に限定されるよう, オーディエンスの制限を含んだ署名無しトークンを発行すべきである (SHOULD).
+	    
+</dd>
+<dt>署名無しトークンをページURL中で渡さない</dt>
+<dd>
+	      署名無しトークンはページURL中で渡されるべきではない (SHOULD NOT). (たとえばクエリ文字列のパラメータとして)
+	      代わりに, 機密性対策の講じられたHTTPメッセージヘッダもしくはメッセージボディ中で渡されるべきである (SHOULD).
+	      ブラウザやウェブサーバその他のソフトウェアは, ブラウザの履歴やウェブサーバのログその他のデータ構造において, 適切にURLを保護していないかもしれない.
+	      署名無しトークンがページURLとして渡された場合, 攻撃者は履歴情報やログ, その他の保護されていない場所から盗み取ることができるかもしれない.
 	    
 </dd>
 </dl></blockquote><p>
@@ -850,7 +786,6 @@ OAuthアクセストークンタイプの登録</h3>
 <a name="anchor9"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.5.1.1"></a><h3>5.1.1.&nbsp;
-
 「署名無し」OAuthアクセストークンタイプ</h3>
 
 <p>
@@ -868,7 +803,6 @@ OAuthアクセストークンタイプの登録</h3>
 		
                 (無し)
               
-
 </dd>
 <dt>HTTP認証スキーム:</dt>
 <dd>
@@ -888,7 +822,6 @@ OAuthアクセストークンタイプの登録</h3>
 		
                 [[ 本文書 ]]
               
-
 </dd>
 </dl></blockquote><p>
           
@@ -902,7 +835,6 @@ OAuthアクセストークンタイプの登録</h3>
 	
 	  本仕様は, <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>で定義される認証スキーム登録において, 次の認証スキームを登録する. 
         
-
 </p>
 <a name="anchor11"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -917,7 +849,6 @@ OAuthアクセストークンタイプの登録</h3>
                 
                 Bearer
               
-
 </dd>
 <dt>仕様書の参照:</dt>
 <dd>
@@ -937,7 +868,6 @@ OAuthアクセストークンタイプの登録</h3>
           
 </p>
 <a name="rfc.references"></a><br /><hr />
-
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6"></a><h3>6.&nbsp;
 References</h3>
@@ -948,42 +878,34 @@ References</h3>
 <table width="99%" border="0">
 <tr><td class="author-text" valign="top"><a name="I-D.ietf-httpbis-p1-messaging">[I-D.ietf-httpbis-p1-messaging]</a></td>
 <td class="author-text">Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;<a href="http://tools.ietf.org/html/draft-ietf-httpbis-p1-messaging-16">HTTP/1.1, part 1: URIs, Connections, and Message Parsing</a>,&rdquo; draft-ietf-httpbis-p1-messaging-16 (work in progress), August&nbsp;2011 (<a href="http://www.ietf.org/internet-drafts/draft-ietf-httpbis-p1-messaging-16.txt">TXT</a>).</td></tr>
-
 <tr><td class="author-text" valign="top"><a name="I-D.ietf-httpbis-p7-auth">[I-D.ietf-httpbis-p7-auth]</a></td>
 <td class="author-text">Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;<a href="http://tools.ietf.org/html/draft-ietf-httpbis-p7-auth-16">HTTP/1.1, part 7: Authentication</a>,&rdquo; draft-ietf-httpbis-p7-auth-16 (work in progress), August&nbsp;2011 (<a href="http://www.ietf.org/internet-drafts/draft-ietf-httpbis-p7-auth-16.txt">TXT</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="I-D.ietf-oauth-v2">[I-D.ietf-oauth-v2]</a></td>
 <td class="author-text">Hammer-Lahav, E., Recordon, D., and D. Hardt, &ldquo;<a href="http://tools.ietf.org/html/draft-ietf-oauth-v2-22">The OAuth 2.0 Authorization Protocol</a>,&rdquo; draft-ietf-oauth-v2-22 (work in progress), September&nbsp;2011 (<a href="http://www.ietf.org/internet-drafts/draft-ietf-oauth-v2-22.txt">TXT</a>, <a href="http://www.ietf.org/internet-drafts/draft-ietf-oauth-v2-22.pdf">PDF</a>).</td></tr>
-
 <tr><td class="author-text" valign="top"><a name="RFC2119">[RFC2119]</a></td>
 <td class="author-text"><a href="mailto:sob@harvard.edu">Bradner, S.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>,&rdquo; BCP&nbsp;14, RFC&nbsp;2119, March&nbsp;1997 (<a href="http://www.rfc-editor.org/rfc/rfc2119.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2119.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2119.xml">XML</a>).</td></tr>
-
 <tr><td class="author-text" valign="top"><a name="RFC2616">[RFC2616]</a></td>
 <td class="author-text"><a href="mailto:fielding@ics.uci.edu">Fielding, R.</a>, <a href="mailto:jg@w3.org">Gettys, J.</a>, <a href="mailto:mogul@wrl.dec.com">Mogul, J.</a>, <a href="mailto:frystyk@w3.org">Frystyk, H.</a>, <a href="mailto:masinter@parc.xerox.com">Masinter, L.</a>, <a href="mailto:paulle@microsoft.com">Leach, P.</a>, and <a href="mailto:timbl@w3.org">T. Berners-Lee</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2616">Hypertext Transfer Protocol -- HTTP/1.1</a>,&rdquo; RFC&nbsp;2616, June&nbsp;1999 (<a href="http://www.rfc-editor.org/rfc/rfc2616.txt">TXT</a>, <a href="http://www.rfc-editor.org/rfc/rfc2616.ps">PS</a>, <a href="http://www.rfc-editor.org/rfc/rfc2616.pdf">PDF</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2616.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2616.xml">XML</a>).</td></tr>
-
 <tr><td class="author-text" valign="top"><a name="RFC2818">[RFC2818]</a></td>
 <td class="author-text">Rescorla, E., &ldquo;<a href="http://tools.ietf.org/html/rfc2818">HTTP Over TLS</a>,&rdquo; RFC&nbsp;2818, May&nbsp;2000 (<a href="http://www.rfc-editor.org/rfc/rfc2818.txt">TXT</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="RFC3986">[RFC3986]</a></td>
 <td class="author-text"><a href="mailto:timbl@w3.org">Berners-Lee, T.</a>, <a href="mailto:fielding@gbiv.com">Fielding, R.</a>, and <a href="mailto:LMM@acm.org">L. Masinter</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc3986">Uniform Resource Identifier (URI): Generic Syntax</a>,&rdquo; STD&nbsp;66, RFC&nbsp;3986, January&nbsp;2005 (<a href="http://www.rfc-editor.org/rfc/rfc3986.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc3986.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc3986.xml">XML</a>).</td></tr>
-
 <tr><td class="author-text" valign="top"><a name="RFC5234">[RFC5234]</a></td>
 <td class="author-text">Crocker, D. and P. Overell, &ldquo;<a href="http://tools.ietf.org/html/rfc5234">Augmented BNF for Syntax Specifications: ABNF</a>,&rdquo; STD&nbsp;68, RFC&nbsp;5234, January&nbsp;2008 (<a href="http://www.rfc-editor.org/rfc/rfc5234.txt">TXT</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="RFC5246">[RFC5246]</a></td>
 <td class="author-text">Dierks, T. and E. Rescorla, &ldquo;<a href="http://tools.ietf.org/html/rfc5246">The Transport Layer Security (TLS) Protocol Version 1.2</a>,&rdquo; RFC&nbsp;5246, August&nbsp;2008 (<a href="http://www.rfc-editor.org/rfc/rfc5246.txt">TXT</a>).</td></tr>
-
 <tr><td class="author-text" valign="top"><a name="W3C.REC-html401-19991224">[W3C.REC-html401-19991224]</a></td>
 <td class="author-text">Raggett, D., Jacobs, I., and A. Hors, &ldquo;<a href="http://www.w3.org/TR/1999/REC-html401-19991224">HTML 4.01 Specification</a>,&rdquo; World Wide Web Consortium Recommendation&nbsp;REC-html401-19991224, December&nbsp;1999 (<a href="http://www.w3.org/TR/1999/REC-html401-19991224">HTML</a>).</td></tr>
 </table>
 
 <a name="rfc.references2"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-
 <h3>6.2.&nbsp;Informative References</h3>
 <table width="99%" border="0">
 <tr><td class="author-text" valign="top"><a name="NIST800-63">[NIST800-63]</a></td>
 <td class="author-text">Burr, W., Dodson, D., Perlner, R., Polk, T., Gupta, S., and E. Nabbus, &ldquo;<a href="http://csrc.nist.gov/publications/PubsDrafts.html#SP-800-63-Rev.%201">NIST Special Publication 800-63-1, INFORMATION SECURITY</a>,&rdquo; December&nbsp;2008.</td></tr>
 <tr><td class="author-text" valign="top"><a name="RFC2617">[RFC2617]</a></td>
 <td class="author-text"><a href="mailto:john@math.nwu.edu">Franks, J.</a>, <a href="mailto:pbaker@verisign.com">Hallam-Baker, P.</a>, <a href="mailto:jeff@AbiSource.com">Hostetler, J.</a>, <a href="mailto:lawrence@agranat.com">Lawrence, S.</a>, <a href="mailto:paulle@microsoft.com">Leach, P.</a>, Luotonen, A., and <a href="mailto:stewart@OpenMarket.com">L. Stewart</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2617">HTTP Authentication: Basic and Digest Access Authentication</a>,&rdquo; RFC&nbsp;2617, June&nbsp;1999 (<a href="http://www.rfc-editor.org/rfc/rfc2617.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2617.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2617.xml">XML</a>).</td></tr>
-
 </table>
 
 <a name="anchor14"></a><br /><hr />
@@ -1009,7 +931,6 @@ References</h3>
         Marius Scurtescu, Naitik Shah, Justin Smith, Jeremy Suriel, Christian Stübner, Paul Tarjan,
         及び Franklin Tse.
       
-
 </p>
 <a name="anchor15"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1023,7 +944,6 @@ References</h3>
 <p>
         -11
         </p>
-
 <ul class="text">
 <li>
 	   Replaced uses of &lt;"&gt; with DQUOTE to pass ABNF syntax check.
@@ -1037,7 +957,6 @@ References</h3>
         </p>
 <ul class="text">
 <li>
-
 	    Removed the #auth-param option from Authorization header
 	    syntax (leaving only the b64token syntax).
 	  
@@ -1056,7 +975,6 @@ References</h3>
 	    displayed to end users.
 	  
 </li>
-
 <li>
 	    Included more description in the Abstract, since Hannes
 	    Tschofenig indicated that the RFC editor would require
@@ -1079,7 +997,6 @@ References</h3>
 <p>
         -09
         </p>
-
 <ul class="text">
 <li>
             Incorporated working group last call comments.  Specific changes were:
@@ -1088,12 +1005,10 @@ References</h3>
 <li>
 	    Use definitions from <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a> rather than <a class='info' href='#RFC2617'>[RFC2617]<span> (</span><span class='info'>Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S., Leach, P., Luotonen, A., and L. Stewart, &ldquo;HTTP Authentication: Basic and Digest Access Authentication,&rdquo; June&nbsp;1999.</span><span>)</span></a>.
 	  
-
 </li>
 <li>
 	    Update credentials definition to conform to <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>.
 	  
-
 </li>
 <li>
 	    Further clarified that query parameters may occur in any order.
@@ -1109,7 +1024,6 @@ References</h3>
 	    Authentication Scheme Registry defined by
 	    <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>.
 	  
-
 </li>
 <li>
             Updated references to oauth-v2, httpbis-p1-messaging, and
@@ -1127,7 +1041,6 @@ References</h3>
         -08
         </p>
 <ul class="text">
-
 <li>
             Updated references to oauth-v2 and httpbis drafts.
 	  
@@ -1144,7 +1057,6 @@ References</h3>
 	  
 </li>
 </ul><p>
-
       
 </p>
 <p>
@@ -1157,7 +1069,6 @@ References</h3>
 	  
 </li>
 <li>
-
 	    Changed HTTP status code for <tt>invalid_request</tt> error code from HTTP
 	    401 (Unauthorized) back to HTTP 400 (Bad Request), per
 	    input from HTTP working group experts.
@@ -1173,7 +1084,6 @@ References</h3>
 <li>
 	    Removed OAuth Errors Registry, per design team input.
 	  
-
 </li>
 <li>
 	    Changed HTTP status code for <tt>invalid_request</tt> error code from HTTP
@@ -1191,7 +1101,6 @@ References</h3>
 	  
 </li>
 <li>
-
 	    Explicitly reference the Augmented Backus-Naur Form (ABNF)
 	    defined in <a class='info' href='#RFC5234'>[RFC5234]<span> (</span><span class='info'>Crocker, D. and P. Overell, &ldquo;Augmented BNF for Syntax Specifications: ABNF,&rdquo; January&nbsp;2008.</span><span>)</span></a>.
 	  
@@ -1201,7 +1110,6 @@ References</h3>
 	    is ( token "=" ( token / quoted-string ) ).
 	  
 </li>
-
 <li>
 	    Clarify security considerations about including an
 	    audience restriction in the token and include a
@@ -1222,7 +1130,6 @@ References</h3>
 	  
 </li>
 <li>
-
 	    Added Bearer Token definition in Terminology section.
 	  
 </li>
@@ -1234,13 +1141,11 @@ References</h3>
 	    Added realm parameter to <tt>WWW-Authenticate</tt> response to comply
 	    with <a class='info' href='#RFC2617'>[RFC2617]<span> (</span><span class='info'>Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S., Leach, P., Luotonen, A., and L. Stewart, &ldquo;HTTP Authentication: Basic and Digest Access Authentication,&rdquo; June&nbsp;1999.</span><span>)</span></a>.
 	  
-
 </li>
 <li>
 	    Removed "[ RWS 1#auth-param ]" from <tt>credentials</tt> definition since it did
 	    not comply with the ABNF in <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>.
 	  
-
 </li>
 <li>
 	    Removed restriction that the <tt>bearer_token</tt> (formerly <tt>oauth_token</tt>) parameter be the last
@@ -1258,7 +1163,6 @@ References</h3>
 <li>
 	    Removed OAuth Parameters registry extension.
 	  
-
 </li>
 <li>
 	    Numerous editorial improvements suggested by working group
@@ -1278,7 +1182,6 @@ References</h3>
 	    draft 12 based upon the specification text from draft 11.
 	  
 </li>
-
 <li>
 	    Augmented the OAuth Parameters registry by adding two
 	    additional parameter usage locations: "resource request"
@@ -1299,7 +1202,6 @@ References</h3>
 	  
 </li>
 <li>
-
 	    Changed the "OAuth2" OAuth access token type name to
 	    "Bearer".
 	  
@@ -1321,7 +1223,6 @@ References</h3>
 	    Changed terminology from "token reuse" to "token capture
 	    and replay".
 	  
-
 </li>
 <li>
 	    Removed sentence "Encrypting the token contents is another
@@ -1344,7 +1245,6 @@ References</h3>
 	    recommendation "Don't pass bearer tokens in page URLs".
 	  
 </li>
-
 <li>
 	    Removed unused reference to OAuth 1.0.
 	  
@@ -1365,7 +1265,6 @@ References</h3>
 	  
 </li>
 </ul><p>
-
       
 </p>
 <p>
@@ -1384,7 +1283,6 @@ References</h3>
 <p>
         -00
         </p>
-
 <ul class="text">
 <li>
             Initial draft based on preliminary version of OAuth 2.0 draft 11.
@@ -1399,7 +1297,6 @@ References</h3>
 <table width="99%" border="0" cellpadding="0" cellspacing="0">
 <tr><td class="author-text">&nbsp;</td>
 <td class="author-text">Michael B. Jones</td></tr>
-
 <tr><td class="author-text">&nbsp;</td>
 <td class="author-text">Microsoft</td></tr>
 <tr><td class="author" align="right">Email:&nbsp;</td>
@@ -1411,7 +1308,6 @@ References</h3>
 <td class="author-text">Dick Hardt</td></tr>
 <tr><td class="author-text">&nbsp;</td>
 <td class="author-text">independent</td></tr>
-
 <tr><td class="author" align="right">Email:&nbsp;</td>
 <td class="author-text"><a href="mailto:dick.hardt@gmail.com">dick.hardt@gmail.com</a></td></tr>
 <tr><td class="author" align="right">URI:&nbsp;</td>
@@ -1422,7 +1318,6 @@ References</h3>
 <tr><td class="author-text">&nbsp;</td>
 <td class="author-text">Facebook</td></tr>
 <tr><td class="author" align="right">Email:&nbsp;</td>
-
 <td class="author-text"><a href="mailto:dr@fb.com">dr@fb.com</a></td></tr>
 <tr><td class="author" align="right">URI:&nbsp;</td>
 <td class="author-text"><a href="http://www.davidrecordon.com/">http://www.davidrecordon.com/</a></td></tr>
