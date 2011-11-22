@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en"><head><title>The OAuth 2.0 Authorization Protocol: Bearer Tokens(日本語)</title>
+<html lang="en"><head><title>The OAuth 2.0 Authorization Protocol: Bearer Tokens (日本語)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="The OAuth 2.0 Authorization Protocol: Bearer Tokens(日本語)">
+<meta name="description" content="The OAuth 2.0 Authorization Protocol: Bearer Tokens (日本語)">
 <meta name="generator" content="xml2rfc v1.36 (http://xml.resource.org/)">
 <style type='text/css'><!--
         body {
@@ -149,13 +149,13 @@
 <tr><td class="header">&nbsp;</td><td class="header">Facebook</td></tr>
 <tr><td class="header">&nbsp;</td><td class="header">October 25, 2011</td></tr>
 </table></td></tr></table>
-<h1><br />The OAuth 2.0 Authorization Protocol: Bearer Tokens(日本語)<br />draft-ietf-oauth-v2-bearer-11</h1>
+<h1><br />The OAuth 2.0 Authorization Protocol: Bearer Tokens (日本語)<br />draft-ietf-oauth-v2-bearer-11</h1>
 
 <h3>Abstract</h3>
 
 <p>
         この仕様書は, OAuth 2.0の保護リソースへアクセスするために, 署名無しトークンをHTTPリクエスト中でどのように利用するか記述したものである.
-        署名無しトークンを所有する任意のパーティ (持参人) は, 認可済みリソースへアクセスするために署名無しトークンを利用できる.  (暗号鍵の所有を示す必要はない)
+        署名無しトークンを所有する任意のパーティ (持参人) は, 認可済みリソースへアクセスするために署名無しトークンを利用できる (暗号鍵の所有を示す必要はない).
         誤った利用を避けるために, 署名無しトークンは保存場所や流通経路での値の露見から守られなければならない (MUST).
       
 </p>
@@ -253,7 +253,7 @@ Authors' Addresses<br />
 
 <p>
         OAuthは, クライアントがアクセストークンを取得することで, 保護リソースへのアクセスを可能にする.
-        アクセストークンは<a class='info' href='#I-D.ietf-oauth-v2'>[I&#8209;D.ietf&#8209;oauth&#8209;v2]<span> (</span><span class='info'>Hammer-Lahav, E., Recordon, D., and D. Hardt, &ldquo;The OAuth 2.0 Authorization Protocol,&rdquo; September&nbsp;2011.</span><span>)</span></a>中で「クライアントに対するアクセス認可の文字列表現」と定義されており,
+        アクセストークンは <a class='info' href='#I-D.ietf-oauth-v2'>[I&#8209;D.ietf&#8209;oauth&#8209;v2]<span> (</span><span class='info'>Hammer-Lahav, E., Recordon, D., and D. Hardt, &ldquo;The OAuth 2.0 Authorization Protocol,&rdquo; September&nbsp;2011.</span><span>)</span></a> 中で「クライアントに対するアクセス認可の文字列表現」と定義されており,
         リソース所有者のクレデンシャルを直接利用することではない.
       
 </p>
@@ -264,7 +264,7 @@ Authors' Addresses<br />
       
 </p>
 <p>
-        この仕様書では<a class='info' href='#RFC2616'>HTTP<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P., and T. Berners-Lee, &ldquo;Hypertext Transfer Protocol -- HTTP/1.1,&rdquo; June&nbsp;1999.</span><span>)</span></a> [RFC2616]及び<a class='info' href='#RFC5246'>TLS<span> (</span><span class='info'>Dierks, T. and E. Rescorla, &ldquo;The Transport Layer Security (TLS) Protocol Version 1.2,&rdquo; August&nbsp;2008.</span><span>)</span></a> [RFC5246]で定義された, TLSを用いたHTTP上でのOAuthで, 署名無しトークンを利用する方法を定める.
+        この仕様書では <a class='info' href='#RFC2616'>HTTP<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P., and T. Berners-Lee, &ldquo;Hypertext Transfer Protocol -- HTTP/1.1,&rdquo; June&nbsp;1999.</span><span>)</span></a> [RFC2616] 及び <a class='info' href='#RFC5246'>TLS<span> (</span><span class='info'>Dierks, T. and E. Rescorla, &ldquo;The Transport Layer Security (TLS) Protocol Version 1.2,&rdquo; August&nbsp;2008.</span><span>)</span></a> [RFC5246] で定義された, TLSを用いたHTTP上でのOAuthで, 署名無しトークンを利用する方法を定める.
         他の仕様書がその他の転送プロトコルの元での利用について本仕様を拡張する可能性もある.
       
 </p>
@@ -274,12 +274,12 @@ Authors' Addresses<br />
 要求記法および規則</h3>
 
 <p>
-        本文書で用いられる各キーワード「MUST (しなければならない)」, 「MUST NOT (してはならない)」, 「REQUIRED (必須である)」, 「SHALL (するものとする)」, 「SHALL NOT (しないものとする)」, 「SHOULD (すべきである)」, 「SHOULD NOT (すべきではない)」, 「RECOMMENDED (推奨される)」, 「MAY (してもよい)」, 「OPTIONAL (任意である)」は<a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a>で述べられている通りに解釈されるべきものである.
+        本文書で用いられる各キーワード「MUST (しなければならない)」, 「MUST NOT (してはならない)」, 「REQUIRED (必須である)」, 「SHALL (するものとする)」, 「SHALL NOT (しないものとする)」, 「SHOULD (すべきである)」, 「SHOULD NOT (すべきではない)」, 「RECOMMENDED (推奨される)」, 「MAY (してもよい)」, 「OPTIONAL (任意である)」は <a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a> で述べられている通りに解釈されるべきものである.
         
 </p>
 <p>
-          このドキュメントでは<a class='info' href='#RFC5234'>[RFC5234]<span> (</span><span class='info'>Crocker, D. and P. Overell, &ldquo;Augmented BNF for Syntax Specifications: ABNF,&rdquo; January&nbsp;2008.</span><span>)</span></a>におけるAugmented Backus-Naur Form (ABNF)表記法を元にした, <a class='info' href='#I-D.ietf-httpbis-p1-messaging'>[I&#8209;D.ietf&#8209;httpbis&#8209;p1&#8209;messaging]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 1: URIs, Connections, and Message Parsing,&rdquo; August&nbsp;2011.</span><span>)</span></a>におけるAugmented Backus-Naur Form(ABNF)表記法を利用している.
-          加えて, 次の規則(<a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a> 記載: b64token, auth-param および realm; <a class='info' href='#I-D.ietf-httpbis-p1-messaging'>[I&#8209;D.ietf&#8209;httpbis&#8209;p1&#8209;messaging]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 1: URIs, Connections, and Message Parsing,&rdquo; August&nbsp;2011.</span><span>)</span></a>記載:  quoted-string; <a class='info' href='#RFC3986'>[RFC3986]<span> (</span><span class='info'>Berners-Lee, T., Fielding, R., and L. Masinter, &ldquo;Uniform Resource Identifier (URI): Generic Syntax,&rdquo; January&nbsp;2005.</span><span>)</span></a>記載: URI-Reference)に従う.
+          このドキュメントでは<a class='info' href='#RFC5234'>[RFC5234]<span> (</span><span class='info'>Crocker, D. and P. Overell, &ldquo;Augmented BNF for Syntax Specifications: ABNF,&rdquo; January&nbsp;2008.</span><span>)</span></a>におけるAugmented Backus-Naur Form (ABNF) 表記法を元にした, <a class='info' href='#I-D.ietf-httpbis-p1-messaging'>[I&#8209;D.ietf&#8209;httpbis&#8209;p1&#8209;messaging]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 1: URIs, Connections, and Message Parsing,&rdquo; August&nbsp;2011.</span><span>)</span></a>におけるAugmented Backus-Naur Form (ABNF) 表記法を利用している.
+          加えて, 次の規則 (<a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a> 記載: b64token, auth-param および realm; <a class='info' href='#I-D.ietf-httpbis-p1-messaging'>[I&#8209;D.ietf&#8209;httpbis&#8209;p1&#8209;messaging]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 1: URIs, Connections, and Message Parsing,&rdquo; August&nbsp;2011.</span><span>)</span></a>記載:  quoted-string; <a class='info' href='#RFC3986'>[RFC3986]<span> (</span><span class='info'>Berners-Lee, T., Fielding, R., and L. Masinter, &ldquo;Uniform Resource Identifier (URI): Generic Syntax,&rdquo; January&nbsp;2005.</span><span>)</span></a>記載: URI-Reference) に従う.
 
 
         
@@ -326,7 +326,7 @@ Authors' Addresses<br />
         
 </p>
 <p>
-          アクセストークンはほかの認証方法(例: ユーザ名とパスワード, アサーション)をリソースサーバが理解しうる一つのトークンに置き換えるような抽象レイヤーを提供する.
+          アクセストークンはほかの認証方法 (例: ユーザ名とパスワード, アサーション) をリソースサーバが理解しうる一つのトークンに置き換えるような抽象レイヤーを提供する.
           この抽象レイヤーは有効期間の短いアクセストークンを発行することを可能にするとともに, リソースサーバから広範囲に渡る認証スキームを理解する必要を取り除く.
         
         
@@ -494,7 +494,7 @@ Host: server.example.com
 <p>
         
           HTTPリクエストURIはリクエストに特化した他のパラメータを含むことができる.
-          その場合, <tt>access_token</tt>パラメータは <tt>&amp;</tt> 文字 (ASCII コード 38)を使い, 他のリクエストに特化したパラメータと適切に分離されていなければならない (MUST).
+          その場合, <tt>access_token</tt>パラメータは <tt>&amp;</tt> 文字 (ASCII コード 38) を使い, 他のリクエストに特化したパラメータと適切に分離されていなければならない (MUST).
         
 </p>
 <p>
@@ -537,24 +537,24 @@ error-uri       = "error_uri" "=" DQUOTE URI-reference DQUOTE
 </pre></div>
 <p>
           <tt>scope</tt> 属性は, スペース区切りのスコープ値のリストであり, 要求されたリソースへのアクセスに必要なアクセストークンのスコープを示す.
-          <tt>scope</tt> 属性は, 2回以上現れてはならない(MUST NOT).
+          <tt>scope</tt> 属性は, 2回以上現れてはならない (MUST NOT).
           <tt>scope</tt> の値は, プログラム中で用いられることを目的とし, エンドユーザへ表示することは意図されていない.
       
       
 </p>
 <p>
-          保護リソースへのリクエストにアクセストークンが含まれているが認証に失敗した場合, リソースサーバはアクセス要求を拒否した理由をクライアントに対して示すために, <tt>error</tt> 属性を含むべきである(SHOULD).
+          保護リソースへのリクエストにアクセストークンが含まれているが認証に失敗した場合, リソースサーバはアクセス要求を拒否した理由をクライアントに対して示すために, <tt>error</tt> 属性を含むべきである (SHOULD).
           パラメータの値は <a class='info' href='#resource-error-codes'>Section&nbsp;3.1<span> (</span><span class='info'>エラーコード</span><span>)</span></a> に記載されている.
-          さらに, リソースサーバは, 開発者にとって可読性のある説明を提供するために, エンドユーザに表示する目的ではない <tt>error_description</tt> 属性を含んでもよい(MAY).
-          また, エラーについての可読性のある説明ウェブページを指し示す, 絶対URIで記載された<tt>error_uri</tt> 属性を含んでもよい(MAY).
-          <tt>error</tt>, <tt>error_description</tt>, そして <tt>error_uri</tt> 属性は, 2回以上現れてはならない(MUST NOT).
+          さらに, リソースサーバは, 開発者にとって可読性のある説明を提供するために, エンドユーザに表示する目的ではない <tt>error_description</tt> 属性を含んでもよい (MAY).
+          また, エラーについての可読性のある説明ウェブページを指し示す, 絶対URIで記載された<tt>error_uri</tt> 属性を含んでもよい (MAY).
+          <tt>error</tt>, <tt>error_description</tt>, そして <tt>error_uri</tt> 属性は, 2回以上現れてはならない (MUST NOT).
       
 
       
 </p>
 <p>
-      例えば, 認証されていない場合の保護リソースへのリクエストに対するレスポンスは以下のようになる:
-      
+          例えば, 認証されていない場合の保護リソースへのリクエストに対するレスポンスは以下のようになる:
+          
         
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 HTTP/1.1 401 Unauthorized
@@ -602,7 +602,7 @@ WWW-Authenticate: Bearer realm="example",
 <dd>
               
               リクエストにはアクセストークンにより提供されるよりも高い権限が必要である.
-              リソースサーバはHTTPステータスコード403 (Forbidden) の応答を返すべき(SHOULD)であり, 保護されたリソースへのアクセスに必要となるスコープを示した <tt>scope</tt> 属性を含めてもよい (MAY).
+              リソースサーバはHTTPステータスコード403 (Forbidden) の応答を返すべき (SHOULD) であり, 保護されたリソースへのアクセスに必要となるスコープを示した <tt>scope</tt> 属性を含めてもよい (MAY).
 
             
 </dd>
@@ -647,27 +647,27 @@ Security Considerations</h3>
 <blockquote class="text"><dl>
 <dt>トークン偽装/改ざん:</dt>
 <dd>
-            攻撃者が偽装トークンを生成したり, 既存のトークンの (認証や属性の記述内容といった) コンテンツを改ざんすることで, リソースサーバはクライアントに対して不適切なアクセス権限を許してしまう可能性がある.
-            例えば, 攻撃者はトークンが妥当である期間を拡張するようにトークンを改ざんするかもしれない. 悪意のあるクライアントは本来見ることができるべきではない情報へのアクセスを得るためのアサーションを改ざんするかもしれない.
+              攻撃者が偽装トークンを生成したり, 既存のトークンの (認証や属性の記述内容といった) コンテンツを改ざんすることで, リソースサーバはクライアントに対して不適切なアクセス権限を許してしまう可能性がある.
+              例えば, 攻撃者はトークンが妥当である期間を拡張するようにトークンを改ざんするかもしれない. 悪意のあるクライアントは本来見ることができるべきではない情報へのアクセスを得るためのアサーションを改ざんするかもしれない.
             
 </dd>
 <dt>トークン露見:</dt>
 <dd>
-            トークンは認証や属性の記述など機微情報を含む可能性がある.
+              トークンは認証や属性の記述など機微情報を含む可能性がある.
             
 </dd>
 <dt>トークンリダイレクト:</dt>
 <dd>
-            攻撃者はあるリソースサーバで利用することを目的として生成されたトークンを,
-            別のリソースサーバが誤ってそのトークンが自身で利用できるものと思い込ませてアクセスを行うために利用する.
+              攻撃者はあるリソースサーバで利用することを目的として生成されたトークンを,
+              別のリソースサーバが誤ってそのトークンが自身で利用できるものと思い込ませてアクセスを行うために利用する.
             
 </dd>
 <dt>トークンリプレイ:</dt>
 <dd>
-            攻撃者は過去にリソースサーバで利用済みのトークンの再利用を試みる.
+              攻撃者は過去にリソースサーバで利用済みのトークンの再利用を試みる.
             
 </dd>
-</dl></blockquote><p> 
+</dl></blockquote><p>
         
 </p>
 <a name="mitigation"></a><br /><hr />
@@ -676,40 +676,40 @@ Security Considerations</h3>
 脅威の軽減</h3>
 
 <p>
-      デジタル署名またはメッセージ認証コード(MAC)を用いてトークンの内容を保護することにより, 多くの脅威は軽減することができる
-      あるいは, 署名無しトークンはエンコードされた認可情報を直接含むのではなく, 認可情報に対する参照を含むことができる.
-      その参照は, 攻撃者が推測不可能でなければならない(MUST). 参照を用いた場合, 認可情報への参照を解決するために, 認証サーバとトークン発行者の間における追加の通信が必要になることがある.
-      そのような通信の方法は, この仕様では定義されない.
-    
+          デジタル署名またはメッセージ認証コード (MAC) を用いてトークンの内容を保護することにより, 多くの脅威は軽減することができる.
+          あるいは, 署名無しトークンはエンコードされた認可情報を直接含むのではなく, 認可情報に対する参照を含むことができる.
+          その参照は, 攻撃者が推測不可能でなければならない (MUST). 参照を用いた場合, 認可情報への参照を解決するために, 認証サーバとトークン発行者の間における追加の通信が必要になることがある.
+          そのような通信の方法は, この仕様では定義されない.
+        
 </p>
 <p>
-      このドキュメントでは, エンコード方法やトークンの内容に関しては定義しない. そのため, トークンの整合性を保護するための詳細に関しての提言は, この文書の範囲外である.
-      トークンの整合性を保護することが, トークンが改変されることを防ぐのに十分であると仮定する.
-    
+          このドキュメントでは, エンコード方法やトークンの内容に関しては定義しない. そのため, トークンの整合性を保護するための詳細に関しての提言は, この文書の範囲外である.
+          トークンの整合性を保護することが, トークンが改変されることを防ぐのに十分であると仮定する.
+        
 </p>
 <p>
-      トークンリダイレクトへの対策として, トークン内に認可サーバの意図する, 一般的に一つの資源サーバまたは資源サーバのリストからなる, トークンの受領者(観衆)のアイデンティティを含むことが重要である.
-      トークンの利用できる範囲を特定の範囲に制限することも推奨される.
-    
+          トークンリダイレクトへの対策として, トークン内に認可サーバの意図する, 一般的に一つの資源サーバまたは資源サーバのリストからなる, トークンの受領者 (観衆) のアイデンティティを含むことが重要である.
+          トークンの利用できる範囲を特定の範囲に制限することも推奨される.
+        
 </p>
 <p>
-      トークン露見に対する保護を提供するために, 機密性保護は, 機密性保護を提供する暗号スイートによる <a class='info' href='#RFC5246'>TLS<span> (</span><span class='info'>Dierks, T. and E. Rescorla, &ldquo;The Transport Layer Security (TLS) Protocol Version 1.2,&rdquo; August&nbsp;2008.</span><span>)</span></a> [RFC5246]を通じて適用される.
-      これは, クライアントと資源サーバ間と同様に, クライアントと認可サーバ間の通信においてもまた, 機密性保護を利用することを必要とする.
-      この仕様においてはTLSの実装と使用が義務付けられており, それは通信経路上でのトークン漏洩を防ぐための推奨されるアプローチである.
-      クライアントがトークンの内容を覗き見るようなケースを防ぐためには, TLSによる保護に加えて, トークンの暗号化を行う必要がある(MUST).
-    
+          トークン露見に対する保護を提供するために, 機密性保護は, 機密性保護を提供する暗号スイートによる <a class='info' href='#RFC5246'>TLS<span> (</span><span class='info'>Dierks, T. and E. Rescorla, &ldquo;The Transport Layer Security (TLS) Protocol Version 1.2,&rdquo; August&nbsp;2008.</span><span>)</span></a> [RFC5246]を通じて適用される.
+          これは, クライアントと資源サーバ間と同様に, クライアントと認可サーバ間の通信においてもまた, 機密性保護を利用することを必要とする.
+          この仕様においてはTLSの実装と使用が義務付けられており, それは通信経路上でのトークン漏洩を防ぐための推奨されるアプローチである.
+          クライアントがトークンの内容を覗き見るようなケースを防ぐためには, TLSによる保護に加えて, トークンの暗号化を行う必要がある (MUST).
+        
 </p>
 <p>
-      トークンの覗き見と再利用(トークンリプレイ)への対策として, 以下の手段が推奨される: 
-      第一に, トークン内の保護された部分に, 有効な時間のフィールドを保持しておき, それによって有効期間を制限しなければならない(MUST).
-      1時間程度, またはそれ以下の短い期間のみ有効なトークンを使うことが, トークンが漏洩した際のインパクトを減らすことを記す.
-      第二に, クライアントと認可サーバ間およびクライアントと資源サーバの間の通信における機密性保持は, 例えばTLS等を用いて機密性保持を適用しなければならない(MUST).
-      結果として, 通信経路に存在する盗聴者は, トークンの交換を覗き見ることができなくなる.
-      従って, そのような経路上の攻撃者は, トークンをリプレイすることができない.
-      さらに, クライアントはトークンを資源サーバに送信するときに, <a class='info' href='#RFC2818'>[RFC2818]<span> (</span><span class='info'>Rescorla, E., &ldquo;HTTP Over TLS,&rdquo; May&nbsp;2000.</span><span>)</span></a>に従いサーバのアイデンティティを確認しなければならない(MUST).
-      保護リソースにリクエストを送信するとき, クライアントがTLS証明書のチェインを確認しなければならない(MUST)ことに注意すべきである.
-      未認証かつ未認可な資源サーバにトークンを送信すること, あるいは証明書チェインの確認に失敗することは, 攻撃者に対して, トークンを盗み, 保護リソースへの認可されていないアクセスを許すことになる.
-    
+          トークンの覗き見と再利用 (トークンリプレイ) への対策として, 以下の手段が推奨される:
+          第一に, トークン内の保護された部分に, 有効な時間のフィールドを保持しておき, それによって有効期間を制限しなければならない (MUST).
+          1時間程度, またはそれ以下の短い期間のみ有効なトークンを使うことが, トークンが漏洩した際のインパクトを減らすことを記す.
+          第二に, クライアントと認可サーバ間およびクライアントと資源サーバの間の通信における機密性保持は, 例えばTLS等を用いて機密性保持を適用しなければならない (MUST).
+          結果として, 通信経路に存在する盗聴者は, トークンの交換を覗き見ることができなくなる.
+          従って, そのような経路上の攻撃者は, トークンをリプレイすることができない.
+          さらに, クライアントはトークンを資源サーバに送信するときに, <a class='info' href='#RFC2818'>[RFC2818]<span> (</span><span class='info'>Rescorla, E., &ldquo;HTTP Over TLS,&rdquo; May&nbsp;2000.</span><span>)</span></a>に従いサーバのアイデンティティを確認しなければならない (MUST).
+          保護リソースにリクエストを送信するとき, クライアントがTLS証明書のチェインを確認しなければならない (MUST) ことに注意すべきである.
+          未認証かつ未認可な資源サーバにトークンを送信すること, あるいは証明書チェインの確認に失敗することは, 攻撃者に対して, トークンを盗み, 保護リソースへの認可されていないアクセスを許すことになる.
+        
 </p>
 <a name="anchor6"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -915,7 +915,8 @@ References</h3>
         以下の人々は本文書の前身となる版に対して貢献を行った:
         Blaine Cook (BT), Brian Eaton (Google), Yaron Y. Goland (Microsoft), Brent Goldman (Facebook),
         Raffi Krikorian (Twitter), Luke Shepard (Facebook), and Allen Tom (Yahoo!).
-        本仕様の内容及びコンセプトはOAuthコミュニティ, WRAPコミュニティ, OAuthワーキンググループによって生み出されたものである.       
+        本仕様の内容及びコンセプトはOAuthコミュニティ, WRAPコミュニティ, OAuthワーキンググループによって生み出されたものである.
+      
 </p>
 <p>
         

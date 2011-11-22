@@ -646,7 +646,7 @@ WWW-Authenticate: Bearer realm="example"]]>
 
         <t>
           <list style="hanging">
-          <!--
+            <!--
             <t hangText="Token manufacture/modification:">
               An attacker may generate a bogus token or modify the
               token contents (such as the authentication or attribute
@@ -658,8 +658,8 @@ WWW-Authenticate: Bearer realm="example"]]>
               should not be able to view.
               -->
             <t hangText="トークン偽装/改ざん:">
-            攻撃者が偽装トークンを生成したり, 既存のトークンの (認証や属性の記述内容といった) コンテンツを改ざんすることで, リソースサーバはクライアントに対して不適切なアクセス権限を許してしまう可能性がある.
-            例えば, 攻撃者はトークンが妥当である期間を拡張するようにトークンを改ざんするかもしれない. 悪意のあるクライアントは本来見ることができるべきではない情報へのアクセスを得るためのアサーションを改ざんするかもしれない.
+              攻撃者が偽装トークンを生成したり, 既存のトークンの (認証や属性の記述内容といった) コンテンツを改ざんすることで, リソースサーバはクライアントに対して不適切なアクセス権限を許してしまう可能性がある.
+              例えば, 攻撃者はトークンが妥当である期間を拡張するようにトークンを改ざんするかもしれない. 悪意のあるクライアントは本来見ることができるべきではない情報へのアクセスを得るためのアサーションを改ざんするかもしれない.
             </t>
             <!--
             <t hangText="Token disclosure:">
@@ -668,19 +668,19 @@ WWW-Authenticate: Bearer realm="example"]]>
             </t>
             -->
             <t hangText="トークン露見:">
-            トークンは認証や属性の記述など機微情報を含む可能性がある.
+              トークンは認証や属性の記述など機微情報を含む可能性がある.
             </t>
             <!--
             <t hangText="Token redirect:">
-              An attacker uses a token generated for consumption by 
+              An attacker uses a token generated for consumption by
               one resource server to gain access to a different
               resource server that mistakenly believes the token to be
               for it.
             </t>
             -->
             <t hangText="トークンリダイレクト:">
-            攻撃者はあるリソースサーバで利用することを目的として生成されたトークンを,
-            別のリソースサーバが誤ってそのトークンが自身で利用できるものと思い込ませてアクセスを行うために利用する.
+              攻撃者はあるリソースサーバで利用することを目的として生成されたトークンを,
+              別のリソースサーバが誤ってそのトークンが自身で利用できるものと思い込ませてアクセスを行うために利用する.
             </t>
             <!--
             <t hangText="Token replay:">
@@ -689,23 +689,23 @@ WWW-Authenticate: Bearer realm="example"]]>
             </t>
             -->
             <t hangText="トークンリプレイ:">
-            攻撃者は過去にリソースサーバで利用済みのトークンの再利用を試みる.
+              攻撃者は過去にリソースサーバで利用済みのトークンの再利用を試みる.
             </t>
-          </list> 
+          </list>
         </t>
-      </section> 
+      </section>
 
-      <section title="脅威の軽減" anchor="mitigation"> 
-      <!--section title="Threat Mitigation" anchor="mitigation"--> 
+      <section title="脅威の軽減" anchor="mitigation">
+      <!--section title="Threat Mitigation" anchor="mitigation"-->
 
-    <t>
-      デジタル署名またはメッセージ認証コード (MAC) を用いてトークンの内容を保護することにより, 多くの脅威は軽減することができる
-      あるいは, 署名無しトークンはエンコードされた認可情報を直接含むのではなく, 認可情報に対する参照を含むことができる.
-      その参照は, 攻撃者が推測不可能でなければならない (MUST). 参照を用いた場合, 認可情報への参照を解決するために, 認証サーバとトークン発行者の間における追加の通信が必要になることがある.
-      そのような通信の方法は, この仕様では定義されない.
-    </t>
+        <t>
+          デジタル署名またはメッセージ認証コード (MAC) を用いてトークンの内容を保護することにより, 多くの脅威は軽減することができる.
+          あるいは, 署名無しトークンはエンコードされた認可情報を直接含むのではなく, 認可情報に対する参照を含むことができる.
+          その参照は, 攻撃者が推測不可能でなければならない (MUST). 参照を用いた場合, 認可情報への参照を解決するために, 認証サーバとトークン発行者の間における追加の通信が必要になることがある.
+          そのような通信の方法は, この仕様では定義されない.
+        </t>
 
-    <!--
+        <!--
         <t>
           A large range of threats can be mitigated by protecting the
           contents of the token by using a digital signature or a
@@ -719,27 +719,27 @@ WWW-Authenticate: Bearer realm="example"]]>
           The mechanics of such an interaction are not defined by this
           specification.
         </t>
-    -->
-    <t>
-      このドキュメントでは, エンコード方法やトークンの内容に関しては定義しない. そのため, トークンの整合性を保護するための詳細に関しての提言は, この文書の範囲外である.
-      トークンの整合性を保護することが, トークンが改変されることを防ぐのに十分であると仮定する.
-    </t>
-        <!--
-    <t>
+        -->
+        <t>
+          このドキュメントでは, エンコード方法やトークンの内容に関しては定義しない. そのため, トークンの整合性を保護するための詳細に関しての提言は, この文書の範囲外である.
+          トークンの整合性を保護することが, トークンが改変されることを防ぐのに十分であると仮定する.
+        </t>
+            <!--
+        <t>
           This document does not specify the encoding or the contents
           of the token; hence detailed recommendations for token
           integrity protection are outside the scope of this document.
           We assume that the token integrity protection is sufficient
           to prevent the token from being modified.
         </t>
-    -->
+        -->
 
-    <t>
-      トークンリダイレクトへの対策として, トークン内に認可サーバの意図する, 一般的に一つの資源サーバまたは資源サーバのリストからなる, トークンの受領者 (観衆) のアイデンティティを含むことが重要である.
-      トークンの利用できる範囲を特定の範囲に制限することも推奨される.
-    </t>
+        <t>
+          トークンリダイレクトへの対策として, トークン内に認可サーバの意図する, 一般的に一つの資源サーバまたは資源サーバのリストからなる, トークンの受領者 (観衆) のアイデンティティを含むことが重要である.
+          トークンの利用できる範囲を特定の範囲に制限することも推奨される.
+        </t>
         <!--
-    <t>
+        <t>
           To deal with token redirect, it is important for the
           authorization server to include the identity of the intended
           recipients (the audience), typically a single resource
@@ -747,16 +747,16 @@ WWW-Authenticate: Bearer realm="example"]]>
           Restricting the use of the token to a specific scope is also
           recommended.
         </t>
-    -->
+        -->
 
-    <t>
-      トークン露見に対する保護を提供するために, 機密性保護は, 機密性保護を提供する暗号スイートによる <xref target='RFC5246'>TLS</xref>を通じて適用される.
-      これは, クライアントと資源サーバ間と同様に, クライアントと認可サーバ間の通信においてもまた, 機密性保護を利用することを必要とする.
-      この仕様においてはTLSの実装と使用が義務付けられており, それは通信経路上でのトークン漏洩を防ぐための推奨されるアプローチである.
-      クライアントがトークンの内容を覗き見るようなケースを防ぐためには, TLSによる保護に加えて, トークンの暗号化を行う必要がある (MUST).
-    </t>
+        <t>
+          トークン露見に対する保護を提供するために, 機密性保護は, 機密性保護を提供する暗号スイートによる <xref target='RFC5246'>TLS</xref>を通じて適用される.
+          これは, クライアントと資源サーバ間と同様に, クライアントと認可サーバ間の通信においてもまた, 機密性保護を利用することを必要とする.
+          この仕様においてはTLSの実装と使用が義務付けられており, それは通信経路上でのトークン漏洩を防ぐための推奨されるアプローチである.
+          クライアントがトークンの内容を覗き見るようなケースを防ぐためには, TLSによる保護に加えて, トークンの暗号化を行う必要がある (MUST).
+        </t>
         <!--
-    <t>
+        <t>
           To provide protection against token disclosure,
           confidentiality protection is applied via <xref
           target='RFC5246'>TLS</xref> with a
@@ -773,19 +773,19 @@ WWW-Authenticate: Bearer realm="example"]]>
           encryption MUST be applied in addition to the usage of TLS
           protection.
         </t>
-    -->
-    <t>
-      トークンの覗き見と再利用 (トークンリプレイ) への対策として, 以下の手段が推奨される:
-      第一に, トークン内の保護された部分に, 有効な時間のフィールドを保持しておき, それによって有効期間を制限しなければならない (MUST).
-      1時間程度, またはそれ以下の短い期間のみ有効なトークンを使うことが, トークンが漏洩した際のインパクトを減らすことを記す.
-      第二に, クライアントと認可サーバ間およびクライアントと資源サーバの間の通信における機密性保持は, 例えばTLS等を用いて機密性保持を適用しなければならない (MUST).
-      結果として, 通信経路に存在する盗聴者は, トークンの交換を覗き見ることができなくなる.
-      従って, そのような経路上の攻撃者は, トークンをリプレイすることができない.
-      さらに, クライアントはトークンを資源サーバに送信するときに, <xref target="RFC2818" />に従いサーバのアイデンティティを確認しなければならない (MUST).
-      保護リソースにリクエストを送信するとき, クライアントがTLS証明書のチェインを確認しなければならない (MUST) ことに注意すべきである.
-      未認証かつ未認可な資源サーバにトークンを送信すること, あるいは証明書チェインの確認に失敗することは, 攻撃者に対して, トークンを盗み, 保護リソースへの認可されていないアクセスを許すことになる.
-    </t>
-    <!--
+        -->
+        <t>
+          トークンの覗き見と再利用 (トークンリプレイ) への対策として, 以下の手段が推奨される:
+          第一に, トークン内の保護された部分に, 有効な時間のフィールドを保持しておき, それによって有効期間を制限しなければならない (MUST).
+          1時間程度, またはそれ以下の短い期間のみ有効なトークンを使うことが, トークンが漏洩した際のインパクトを減らすことを記す.
+          第二に, クライアントと認可サーバ間およびクライアントと資源サーバの間の通信における機密性保持は, 例えばTLS等を用いて機密性保持を適用しなければならない (MUST).
+          結果として, 通信経路に存在する盗聴者は, トークンの交換を覗き見ることができなくなる.
+          従って, そのような経路上の攻撃者は, トークンをリプレイすることができない.
+          さらに, クライアントはトークンを資源サーバに送信するときに, <xref target="RFC2818" />に従いサーバのアイデンティティを確認しなければならない (MUST).
+          保護リソースにリクエストを送信するとき, クライアントがTLS証明書のチェインを確認しなければならない (MUST) ことに注意すべきである.
+          未認証かつ未認可な資源サーバにトークンを送信すること, あるいは証明書チェインの確認に失敗することは, 攻撃者に対して, トークンを盗み, 保護リソースへの認可されていないアクセスを許すことになる.
+        </t>
+        <!--
         <t>
           To deal with token capture and replay,
           the following recommendations are
@@ -811,9 +811,9 @@ WWW-Authenticate: Bearer realm="example"]]>
           adversaries to steal the token and gain unauthorized access
           to protected resources.
         </t>
-    -->
-      </section> 
- 
+        -->
+      </section>
+
       <!--section title="Summary of Recommendations"-->
       <section title="推奨事項のまとめ">
         <t>
@@ -919,8 +919,8 @@ WWW-Authenticate: Bearer realm="example"]]>
       </section>
     </section>
 
-    <!-- section title='IANA Considerations' -->   
-    <section title='IANAに関する考慮事項'>   
+    <!-- section title='IANA Considerations' -->
+    <section title='IANAに関する考慮事項'>
 
       <!-- section title='OAuth Access Token Type Registration' -->
       <section title='OAuthアクセストークンタイプの登録'>
@@ -1013,7 +1013,7 @@ WWW-Authenticate: Bearer realm="example"]]>
         </section>
       </section>
 
-    </section> 
+    </section>
 
   </middle>
 
@@ -1065,7 +1065,7 @@ WWW-Authenticate: Bearer realm="example"]]>
         <format target="http://csrc.nist.gov/publications/PubsDrafts.html#SP-800-63-Rev.%201" type="HTML"/>
       </reference>
 
-    </references> 
+    </references>
 
     <!-- section title='Acknowledgements' -->
     <section title='謝辞'>
@@ -1391,7 +1391,7 @@ WWW-Authenticate: Bearer realm="example"]]>
           </t>
         </list>
       </t>
-    </section>     
+    </section>
 
   </back>
 
