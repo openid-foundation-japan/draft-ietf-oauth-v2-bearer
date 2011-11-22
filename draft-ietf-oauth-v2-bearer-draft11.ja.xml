@@ -50,8 +50,8 @@
       </t-->
       <t>
         この仕様書は, OAuth 2.0の保護リソースへアクセスするために, 署名無しトークンをHTTPリクエスト中でどのように利用するか記述したものである.
-        署名無しトークンを所有する任意のパーティ（持参人）は, 認可済みリソースへアクセスするために署名無しトークンを利用できる. （暗号鍵の所有を示す必要はない）
-        誤った利用を避けるために, 署名無しトークンは保存場所や流通経路での値の露見から守られなければならない（MUST).
+        署名無しトークンを所有する任意のパーティ (持参人) は, 認可済みリソースへアクセスするために署名無しトークンを利用できる.  (暗号鍵の所有を示す必要はない)
+        誤った利用を避けるために, 署名無しトークンは保存場所や流通経路での値の露見から守られなければならない (MUST).
       </t>
     </abstract>
   </front>
@@ -146,8 +146,8 @@
             <t hangText="署名無しトークン">
               <vspace />
               セキュリティトークン.
-              トークンを所有する任意のパーティ（持参人）は, それを所有する他の任意のパーティーにとって可能ないかなる方法でもトークンを利用することができるという特性を持っている.
-              署名無しトークンを利用する際, 持参人は, 暗号鍵の所持を証明（proof-of-posession）するよう要求されない.
+              トークンを所有する任意のパーティ (持参人) は, それを所有する他の任意のパーティーにとって可能ないかなる方法でもトークンを利用することができるという特性を持っている.
+              署名無しトークンを利用する際, 持参人は, 暗号鍵の所持を証明 (proof-of-posession) するよう要求されない.
             </t>
           </list>
         </t>
@@ -357,7 +357,7 @@ Authorization: Bearer vF9dft4qmT]]>
         </t>
         <t>
           エンティティボディにはリクエストに固有なパラメータを含んでもよい (MAY).
-          この場合, <spanx style='verb'>access_token</spanx>パラメータは文字<spanx style='verb'>&amp;</spanx> (ASCIIコード38) を用いてリクエスト固有なパラメーから適切に分離されなければならない (MUST).
+          この場合, <spanx style='verb'>access_token</spanx>パラメータは文字 <spanx style='verb'>&amp;</spanx> (ASCIIコード38) を用いてリクエスト固有なパラメーから適切に分離されなければならない (MUST).
 <!--
           The entity-body MAY include other request-specific
           parameters, in which case, the <spanx
@@ -425,7 +425,7 @@ Host: server.example.com]]>
           style='verb'>&amp;</spanx> character(s) (ASCII code 38).
           -->
           HTTPリクエストURIはリクエストに特化した他のパラメータを含むことができる.
-          その場合, <spanx style='verb'>access_token</spanx>パラメータは<spanx style='verb'>&amp;</spanx> 文字 (ASCII コード 38)を使い, 他のリクエストに特化したパラメータと適切に分離されていなければならない（MUST）.
+          その場合, <spanx style='verb'>access_token</spanx>パラメータは <spanx style='verb'>&amp;</spanx> 文字 (ASCII コード 38)を使い, 他のリクエストに特化したパラメータと適切に分離されていなければならない (MUST).
         </t>
         <figure>
           <preamble>
@@ -442,7 +442,7 @@ Host: server.example.com]]>
           SHOULD NOT be used unless it is the only feasible method.
           Resource servers MAY support this method.
           -->
-          URI方式に関係する<xref target="sec-con">セキュリティに関する考慮事項</xref>のため, この方法は単に実現可能な方法であるということを除いては利用すべきではない（SHOULD NOT）. リソースサーバはこの方式をサポートしても良い（MAY）.
+          URI方式に関係する<xref target="sec-con">セキュリティに関する考慮事項</xref>のため, この方法は単に実現可能な方法であるということを除いては利用すべきではない (SHOULD NOT). リソースサーバはこの方式をサポートしても良い (MAY).
         </t>
       </section>
 
@@ -659,7 +659,7 @@ WWW-Authenticate: Bearer realm="example"]]>
               should not be able to view.
               -->
             <t hangText="トークン偽装/改ざん:">
-            攻撃者が偽装トークンを生成したり, 既存のトークンの（認証や属性の記述内容といった）コンテンツを改ざんすることで, リソースサーバはクライアントに対して不適切なアクセス権限を許してしまう可能性がある.
+            攻撃者が偽装トークンを生成したり, 既存のトークンの (認証や属性の記述内容といった) コンテンツを改ざんすることで, リソースサーバはクライアントに対して不適切なアクセス権限を許してしまう可能性がある.
             例えば, 攻撃者はトークンが妥当である期間を拡張するようにトークンを改ざんするかもしれない. 悪意のあるクライアントは本来見ることができるべきではない情報へのアクセスを得るためのアサーションを改ざんするかもしれない.
             </t>
             <!--
