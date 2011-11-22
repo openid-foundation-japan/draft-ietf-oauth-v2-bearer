@@ -402,9 +402,6 @@ access_token=vF9dft4qmT]]>
           the <spanx style='verb'>access_token</spanx> parameter.
           -->
           HTTPリクエストURIの中でアクセストークンを送信する際、クライアントは<spanx style='verb'>access_token</spanx>パラメータを用いてアクセストークンを<xref target='RFC3986' />で定義されているURIクエリコンポーネントに追加する。
-          When sending the access token in the HTTP request URI, the client adds the access
-          token to the request URI query component as defined by <xref target='RFC3986' /> using
-          the <spanx style='verb'>access_token</spanx> parameter.
         </t>
         <figure>
           <preamble>

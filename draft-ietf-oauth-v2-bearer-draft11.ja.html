@@ -210,7 +210,7 @@ Formエンコードされたボディパラメータ<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#query-param">2.3.</a>&nbsp;
 URIクエリパラメータ<br />
 <a href="#authn-header">3.</a>&nbsp;
-WWW-Authenticate レスポンスヘッダーフィールド<br />
+WWW-Authenticate レスポンスヘッダフィールド<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#resource-error-codes">3.1.</a>&nbsp;
 エラーコード<br />
 <a href="#sec-con">4.</a>&nbsp;
@@ -320,7 +320,7 @@ Authors' Addresses<br />
           OAuthはリソースオーナーの代わりに保護リソースにアクセスする方法をクライアントに提供する.
           一般的なケースにおいて, クライアントが保護リソースにアクセスする前に, クライアントは初めにリソースオーナーの認可を取得し, アクセス認可とアクセストークンを交換しなけばならない.
           アクセストークンは, 与えられた権限の範囲, 期間とその他の属性を示している.
-          クライアントはリソースサーバーにアクセストークンを渡すことにより, 保護リソースにアクセスする.
+          クライアントはリソースサーバにアクセストークンを渡すことにより, 保護リソースにアクセスする.
           いくつかのケースにおいては, クライアントは, 最初にリソースオーナーから認可を得ずに認可サーバからアクセストークンを得るために, 自らのクレデンシャルを認可サーバに直接渡すことができる.
         
         
@@ -365,7 +365,7 @@ Authors' Addresses<br />
             
 </p>
 <p>
-              F) リソースサーバーはアクセストークンの正当性を確認し, 有効な場合はリクエストに対し応答する.
+              F) リソースサーバはアクセストークンの正当性を確認し, 有効な場合はリクエストに対し応答する.
             
             
 </p>
@@ -433,7 +433,7 @@ Formエンコードされたボディパラメータ</h3>
             
 </li>
 <li>
-              エンティティボディが<a class='info' href='#W3C.REC-html401-19991224'>[W3C.REC&#8209;html401&#8209;19991224]<span> (</span><span class='info'>Raggett, D., Jacobs, I., and A. Hors, &ldquo;HTML 4.01 Specification,&rdquo; December&nbsp;1999.</span><span>)</span></a>によって定義される<tt>application/x-www-form-urlencoded</tt>コンテントタイプのエンコード要求を満たす.
+              エンティティボディが<a class='info' href='#W3C.REC-html401-19991224'>[W3C.REC&#8209;html401&#8209;19991224]<span> (</span><span class='info'>Raggett, D., Hors, A., and I. Jacobs, &ldquo;HTML 4.01 Specification,&rdquo; December&nbsp;1999.</span><span>)</span></a>によって定義される<tt>application/x-www-form-urlencoded</tt>コンテントタイプのエンコード要求を満たす.
 
             
 </li>
@@ -481,9 +481,6 @@ URIクエリパラメータ</h3>
 <p>
         
           HTTPリクエストURIの中でアクセストークンを送信する際、クライアントは<tt>access_token</tt>パラメータを用いてアクセストークンを<a class='info' href='#RFC3986'>[RFC3986]<span> (</span><span class='info'>Berners-Lee, T., Fielding, R., and L. Masinter, &ldquo;Uniform Resource Identifier (URI): Generic Syntax,&rdquo; January&nbsp;2005.</span><span>)</span></a>で定義されているURIクエリコンポーネントに追加する。
-          When sending the access token in the HTTP request URI, the client adds the access
-          token to the request URI query component as defined by <a class='info' href='#RFC3986'>[RFC3986]<span> (</span><span class='info'>Berners-Lee, T., Fielding, R., and L. Masinter, &ldquo;Uniform Resource Identifier (URI): Generic Syntax,&rdquo; January&nbsp;2005.</span><span>)</span></a> using
-          the <tt>access_token</tt> parameter.
         
 </p>
 <p>
@@ -514,11 +511,11 @@ https://server.example.com/resource?x=y&amp;access_token=vF9dft4qmT&amp;p=q
 <a name="authn-header"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.3"></a><h3>3.&nbsp;
-WWW-Authenticate レスポンスヘッダーフィールド</h3>
+WWW-Authenticate レスポンスヘッダフィールド</h3>
 
 <p>
-        保護リソースへのリクエストが, 認証クレデンシャルを含んでいない, または保護リソースへアクセスすることができるアクセストークンを含んでいない場合, リソースサーバーはHTTP <tt>WWW-Authenticate</tt> レスポンスヘッダーフィールドを含めなければならない (MUST). 同様に, その他の条件下でもリソースサーバはそれをレスポンスに含めてよい (MAY)
-        <tt>WWW-Authenticate</tt> ヘッダーフィールドは, <a class='info' href='#RFC2617'>[RFC2617]<span> (</span><span class='info'>Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S., Leach, P., Luotonen, A., and L. Stewart, &ldquo;HTTP Authentication: Basic and Digest Access Authentication,&rdquo; June&nbsp;1999.</span><span>)</span></a> により定義されている以下のフレームワークを使用する.
+        保護リソースへのリクエストが, 認証クレデンシャルを含んでいない, または保護リソースへアクセスすることができるアクセストークンを含んでいない場合, リソースサーバはHTTP <tt>WWW-Authenticate</tt> レスポンスヘッダフィールドを含めなければならない (MUST). 同様に, その他の条件下でもリソースサーバはそれをレスポンスに含めてよい (MAY).
+        <tt>WWW-Authenticate</tt> ヘッダフィールドは, <a class='info' href='#RFC2617'>[RFC2617]<span> (</span><span class='info'>Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S., Leach, P., Luotonen, A., and L. Stewart, &ldquo;HTTP Authentication: Basic and Digest Access Authentication,&rdquo; June&nbsp;1999.</span><span>)</span></a> により定義されている以下のフレームワークを使用する.
       
       
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
@@ -539,18 +536,18 @@ error-desc-char = SP / VCHAR
 error-uri       = "error_uri" "=" DQUOTE URI-reference DQUOTE
 </pre></div>
 <p>
-          <tt>scope</tt> 属性は, 要求されたリソースにアクセスするために必要なアクセストークンに求められるスコープを示す, スペース区切りのスコープ値リストである.
-          <tt>scope</tt> 属性は, 二度以上現れてはならない(MUST NOT).
-          <tt>scope</tt> の値は, プログラム中で用いられることを目的とし, エンドユーザーへ表示することは意図されていない.
+          <tt>scope</tt> 属性は, スペース区切りのスコープ値のリストであり, 要求されたリソースへのアクセスに必要なアクセストークンのスコープを示す.
+          <tt>scope</tt> 属性は, 2回以上現れてはならない(MUST NOT).
+          <tt>scope</tt> の値は, プログラム中で用いられることを目的とし, エンドユーザへ表示することは意図されていない.
       
       
 </p>
 <p>
-          アクセストークンを含んだ保護リソースへのリクエストがあり, 認証に失敗した場合, リソースサーバはクライアントにアクセスリクエストが拒否された理由を示すために, <tt>error</tt> 属性を含むべきである(SHOULD).
+          保護リソースへのリクエストにアクセストークンが含まれているが認証に失敗した場合, リソースサーバはアクセス要求を拒否した理由をクライアントに対して示すために, <tt>error</tt> 属性を含むべきである(SHOULD).
           パラメータの値は <a class='info' href='#resource-error-codes'>Section&nbsp;3.1<span> (</span><span class='info'>エラーコード</span><span>)</span></a> に記載されている.
-          さらに, リソースサーバは, 開発者に人間の読みやすい説明を提供するために, エンドユーザに表示する目的ではない <tt>error_description</tt> 属性を含んでもよい(MAY).
-          発生したエラーを説明する, 人間が読みやすいウェブページを指す絶対URIを提供する, <tt>error_uri</tt> 属性を含んでもよい(MAY).
-          <tt>error</tt>, <tt>error_description</tt>, そして <tt>error_uri</tt> 属性は, 二度以上現れてはならない(MUST NOT).
+          さらに, リソースサーバは, 開発者にとって可読性のある説明を提供するために, エンドユーザに表示する目的ではない <tt>error_description</tt> 属性を含んでもよい(MAY).
+          また, エラーについての可読性のある説明ウェブページを指し示す, 絶対URIで記載された<tt>error_uri</tt> 属性を含んでもよい(MAY).
+          <tt>error</tt>, <tt>error_description</tt>, そして <tt>error_uri</tt> 属性は, 2回以上現れてはならない(MUST NOT).
       
 
       
@@ -587,7 +584,7 @@ WWW-Authenticate: Bearer realm="example",
 <dt>invalid_request</dt>
 <dd>
 	      
-	      リクエストに必要なパラメータが不足している, 対応していないパラメータもしくはパラメータの値が含まれている, 同じパラメータが複数回現れている, アクセストークンを含む方法を複数用いている, もしくはリクエストがその他不正な形式になっている.
+	      リクエストに必要なパラメータが不足している, 対応していないパラメータもしくはパラメータの値が含まれている, 同じパラメータが複数回現れている, 1つのアクセストークンを含むために複数の方法を用いている, もしくはリクエストがその他不正な形式になっている.
 	      リソースサーバはHTTPステータスコード400 (Bad Request) の応答を返すべきである (SHOULD).
 
 	    
@@ -605,7 +602,7 @@ WWW-Authenticate: Bearer realm="example",
 <dd>
 	      
 	      リクエストにはアクセストークンにより提供されるよりも高い権限が必要である.
-	      リソースサーバはHTTPステータスコード403 (Forbidden) の応答を返すべきであり (SHOULD), 保護されたリソースへのアクセスに必要となるスコープを示した <tt>scope</tt> 属性を含めてもよい (MAY).
+	      リソースサーバはHTTPステータスコード403 (Forbidden) の応答を返すべき(SHOULD)であり, 保護されたリソースへのアクセスに必要となるスコープを示した <tt>scope</tt> 属性を含めてもよい (MAY).
 
 	    
 </dd>
@@ -895,7 +892,7 @@ References</h3>
 <tr><td class="author-text" valign="top"><a name="RFC5246">[RFC5246]</a></td>
 <td class="author-text">Dierks, T. and E. Rescorla, &ldquo;<a href="http://tools.ietf.org/html/rfc5246">The Transport Layer Security (TLS) Protocol Version 1.2</a>,&rdquo; RFC&nbsp;5246, August&nbsp;2008 (<a href="http://www.rfc-editor.org/rfc/rfc5246.txt">TXT</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="W3C.REC-html401-19991224">[W3C.REC-html401-19991224]</a></td>
-<td class="author-text">Raggett, D., Jacobs, I., and A. Hors, &ldquo;<a href="http://www.w3.org/TR/1999/REC-html401-19991224">HTML 4.01 Specification</a>,&rdquo; World Wide Web Consortium Recommendation&nbsp;REC-html401-19991224, December&nbsp;1999 (<a href="http://www.w3.org/TR/1999/REC-html401-19991224">HTML</a>).</td></tr>
+<td class="author-text">Raggett, D., Hors, A., and I. Jacobs, &ldquo;<a href="http://www.w3.org/TR/1999/REC-html401-19991224">HTML 4.01 Specification</a>,&rdquo; World Wide Web Consortium Recommendation&nbsp;REC-html401-19991224, December&nbsp;1999 (<a href="http://www.w3.org/TR/1999/REC-html401-19991224">HTML</a>).</td></tr>
 </table>
 
 <a name="rfc.references2"></a><br /><hr />
