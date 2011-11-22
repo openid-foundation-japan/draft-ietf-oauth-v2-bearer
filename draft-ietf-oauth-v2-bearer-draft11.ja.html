@@ -154,9 +154,9 @@
 <h3>Abstract</h3>
 
 <p>
-        この仕様書は、OAuth 2.0の保護リソースへアクセスするために、署名無しトークンをHTTPリクエスト中でどのように利用するか記述したものである。
-        署名無しトークンを所有する任意のパーティ（持参人）は、認可済みリソースへアクセスするために署名無しトークンを利用できる。（暗号鍵の所有を示す必要はない。）
-        誤った利用を避けるために、署名無しトークンは保存場所や流通経路での値の露見から守られなければならない（MUST)。
+        この仕様書は, OAuth 2.0の保護リソースへアクセスするために, 署名無しトークンをHTTPリクエスト中でどのように利用するか記述したものである.
+        署名無しトークンを所有する任意のパーティ（持参人）は, 認可済みリソースへアクセスするために署名無しトークンを利用できる. （暗号鍵の所有を示す必要はない）
+        誤った利用を避けるために, 署名無しトークンは保存場所や流通経路での値の露見から守られなければならない（MUST).
       
 </p>
 <h3>Status of this Memo</h3>
@@ -252,20 +252,20 @@ Authors' Addresses<br />
 はじめに</h3>
 
 <p>
-        OAuthは、クライアントがアクセストークンを取得することで、保護リソースへのアクセスを可能にする。
-        アクセストークンは<a class='info' href='#I-D.ietf-oauth-v2'>[I&#8209;D.ietf&#8209;oauth&#8209;v2]<span> (</span><span class='info'>Hammer-Lahav, E., Recordon, D., and D. Hardt, &ldquo;The OAuth 2.0 Authorization Protocol,&rdquo; September&nbsp;2011.</span><span>)</span></a>中で「クライアントに対するアクセス認可の文字列表現」と定義されており、
-        リソース所有者のクレデンシャルを直接利用することではない。
+        OAuthは, クライアントがアクセストークンを取得することで, 保護リソースへのアクセスを可能にする.
+        アクセストークンは<a class='info' href='#I-D.ietf-oauth-v2'>[I&#8209;D.ietf&#8209;oauth&#8209;v2]<span> (</span><span class='info'>Hammer-Lahav, E., Recordon, D., and D. Hardt, &ldquo;The OAuth 2.0 Authorization Protocol,&rdquo; September&nbsp;2011.</span><span>)</span></a>中で「クライアントに対するアクセス認可の文字列表現」と定義されており,
+        リソース所有者のクレデンシャルを直接利用することではない.
       
 </p>
 <p>
-        トークンはリソース所有者の承認を伴い、認可サーバによってクライアントに対して発行される。
-        クライアントはアクセストークンを、リソースサーバが持つ保護リソースにアクセスするために利用する。
-        この仕様書では、アクセストークンが署名無しトークンである場合に、保護リソースを要求する方法を記載する。
+        トークンはリソース所有者の承認を伴い, 認可サーバによってクライアントに対して発行される.
+        クライアントはアクセストークンを, リソースサーバが持つ保護リソースにアクセスするために利用する.
+        この仕様書では, アクセストークンが署名無しトークンである場合に, 保護リソースを要求する方法を記載する.
       
 </p>
 <p>
-        この仕様書では<a class='info' href='#RFC2616'>HTTP<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P., and T. Berners-Lee, &ldquo;Hypertext Transfer Protocol -- HTTP/1.1,&rdquo; June&nbsp;1999.</span><span>)</span></a> [RFC2616]及び<a class='info' href='#RFC5246'>TLS<span> (</span><span class='info'>Dierks, T. and E. Rescorla, &ldquo;The Transport Layer Security (TLS) Protocol Version 1.2,&rdquo; August&nbsp;2008.</span><span>)</span></a> [RFC5246]で定義された、TLSを用いたHTTP上でのOAuthで、署名無しトークンを利用する方法を定める. 
-        他の仕様書がその他の転送プロトコルの元での利用について本仕様を拡張する可能性もある. 
+        この仕様書では<a class='info' href='#RFC2616'>HTTP<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P., and T. Berners-Lee, &ldquo;Hypertext Transfer Protocol -- HTTP/1.1,&rdquo; June&nbsp;1999.</span><span>)</span></a> [RFC2616]及び<a class='info' href='#RFC5246'>TLS<span> (</span><span class='info'>Dierks, T. and E. Rescorla, &ldquo;The Transport Layer Security (TLS) Protocol Version 1.2,&rdquo; August&nbsp;2008.</span><span>)</span></a> [RFC5246]で定義された, TLSを用いたHTTP上でのOAuthで, 署名無しトークンを利用する方法を定める.
+        他の仕様書がその他の転送プロトコルの元での利用について本仕様を拡張する可能性もある.
       
 </p>
 <a name="anchor2"></a><br /><hr />
@@ -274,11 +274,11 @@ Authors' Addresses<br />
 要求記法および規則</h3>
 
 <p>
-        本文書で用いられる各キーワード「MUST (しなければならない)」、「MUST NOT (してはならない)」、「REQUIRED (必須である)」、「SHALL (するものとする)」、「SHALL NOT (しないものとする)」、「SHOULD (すべきである)」、「SHOULD NOT (すべきではない)」、「RECOMMENDED (推奨される)」、「MAY (してもよい)」、「OPTIONAL (任意である)」は<a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a>で述べられている通りに解釈されるべきものである。
+        本文書で用いられる各キーワード「MUST (しなければならない)」, 「MUST NOT (してはならない)」, 「REQUIRED (必須である)」, 「SHALL (するものとする)」, 「SHALL NOT (しないものとする)」, 「SHOULD (すべきである)」, 「SHOULD NOT (すべきではない)」, 「RECOMMENDED (推奨される)」, 「MAY (してもよい)」, 「OPTIONAL (任意である)」は<a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a>で述べられている通りに解釈されるべきものである.
         
 </p>
 <p>
-          このドキュメントでは<a class='info' href='#RFC5234'>[RFC5234]<span> (</span><span class='info'>Crocker, D. and P. Overell, &ldquo;Augmented BNF for Syntax Specifications: ABNF,&rdquo; January&nbsp;2008.</span><span>)</span></a>におけるAugmented Backus-Naur Form (ABNF)表記法を元にした、<a class='info' href='#I-D.ietf-httpbis-p1-messaging'>[I&#8209;D.ietf&#8209;httpbis&#8209;p1&#8209;messaging]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 1: URIs, Connections, and Message Parsing,&rdquo; August&nbsp;2011.</span><span>)</span></a>におけるAugmented Backus-Naur Form(ABNF)表記法を利用している. 
+          このドキュメントでは<a class='info' href='#RFC5234'>[RFC5234]<span> (</span><span class='info'>Crocker, D. and P. Overell, &ldquo;Augmented BNF for Syntax Specifications: ABNF,&rdquo; January&nbsp;2008.</span><span>)</span></a>におけるAugmented Backus-Naur Form (ABNF)表記法を元にした, <a class='info' href='#I-D.ietf-httpbis-p1-messaging'>[I&#8209;D.ietf&#8209;httpbis&#8209;p1&#8209;messaging]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 1: URIs, Connections, and Message Parsing,&rdquo; August&nbsp;2011.</span><span>)</span></a>におけるAugmented Backus-Naur Form(ABNF)表記法を利用している.
           加えて, 次の規則(<a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a> 記載: b64token, auth-param および realm; <a class='info' href='#I-D.ietf-httpbis-p1-messaging'>[I&#8209;D.ietf&#8209;httpbis&#8209;p1&#8209;messaging]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 1: URIs, Connections, and Message Parsing,&rdquo; August&nbsp;2011.</span><span>)</span></a>記載:  quoted-string; <a class='info' href='#RFC3986'>[RFC3986]<span> (</span><span class='info'>Berners-Lee, T., Fielding, R., and L. Masinter, &ldquo;Uniform Resource Identifier (URI): Generic Syntax,&rdquo; January&nbsp;2005.</span><span>)</span></a>記載: URI-Reference)に従う.
 
 
@@ -299,16 +299,16 @@ Authors' Addresses<br />
 <dt>署名無しトークン</dt>
 <dd>
               
-              セキュリティトークン。
-              トークンを所有する任意のパーティ（持参人）は、それを所有する他の任意のパーティーにとって可能ないかなる方法でもトークンを利用することができるという特性を持っている。
-              署名無しトークンを利用する際、持参人は、暗号鍵の所持を証明（proof-of-posession）するよう要求されない。
+              セキュリティトークン.
+              トークンを所有する任意のパーティ（持参人）は, それを所有する他の任意のパーティーにとって可能ないかなる方法でもトークンを利用することができるという特性を持っている.
+              署名無しトークンを利用する際, 持参人は, 暗号鍵の所持を証明（proof-of-posession）するよう要求されない.
             
 </dd>
 </dl></blockquote><p>
         
 </p>
 <p>
-          他の全ての用語は<a class='info' href='#I-D.ietf-oauth-v2'>[I&#8209;D.ietf&#8209;oauth&#8209;v2]<span> (</span><span class='info'>Hammer-Lahav, E., Recordon, D., and D. Hardt, &ldquo;The OAuth 2.0 Authorization Protocol,&rdquo; September&nbsp;2011.</span><span>)</span></a>で定義されている通りである。
+          他の全ての用語は<a class='info' href='#I-D.ietf-oauth-v2'>[I&#8209;D.ietf&#8209;oauth&#8209;v2]<span> (</span><span class='info'>Hammer-Lahav, E., Recordon, D., and D. Hardt, &ldquo;The OAuth 2.0 Authorization Protocol,&rdquo; September&nbsp;2011.</span><span>)</span></a>で定義されている通りである.
         
 </p>
 <a name="anchor4"></a><br /><hr />
@@ -378,9 +378,9 @@ Authors' Addresses<br />
 認証されたリクエスト</h3>
 
 <p>
-	クライアントは保護されたリソースへの認証されたアクセス要求を行うために署名無しトークンを用いてもよい (MAY).
-	この章では, リソースの要求において署名無しトークンをリソースサーバに送信する3つの方法を定義する.
-	クライアントは一度のリクエストにおいて, トークンを送信する方法を複数同時に用いてはならない (MUST NOT).
+        クライアントは保護されたリソースへの認証されたアクセス要求を行うために署名無しトークンを用いてもよい (MAY).
+        この章では, リソースの要求において署名無しトークンをリソースサーバに送信する3つの方法を定義する.
+        クライアントは一度のリクエストにおいて, トークンを送信する方法を複数同時に用いてはならない (MUST NOT).
 
       
 </p>
@@ -390,7 +390,7 @@ Authors' Addresses<br />
 Authorizationリクエストヘッダフィールド</h3>
 
 <p>
-	  <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>によって定義される<tt>Authorization</tt>リクエストヘッダフィールド中でアクセストークンを送信する際, クライアントは<tt>Bearer</tt>認証スキームを用いる.
+          <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>によって定義される<tt>Authorization</tt>リクエストヘッダフィールド中でアクセストークンを送信する際, クライアントは<tt>Bearer</tt>認証スキームを用いる.
 
         
 </p>
@@ -411,10 +411,10 @@ Authorization: Bearer vF9dft4qmT
 credentials = "Bearer" 1*SP b64token
 </pre></div>
 <p>
-	  クライアントが署名無しトークンを伴う認証されたリクエストを送信する際には, <tt>Bearer</tt> HTTP認可スキームを用いた<tt>Authorization</tt>リクエストヘッダフィールドを使用すべきである (SHOULD).
-	  リソースサーバはこの方法をサポートしなければならない (MUST).
+          クライアントが署名無しトークンを伴う認証されたリクエストを送信する際には, <tt>Bearer</tt> HTTP認可スキームを用いた<tt>Authorization</tt>リクエストヘッダフィールドを使用すべきである (SHOULD).
+          リソースサーバはこの方法をサポートしなければならない (MUST).
 
-	
+        
 </p>
 <a name="body-param"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -444,7 +444,7 @@ Formエンコードされたボディパラメータ</h3>
 </li>
 <li>
               リクエストボディが定義されたセマンティクスを持つHTTPリクエストメソッドである.
-              特に、これは<tt>GET</tt>メソッドを用いてはならない (MUST NOT) ことを意味する.
+              特に, これは<tt>GET</tt>メソッドを用いてはならない (MUST NOT) ことを意味する.
 
             
 </li>
@@ -453,7 +453,7 @@ Formエンコードされたボディパラメータ</h3>
 </p>
 <p>
           エンティティボディにはリクエストに固有なパラメータを含んでもよい (MAY).
-          この場合、<tt>access_token</tt>パラメータは文字<tt>&amp;</tt> (ASCIIコード38) を用いてリクエスト固有なパラメーから適切に分離されなければならない (MUST).
+          この場合, <tt>access_token</tt>パラメータは文字<tt>&amp;</tt> (ASCIIコード38) を用いてリクエスト固有なパラメーから適切に分離されなければならない (MUST).
 
         
 </p>
@@ -469,9 +469,9 @@ Content-Type: application/x-www-form-urlencoded
 access_token=vF9dft4qmT
 </pre></div>
 <p>
-	  この<tt>application/x-www-form-urlencoded</tt>を用いる方法は, 関与しているブラウザが<tt>Authorization</tt>リクエストヘッダにアクセスできない場合を除いて使用すべきではない (SHOULD NOT). リソースサーバはこの方法をサポートしてもよい (MAY).
+          この<tt>application/x-www-form-urlencoded</tt>を用いる方法は, 関与しているブラウザが<tt>Authorization</tt>リクエストヘッダにアクセスできない場合を除いて使用すべきではない (SHOULD NOT). リソースサーバはこの方法をサポートしてもよい (MAY).
 
-	
+        
 </p>
 <a name="query-param"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -480,12 +480,12 @@ URIクエリパラメータ</h3>
 
 <p>
         
-          HTTPリクエストURIの中でアクセストークンを送信する際、クライアントは<tt>access_token</tt>パラメータを用いてアクセストークンを<a class='info' href='#RFC3986'>[RFC3986]<span> (</span><span class='info'>Berners-Lee, T., Fielding, R., and L. Masinter, &ldquo;Uniform Resource Identifier (URI): Generic Syntax,&rdquo; January&nbsp;2005.</span><span>)</span></a>で定義されているURIクエリコンポーネントに追加する。
+          HTTPリクエストURIの中でアクセストークンを送信する際, クライアントは<tt>access_token</tt>パラメータを用いてアクセストークンを<a class='info' href='#RFC3986'>[RFC3986]<span> (</span><span class='info'>Berners-Lee, T., Fielding, R., and L. Masinter, &ldquo;Uniform Resource Identifier (URI): Generic Syntax,&rdquo; January&nbsp;2005.</span><span>)</span></a>で定義されているURIクエリコンポーネントに追加する.
         
 </p>
 <p>
           
-            たとえば、クライアントは次のようなHTTPリクエストをトランスポートレイヤセキュリティを利用して送信する:
+            たとえば, クライアントは次のようなHTTPリクエストをトランスポートレイヤセキュリティを利用して送信する:
           
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 GET /resource?access_token=vF9dft4qmT HTTP/1.1
@@ -493,8 +493,8 @@ Host: server.example.com
 </pre></div>
 <p>
         
-          HTTPリクエストURIはリクエストに特化した他のパラメータを含むことができる。
-          その場合、<tt>access_token</tt>パラメータは<tt>&amp;</tt> 文字 (ASCII コード 38)を使い、他のリクエストに特化したパラメータと適切に分離されていなければならない（MUST）。
+          HTTPリクエストURIはリクエストに特化した他のパラメータを含むことができる.
+          その場合, <tt>access_token</tt>パラメータは<tt>&amp;</tt> 文字 (ASCII コード 38)を使い, 他のリクエストに特化したパラメータと適切に分離されていなければならない（MUST）.
         
 </p>
 <p>
@@ -504,9 +504,9 @@ Host: server.example.com
 https://server.example.com/resource?x=y&amp;access_token=vF9dft4qmT&amp;p=q
 </pre></div>
 <p>
-	
-	  URI方式に関係する<a class='info' href='#sec-con'>セキュリティに関する考慮事項<span> (</span><span class='info'>Security Considerations</span><span>)</span></a>のため、この方法は単に実現可能な方法であるということを除いては利用すべきではない（SHOULD NOT）。リソースサーバはこの方式をサポートしても良い（MAY）。
-	
+        
+          URI方式に関係する<a class='info' href='#sec-con'>セキュリティに関する考慮事項<span> (</span><span class='info'>Security Considerations</span><span>)</span></a>のため, この方法は単に実現可能な方法であるということを除いては利用すべきではない（SHOULD NOT）. リソースサーバはこの方式をサポートしても良い（MAY）.
+        
 </p>
 <a name="authn-header"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -555,7 +555,7 @@ error-uri       = "error_uri" "=" DQUOTE URI-reference DQUOTE
 <p>
       例えば, 認証されていない場合の保護リソースへのリクエストに対するレスポンスは以下のようになる:
       
-	
+        
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 HTTP/1.1 401 Unauthorized
 WWW-Authenticate: Bearer realm="example"
@@ -576,47 +576,47 @@ WWW-Authenticate: Bearer realm="example",
 エラーコード</h3>
 
 <p>
-	  リクエストが失敗した場合, リソースサーバは適切なHTTPステータスコード (典型的には 400, 401, もしくは 403) を用いて応答し, 下記のうち1つのエラーコードをレスポンスに含める:
+          リクエストが失敗した場合, リソースサーバは適切なHTTPステータスコード (典型的には 400, 401, もしくは 403) を用いて応答し, 下記のうち1つのエラーコードをレスポンスに含める:
 
 
-	  </p>
+          </p>
 <blockquote class="text"><dl>
 <dt>invalid_request</dt>
 <dd>
-	      
-	      リクエストに必要なパラメータが不足している, 対応していないパラメータもしくはパラメータの値が含まれている, 同じパラメータが複数回現れている, 1つのアクセストークンを含むために複数の方法を用いている, もしくはリクエストがその他不正な形式になっている.
-	      リソースサーバはHTTPステータスコード400 (Bad Request) の応答を返すべきである (SHOULD).
+              
+              リクエストに必要なパラメータが不足している, 対応していないパラメータもしくはパラメータの値が含まれている, 同じパラメータが複数回現れている, 1つのアクセストークンを含むために複数の方法を用いている, もしくはリクエストがその他不正な形式になっている.
+              リソースサーバはHTTPステータスコード400 (Bad Request) の応答を返すべきである (SHOULD).
 
-	    
+            
 </dd>
 <dt>invalid_token</dt>
 <dd>
-	      
-	      提供されたアクセストークンが期限切れである, 取り消されている, 不正な値である, もしくはその他の理由により無効である.
-	      リソースサーバはHTTPステータスコード401 (Unauthorized) の応答を返すべきである (SHOULD).
-	      クライアントは新しいアクセストークンを要求して保護されたリソースへのアクセスを再試行してもよい (MAY).
+              
+              提供されたアクセストークンが期限切れである, 取り消されている, 不正な値である, もしくはその他の理由により無効である.
+              リソースサーバはHTTPステータスコード401 (Unauthorized) の応答を返すべきである (SHOULD).
+              クライアントは新しいアクセストークンを要求して保護されたリソースへのアクセスを再試行してもよい (MAY).
 
-	    
+            
 </dd>
 <dt>insufficient_scope</dt>
 <dd>
-	      
-	      リクエストにはアクセストークンにより提供されるよりも高い権限が必要である.
-	      リソースサーバはHTTPステータスコード403 (Forbidden) の応答を返すべき(SHOULD)であり, 保護されたリソースへのアクセスに必要となるスコープを示した <tt>scope</tt> 属性を含めてもよい (MAY).
+              
+              リクエストにはアクセストークンにより提供されるよりも高い権限が必要である.
+              リソースサーバはHTTPステータスコード403 (Forbidden) の応答を返すべき(SHOULD)であり, 保護されたリソースへのアクセスに必要となるスコープを示した <tt>scope</tt> 属性を含めてもよい (MAY).
 
-	    
+            
 </dd>
 </dl></blockquote><p>
-	
+        
 </p>
 <p>
-	  リクエストが一切の認証情報を含まない場合 (つまり, 認証が必要であることをクライアントが認識していなかった場合か, 対応していない認証方法をクライアントが試行した場合), リソースサーバはエラーコードやその他のエラー情報を応答に含めるべきではない (SHOULD NOT).
+          リクエストが一切の認証情報を含まない場合 (つまり, 認証が必要であることをクライアントが認識していなかった場合か, 対応していない認証方法をクライアントが試行した場合), リソースサーバはエラーコードやその他のエラー情報を応答に含めるべきではない (SHOULD NOT).
 
-	
+        
 </p>
 <p>
-	    For example:
-	  
+            For example:
+          
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 HTTP/1.1 401 Unauthorized
 WWW-Authenticate: Bearer realm="example"
@@ -628,7 +628,7 @@ Security Considerations</h3>
 
 <p>
       
-	本章では、署名無しトークン利用時におけるトークンの取り扱い方法に関するセキュリティ上の脅威、およびこれらの脅威をどのように軽減するかを記述する。
+        本章では, 署名無しトークン利用時におけるトークンの取り扱い方法に関するセキュリティ上の脅威, およびこれらの脅威をどのように軽減するかを記述する.
       
 </p>
 <a name="threats"></a><br /><hr />
@@ -637,38 +637,38 @@ Security Considerations</h3>
 セキュリティ上の脅威</h3>
 
 <p>
-	
-	  次のリストは何らかのトークン形式を取り扱うプロトコルにおける共通の脅威を表したものである。
-	  この脅威リストはNIST Special Publication 800-63 <a class='info' href='#NIST800-63'>[NIST800&#8209;63]<span> (</span><span class='info'>Burr, W., Dodson, D., Perlner, R., Polk, T., Gupta, S., and E. Nabbus, &ldquo;NIST Special Publication 800-63-1, INFORMATION SECURITY,&rdquo; December&nbsp;2008.</span><span>)</span></a>をベースにしたものである。この文書はOAuth 2.0仕様を前提として作成されたものであるため、その仕様や関連文書中に記載されている脅威に関する議論は行わないものとする。
-	
+        
+          次のリストは何らかのトークン形式を取り扱うプロトコルにおける共通の脅威を表したものである.
+          この脅威リストはNIST Special Publication 800-63 <a class='info' href='#NIST800-63'>[NIST800&#8209;63]<span> (</span><span class='info'>Burr, W., Dodson, D., Perlner, R., Polk, T., Gupta, S., and E. Nabbus, &ldquo;NIST Special Publication 800-63-1, INFORMATION SECURITY,&rdquo; December&nbsp;2008.</span><span>)</span></a>をベースにしたものである. この文書はOAuth 2.0仕様を前提として作成されたものであるため, その仕様や関連文書中に記載されている脅威に関する議論は行わないものとする.
+        
 </p>
 <p>
-	  </p>
+          </p>
 <blockquote class="text"><dl>
 <dt>トークン偽装/改ざん:</dt>
 <dd>
-	    攻撃者が偽装トークンを生成したり、既存のトークンの（認証や属性の記述内容といった）コンテンツを改ざんすることで、リソースサーバはクライアントに対して不適切なアクセス権限を許してしまう可能性がある。
-	    例えば、攻撃者はトークンが妥当である期間を拡張するようにトークンを改ざんするかもしれない。悪意のあるクライアントは本来見ることができるべきではない情報へのアクセスを得るためのアサーションを改ざんするかもしれない。
-	    
+            攻撃者が偽装トークンを生成したり, 既存のトークンの（認証や属性の記述内容といった）コンテンツを改ざんすることで, リソースサーバはクライアントに対して不適切なアクセス権限を許してしまう可能性がある.
+            例えば, 攻撃者はトークンが妥当である期間を拡張するようにトークンを改ざんするかもしれない. 悪意のあるクライアントは本来見ることができるべきではない情報へのアクセスを得るためのアサーションを改ざんするかもしれない.
+            
 </dd>
 <dt>トークン露見:</dt>
 <dd>
-	    トークンは認証や属性の記述など機微情報を含む可能性がある。
-	    
+            トークンは認証や属性の記述など機微情報を含む可能性がある.
+            
 </dd>
 <dt>トークンリダイレクト:</dt>
 <dd>
-	    攻撃者はあるリソースサーバで利用することを目的として生成されたトークンを、
-	    別のリソースサーバが誤ってそのトークンが自身で利用できるものと思い込ませてアクセスを行うために利用する。
-	    
+            攻撃者はあるリソースサーバで利用することを目的として生成されたトークンを,
+            別のリソースサーバが誤ってそのトークンが自身で利用できるものと思い込ませてアクセスを行うために利用する.
+            
 </dd>
 <dt>トークンリプレイ:</dt>
 <dd>
-	    攻撃者は過去にリソースサーバで利用済みのトークンの再利用を試みる。
-	    
+            攻撃者は過去にリソースサーバで利用済みのトークンの再利用を試みる.
+            
 </dd>
 </dl></blockquote><p> 
-	
+        
 </p>
 <a name="mitigation"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -717,53 +717,53 @@ Security Considerations</h3>
 推奨事項のまとめ</h3>
 
 <p>
-	  </p>
+          </p>
 <blockquote class="text"><dl>
 <dt>署名無しトークンを保護する</dt>
 <dd>
-	      クライアントの実装は, 保護されたリソースへのアクセスを可能とするために署名無しトークンを使う際には, それが意図されていない相手に漏洩していないことを確実にしなければならない (MUST).
-	      これは署名無しトークンを用いる際に最も重要なセキュリティに関する考慮事項であり, 後述の詳細な推奨事項すべての基礎となる.
-	    
+              クライアントの実装は, 保護されたリソースへのアクセスを可能とするために署名無しトークンを使う際には, それが意図されていない相手に漏洩していないことを確実にしなければならない (MUST).
+              これは署名無しトークンを用いる際に最も重要なセキュリティに関する考慮事項であり, 後述の詳細な推奨事項すべての基礎となる.
+            
 </dd>
 <dt>SSL証明書チェインを検証する</dt>
 <dd>
-	      クライアントが保護リソースのリクエストを送信する際には, TLS証明書のチェインを検証しなければならない (MUST).
-	      このことに失敗した場合, DNSハイジャック攻撃によるトークンの盗難および意図しないアクセスを可能としてしまう.
-	    
+              クライアントが保護リソースのリクエストを送信する際には, TLS証明書のチェインを検証しなければならない (MUST).
+              このことに失敗した場合, DNSハイジャック攻撃によるトークンの盗難および意図しないアクセスを可能としてしまう.
+            
 </dd>
 <dt>常に TLS (https) を用いる</dt>
 <dd>
-	      クライアントが署名無しトークンを用いたリクエストを送信する際には, 常に <a class='info' href='#RFC5246'>TLS<span> (</span><span class='info'>Dierks, T. and E. Rescorla, &ldquo;The Transport Layer Security (TLS) Protocol Version 1.2,&rdquo; August&nbsp;2008.</span><span>)</span></a> [RFC5246] (https) もしくは同等なトランスポートセキュリティを用いなければならない.
-	      このことに失敗した場合, 攻撃者に意図しないアクセスを可能とするさまざまな攻撃にトークンが晒されてしまう.
-	    
+              クライアントが署名無しトークンを用いたリクエストを送信する際には, 常に <a class='info' href='#RFC5246'>TLS<span> (</span><span class='info'>Dierks, T. and E. Rescorla, &ldquo;The Transport Layer Security (TLS) Protocol Version 1.2,&rdquo; August&nbsp;2008.</span><span>)</span></a> [RFC5246] (https) もしくは同等なトランスポートセキュリティを用いなければならない.
+              このことに失敗した場合, 攻撃者に意図しないアクセスを可能とするさまざまな攻撃にトークンが晒されてしまう.
+            
 </dd>
 <dt>クッキーに署名無しトークンを保存しない</dt>
 <dd>
-	      平文で送信されうるクッキーに署名無しトークンを保存する実装を行ってはならない (MUST NOT). (平文での送信はクッキーのデフォルト送信モードである)
-	      署名無しトークンをクッキーに保存する実装では, クロスサイトリクエストフォージェリへの対処をしなければならない (MUST).
-	    
+              平文で送信されうるクッキーに署名無しトークンを保存する実装を行ってはならない (MUST NOT). (平文での送信はクッキーのデフォルト送信モードである)
+              署名無しトークンをクッキーに保存する実装では, クロスサイトリクエストフォージェリへの対処をしなければならない (MUST).
+            
 </dd>
 <dt>有効期間の短い署名無しトークンを発行する</dt>
 <dd>
-	      トークンサーバは, 特にブラウザやその他の情報漏洩の起こりやすい環境の中で実行されるクライアントに対してトークンを発行する際には, 有効期間の短い (1時間ないしそれ以下) 署名無しトークンを発行すべきである (SHOULD).
-	      有効期間の短い署名無しトークンを用いることにより, 漏洩した際の影響を減らすことができる.
-	    
+              トークンサーバは, 特にブラウザやその他の情報漏洩の起こりやすい環境の中で実行されるクライアントに対してトークンを発行する際には, 有効期間の短い (1時間ないしそれ以下) 署名無しトークンを発行すべきである (SHOULD).
+              有効期間の短い署名無しトークンを用いることにより, 漏洩した際の影響を減らすことができる.
+            
 </dd>
 <dt>スコープの設定された署名無しトークンを発行する</dt>
 <dd>
-	      トークンサーバは, 1つまたは複数の意図されたリライングパーティによる使用に限定されるよう, オーディエンスの制限を含んだ署名無しトークンを発行すべきである (SHOULD).
-	    
+              トークンサーバは, 1つまたは複数の意図されたリライングパーティによる使用に限定されるよう, オーディエンスの制限を含んだ署名無しトークンを発行すべきである (SHOULD).
+            
 </dd>
 <dt>署名無しトークンをページURL中で渡さない</dt>
 <dd>
-	      署名無しトークンはページURL中で渡されるべきではない (SHOULD NOT). (たとえばクエリ文字列のパラメータとして)
-	      代わりに, 機密性対策の講じられたHTTPメッセージヘッダもしくはメッセージボディ中で渡されるべきである (SHOULD).
-	      ブラウザやウェブサーバその他のソフトウェアは, ブラウザの履歴やウェブサーバのログその他のデータ構造において, 適切にURLを保護していないかもしれない.
-	      署名無しトークンがページURLとして渡された場合, 攻撃者は履歴情報やログ, その他の保護されていない場所から盗み取ることができるかもしれない.
-	    
+              署名無しトークンはページURL中で渡されるべきではない (SHOULD NOT). (たとえばクエリ文字列のパラメータとして)
+              代わりに, 機密性対策の講じられたHTTPメッセージヘッダもしくはメッセージボディ中で渡されるべきである (SHOULD).
+              ブラウザやウェブサーバその他のソフトウェアは, ブラウザの履歴やウェブサーバのログその他のデータ構造において, 適切にURLを保護していないかもしれない.
+              署名無しトークンがページURLとして渡された場合, 攻撃者は履歴情報やログ, その他の保護されていない場所から盗み取ることができるかもしれない.
+            
 </dd>
 </dl></blockquote><p>
-	
+        
 </p>
 <a name="anchor7"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -776,8 +776,8 @@ IANAに関する考慮事項</h3>
 OAuthアクセストークンタイプの登録</h3>
 
 <p>
-	
-	  本仕様は, OAuthアクセストークンタイプの登録において, 次のアクセストークンのタイプを登録する.
+        
+          本仕様は, OAuthアクセストークンタイプの登録において, 次のアクセストークンのタイプを登録する.
         
 </p>
 <a name="anchor9"></a><br /><hr />
@@ -797,7 +797,7 @@ OAuthアクセストークンタイプの登録</h3>
 <dt>トークンエンドポイントで追加となるレスポンスパラメータ:</dt>
 <dd>
                 
-		
+                
                 (無し)
               
 </dd>
@@ -816,7 +816,7 @@ OAuthアクセストークンタイプの登録</h3>
 <dt>仕様文書:</dt>
 <dd>
                 
-		
+                
                 [[ 本文書 ]]
               
 </dd>
@@ -829,8 +829,8 @@ OAuthアクセストークンタイプの登録</h3>
 認証スキームの登録</h3>
 
 <p>
-	
-	  本仕様は, <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>で定義される認証スキーム登録において, 次の認証スキームを登録する. 
+        
+          本仕様は, <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>で定義される認証スキーム登録において, 次の認証スキームを登録する.
         
 </p>
 <a name="anchor11"></a><br /><hr />
@@ -850,14 +850,14 @@ OAuthアクセストークンタイプの登録</h3>
 <dt>仕様書の参照:</dt>
 <dd>
                 
-		
+                
                 [[ 本文書 ]]
               
 </dd>
 <dt>備考 (オプション):</dt>
 <dd>
                 
-		
+                
                 (無し)
               
 </dd>
@@ -911,19 +911,19 @@ References</h3>
 謝辞</h3>
 
 <p>
-	
+        
         以下の人々は本文書の前身となる版に対して貢献を行った:
         Blaine Cook (BT), Brian Eaton (Google), Yaron Y. Goland (Microsoft), Brent Goldman (Facebook),
-        Raffi Krikorian (Twitter), Luke Shepard (Facebook), and Allen Tom (Yahoo!). 
-	本仕様の内容及びコンセプトはOAuthコミュニティ, WRAPコミュニティ, OAuthワーキンググループによって生み出されたものである.       
+        Raffi Krikorian (Twitter), Luke Shepard (Facebook), and Allen Tom (Yahoo!).
+        本仕様の内容及びコンセプトはOAuthコミュニティ, WRAPコミュニティ, OAuthワーキンググループによって生み出されたものである.       
 </p>
 <p>
-	
-	OAuthワーキンググループには本文書のアイデアと文書の記述を提案した多くの貢献者がおり, 以下の人々が含まれる:
+        
+        OAuthワーキンググループには本文書のアイデアと文書の記述を提案した多くの貢献者がおり, 以下の人々が含まれる:
         Michael Adams, Amanda Anganes, Andrew Arnott, Dirk Balfanz, Brian Campbell, Leah Culver, Bill de hÓra,
         Brian Ellin, Igor Faynberg, George Fletcher, Tim Freeman, Evan Gilbert, Justin Hart,
         John Kemp, Eran Hammer-Lahav, Chasen Le Hara, Michael B. Jones, Torsten Lodderstedt,
-	Eve Maler, James Manger, Laurence Miao,
+        Eve Maler, James Manger, Laurence Miao,
         Chuck Mortimore, Anthony Nadalin, Justin Richer, Peter Saint-Andre, Nat Sakimura, Rob Sayre,
         Marius Scurtescu, Naitik Shah, Justin Smith, Jeremy Suriel, Christian Stübner, Paul Tarjan,
         及び Franklin Tse.
@@ -943,8 +943,8 @@ References</h3>
         </p>
 <ul class="text">
 <li>
-	   Replaced uses of &lt;"&gt; with DQUOTE to pass ABNF syntax check.
-	  
+           Replaced uses of &lt;"&gt; with DQUOTE to pass ABNF syntax check.
+          
 </li>
 </ul><p>
       
@@ -954,39 +954,39 @@ References</h3>
         </p>
 <ul class="text">
 <li>
-	    Removed the #auth-param option from Authorization header
-	    syntax (leaving only the b64token syntax).
-	  
+            Removed the #auth-param option from Authorization header
+            syntax (leaving only the b64token syntax).
+          
 </li>
 <li>
-	    Restricted the <tt>scope</tt> value
-	    character set to %x21 / %x23-5B / %x5D-7E (printable ASCII
-	    characters excluding double-quote and backslash).
-	    Indicated that scope is intended for programmatic use and
-	    is not meant to be displayed to end users.
-	  
+            Restricted the <tt>scope</tt> value
+            character set to %x21 / %x23-5B / %x5D-7E (printable ASCII
+            characters excluding double-quote and backslash).
+            Indicated that scope is intended for programmatic use and
+            is not meant to be displayed to end users.
+          
 </li>
 <li>
-	    Restricted the character set for <tt>error_description</tt> strings to SP /
-	    VCHAR and indicated that they are not meant to be
-	    displayed to end users.
-	  
+            Restricted the character set for <tt>error_description</tt> strings to SP /
+            VCHAR and indicated that they are not meant to be
+            displayed to end users.
+          
 </li>
 <li>
-	    Included more description in the Abstract, since Hannes
-	    Tschofenig indicated that the RFC editor would require
-	    this.
-	  
+            Included more description in the Abstract, since Hannes
+            Tschofenig indicated that the RFC editor would require
+            this.
+          
 </li>
 <li>
             Changed "Access Grant" to "Authorization Grant", as was
             done in the core spec.
-	  
+          
 </li>
 <li>
-	    Simplified the introduction to the Authenticated Requests
-	    section.
-	  
+            Simplified the introduction to the Authenticated Requests
+            section.
+          
 </li>
 </ul><p>
       
@@ -997,39 +997,39 @@ References</h3>
 <ul class="text">
 <li>
             Incorporated working group last call comments.  Specific changes were:
-	  
+          
 </li>
 <li>
-	    Use definitions from <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a> rather than <a class='info' href='#RFC2617'>[RFC2617]<span> (</span><span class='info'>Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S., Leach, P., Luotonen, A., and L. Stewart, &ldquo;HTTP Authentication: Basic and Digest Access Authentication,&rdquo; June&nbsp;1999.</span><span>)</span></a>.
-	  
+            Use definitions from <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a> rather than <a class='info' href='#RFC2617'>[RFC2617]<span> (</span><span class='info'>Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S., Leach, P., Luotonen, A., and L. Stewart, &ldquo;HTTP Authentication: Basic and Digest Access Authentication,&rdquo; June&nbsp;1999.</span><span>)</span></a>.
+          
 </li>
 <li>
-	    Update credentials definition to conform to <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>.
-	  
+            Update credentials definition to conform to <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>.
+          
 </li>
 <li>
-	    Further clarified that query parameters may occur in any order.
-	  
+            Further clarified that query parameters may occur in any order.
+          
 </li>
 <li>
-	    Specify that error_description is UTF-8 encoded
-	    (matching the core specification).
-	  
+            Specify that error_description is UTF-8 encoded
+            (matching the core specification).
+          
 </li>
 <li>
-	    Registered "Bearer" Authentication Scheme in
-	    Authentication Scheme Registry defined by
-	    <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>.
-	  
+            Registered "Bearer" Authentication Scheme in
+            Authentication Scheme Registry defined by
+            <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>.
+          
 </li>
 <li>
             Updated references to oauth-v2, httpbis-p1-messaging, and
             httpbis-p7-auth drafts.
-	  
+          
 </li>
 <li>
-	    Other wording improvements not introducing normative changes.
-	  
+            Other wording improvements not introducing normative changes.
+          
 </li>
 </ul><p>
       
@@ -1040,7 +1040,7 @@ References</h3>
 <ul class="text">
 <li>
             Updated references to oauth-v2 and httpbis drafts.
-	  
+          
 </li>
 </ul><p>
       
@@ -1051,7 +1051,7 @@ References</h3>
 <ul class="text">
 <li>
             Added missing comma in error response example.
-	  
+          
 </li>
 </ul><p>
       
@@ -1063,13 +1063,13 @@ References</h3>
 <li>
             Changed parameter name <tt>bearer_token</tt> to <tt>access_token</tt>, per working group
             consensus.
-	  
+          
 </li>
 <li>
-	    Changed HTTP status code for <tt>invalid_request</tt> error code from HTTP
-	    401 (Unauthorized) back to HTTP 400 (Bad Request), per
-	    input from HTTP working group experts.
-	  
+            Changed HTTP status code for <tt>invalid_request</tt> error code from HTTP
+            401 (Unauthorized) back to HTTP 400 (Bad Request), per
+            input from HTTP working group experts.
+          
 </li>
 </ul><p>
       
@@ -1079,40 +1079,40 @@ References</h3>
         </p>
 <ul class="text">
 <li>
-	    Removed OAuth Errors Registry, per design team input.
-	  
+            Removed OAuth Errors Registry, per design team input.
+          
 </li>
 <li>
-	    Changed HTTP status code for <tt>invalid_request</tt> error code from HTTP
-	    400 (Bad Request) to HTTP 401 (Unauthorized) to match HTTP
-	    usage [[ change pending working group consensus ]].
-	  
+            Changed HTTP status code for <tt>invalid_request</tt> error code from HTTP
+            400 (Bad Request) to HTTP 401 (Unauthorized) to match HTTP
+            usage [[ change pending working group consensus ]].
+          
 </li>
 <li>
-	    Added missing quotation marks in error-uri definition.
-	  
+            Added missing quotation marks in error-uri definition.
+          
 </li>
 <li>
-	    Added note to add language and encoding information to
-	    error_description if the core specification does.
-	  
+            Added note to add language and encoding information to
+            error_description if the core specification does.
+          
 </li>
 <li>
-	    Explicitly reference the Augmented Backus-Naur Form (ABNF)
-	    defined in <a class='info' href='#RFC5234'>[RFC5234]<span> (</span><span class='info'>Crocker, D. and P. Overell, &ldquo;Augmented BNF for Syntax Specifications: ABNF,&rdquo; January&nbsp;2008.</span><span>)</span></a>.
-	  
+            Explicitly reference the Augmented Backus-Naur Form (ABNF)
+            defined in <a class='info' href='#RFC5234'>[RFC5234]<span> (</span><span class='info'>Crocker, D. and P. Overell, &ldquo;Augmented BNF for Syntax Specifications: ABNF,&rdquo; January&nbsp;2008.</span><span>)</span></a>.
+          
 </li>
 <li>
-	    Use auth-param instead of repeating its definition, which
-	    is ( token "=" ( token / quoted-string ) ).
-	  
+            Use auth-param instead of repeating its definition, which
+            is ( token "=" ( token / quoted-string ) ).
+          
 </li>
 <li>
-	    Clarify security considerations about including an
-	    audience restriction in the token and include a
-	    recommendation to issue scoped bearer tokens in the
-	    summary of recommendations.
-	  
+            Clarify security considerations about including an
+            audience restriction in the token and include a
+            recommendation to issue scoped bearer tokens in the
+            summary of recommendations.
+          
 </li>
 </ul><p>
       
@@ -1122,49 +1122,49 @@ References</h3>
         </p>
 <ul class="text">
 <li>
-	    Edits responding to working group last call feedback on
-	    -03.  Specific edits enumerated below.
-	  
+            Edits responding to working group last call feedback on
+            -03.  Specific edits enumerated below.
+          
 </li>
 <li>
-	    Added Bearer Token definition in Terminology section.
-	  
+            Added Bearer Token definition in Terminology section.
+          
 </li>
 <li>
             Changed parameter name <tt>oauth_token</tt> to <tt>bearer_token</tt>.
-	  
+          
 </li>
 <li>
-	    Added realm parameter to <tt>WWW-Authenticate</tt> response to comply
-	    with <a class='info' href='#RFC2617'>[RFC2617]<span> (</span><span class='info'>Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S., Leach, P., Luotonen, A., and L. Stewart, &ldquo;HTTP Authentication: Basic and Digest Access Authentication,&rdquo; June&nbsp;1999.</span><span>)</span></a>.
-	  
+            Added realm parameter to <tt>WWW-Authenticate</tt> response to comply
+            with <a class='info' href='#RFC2617'>[RFC2617]<span> (</span><span class='info'>Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S., Leach, P., Luotonen, A., and L. Stewart, &ldquo;HTTP Authentication: Basic and Digest Access Authentication,&rdquo; June&nbsp;1999.</span><span>)</span></a>.
+          
 </li>
 <li>
-	    Removed "[ RWS 1#auth-param ]" from <tt>credentials</tt> definition since it did
-	    not comply with the ABNF in <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>.
-	  
+            Removed "[ RWS 1#auth-param ]" from <tt>credentials</tt> definition since it did
+            not comply with the ABNF in <a class='info' href='#I-D.ietf-httpbis-p7-auth'>[I&#8209;D.ietf&#8209;httpbis&#8209;p7&#8209;auth]<span> (</span><span class='info'>Fielding, R., Gettys, J., Mogul, J., Nielsen, H., Masinter, L., Leach, P., Berners-Lee, T., Reschke, J., and Y. Lafon, &ldquo;HTTP/1.1, part 7: Authentication,&rdquo; August&nbsp;2011.</span><span>)</span></a>.
+          
 </li>
 <li>
-	    Removed restriction that the <tt>bearer_token</tt> (formerly <tt>oauth_token</tt>) parameter be the last
-	    parameter in the entity-body and the HTTP request URI
-	    query.
-	  
+            Removed restriction that the <tt>bearer_token</tt> (formerly <tt>oauth_token</tt>) parameter be the last
+            parameter in the entity-body and the HTTP request URI
+            query.
+          
 </li>
 <li>
-	    Do not require WWW-Authenticate Response in a reply to a
-	    malformed request, as an HTTP 400 Bad Request response
-	    without a WWW-Authenticate header is likely the right
-	    response in some cases of malformed requests.
-	  
+            Do not require WWW-Authenticate Response in a reply to a
+            malformed request, as an HTTP 400 Bad Request response
+            without a WWW-Authenticate header is likely the right
+            response in some cases of malformed requests.
+          
 </li>
 <li>
-	    Removed OAuth Parameters registry extension.
-	  
+            Removed OAuth Parameters registry extension.
+          
 </li>
 <li>
-	    Numerous editorial improvements suggested by working group
-	    members.
-	  
+            Numerous editorial improvements suggested by working group
+            members.
+          
 </li>
 </ul><p>
       
@@ -1174,16 +1174,16 @@ References</h3>
         </p>
 <ul class="text">
 <li>
-	    Restored the WWW-Authenticate response header
-	    functionality deleted from the framework specification in
-	    draft 12 based upon the specification text from draft 11.
-	  
+            Restored the WWW-Authenticate response header
+            functionality deleted from the framework specification in
+            draft 12 based upon the specification text from draft 11.
+          
 </li>
 <li>
-	    Augmented the OAuth Parameters registry by adding two
-	    additional parameter usage locations: "resource request"
-	    and "resource response".
-	  
+            Augmented the OAuth Parameters registry by adding two
+            additional parameter usage locations: "resource request"
+            and "resource response".
+          
 </li>
 <li>
             Registered the "oauth_token" OAuth parameter with usage
@@ -1195,13 +1195,13 @@ References</h3>
           
 </li>
 <li>
-	    Created the OAuth Error registry and registered errors.
-	  
+            Created the OAuth Error registry and registered errors.
+          
 </li>
 <li>
-	    Changed the "OAuth2" OAuth access token type name to
-	    "Bearer".
-	  
+            Changed the "OAuth2" OAuth access token type name to
+            "Bearer".
+          
 </li>
 </ul><p>
       
@@ -1217,49 +1217,49 @@ References</h3>
           
 </li>
 <li>
-	    Changed terminology from "token reuse" to "token capture
-	    and replay".
-	  
+            Changed terminology from "token reuse" to "token capture
+            and replay".
+          
 </li>
 <li>
-	    Removed sentence "Encrypting the token contents is another
-	    alternative" from the security considerations since it was
-	    redundant and potentially confusing.
-	  
+            Removed sentence "Encrypting the token contents is another
+            alternative" from the security considerations since it was
+            redundant and potentially confusing.
+          
 </li>
 <li>
-	    Corrected some references to "resource server" to be
-	    "authorization server" in the security considerations.
-	  
+            Corrected some references to "resource server" to be
+            "authorization server" in the security considerations.
+          
 </li>
 <li>
-	    Generalized security considerations language about
-	    obtaining consent of the resource owner.
-	  
+            Generalized security considerations language about
+            obtaining consent of the resource owner.
+          
 </li>
 <li>
-	    Broadened scope of security considerations description for
-	    recommendation "Don't pass bearer tokens in page URLs".
-	  
+            Broadened scope of security considerations description for
+            recommendation "Don't pass bearer tokens in page URLs".
+          
 </li>
 <li>
-	    Removed unused reference to OAuth 1.0.
-	  
+            Removed unused reference to OAuth 1.0.
+          
 </li>
 <li>
-	    Updated reference to framework specification and updated
-	    David Recordon's e-mail address.
-	  
+            Updated reference to framework specification and updated
+            David Recordon's e-mail address.
+          
 </li>
 <li>
-	    Removed security considerations text on authenticating
-	    clients.
-	  
+            Removed security considerations text on authenticating
+            clients.
+          
 </li>
 <li>
-	    Registered the "OAuth2" OAuth access token type and
-	    "oauth_token" parameter.
-	  
+            Registered the "OAuth2" OAuth access token type and
+            "oauth_token" parameter.
+          
 </li>
 </ul><p>
       
