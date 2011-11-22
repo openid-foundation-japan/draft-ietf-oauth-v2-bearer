@@ -13,7 +13,7 @@
 
   <front>
     <!--title abbrev='OAuth 2.0 Bearer Tokens'>The OAuth 2.0 Authorization Protocol: Bearer Tokens</title-->
-    <title abbrev='OAuth 2.0 Bearer Tokens'>The OAuth 2.0 Authorization Protocol: Bearer Tokens(日本語)</title>
+    <title abbrev='OAuth 2.0 Bearer Tokens'>The OAuth 2.0 Authorization Protocol: Bearer Tokens (日本語)</title>
 
     <author fullname="Michael B. Jones" surname="Jones" initials="M.B."> <!-- role="editor" -->
       <organization>Microsoft</organization>
@@ -50,7 +50,7 @@
       </t-->
       <t>
         この仕様書は, OAuth 2.0の保護リソースへアクセスするために, 署名無しトークンをHTTPリクエスト中でどのように利用するか記述したものである.
-        署名無しトークンを所有する任意のパーティ (持参人) は, 認可済みリソースへアクセスするために署名無しトークンを利用できる.  (暗号鍵の所有を示す必要はない)
+        署名無しトークンを所有する任意のパーティ (持参人) は, 認可済みリソースへアクセスするために署名無しトークンを利用できる (暗号鍵の所有を示す必要はない).
         誤った利用を避けるために, 署名無しトークンは保存場所や流通経路での値の露見から守られなければならない (MUST).
       </t>
     </abstract>
@@ -69,7 +69,7 @@
       </t-->
       <t>
         OAuthは, クライアントがアクセストークンを取得することで, 保護リソースへのアクセスを可能にする.
-        アクセストークンは<xref target="I-D.ietf-oauth-v2"/>中で「クライアントに対するアクセス認可の文字列表現」と定義されており,
+        アクセストークンは <xref target="I-D.ietf-oauth-v2"/> 中で「クライアントに対するアクセス認可の文字列表現」と定義されており,
         リソース所有者のクレデンシャルを直接利用することではない.
       </t>
       <!--t>
@@ -90,8 +90,7 @@
         it for use with other transport protocols.
       </t-->
       <t>
-        この仕様書では<xref target='RFC2616'>HTTP</xref>及び<xref
-        target='RFC5246'>TLS</xref>で定義された, TLSを用いたHTTP上でのOAuthで, 署名無しトークンを利用する方法を定める.
+        この仕様書では <xref target='RFC2616'>HTTP</xref> 及び <xref target='RFC5246'>TLS</xref> で定義された, TLSを用いたHTTP上でのOAuthで, 署名無しトークンを利用する方法を定める.
         他の仕様書がその他の転送プロトコルの元での利用について本仕様を拡張する可能性もある.
       </t>
 
@@ -103,7 +102,7 @@
           described in <xref target='RFC2119' />.
         </t-->
         <t>
-        本文書で用いられる各キーワード「MUST (しなければならない)」, 「MUST NOT (してはならない)」, 「REQUIRED (必須である)」, 「SHALL (するものとする)」, 「SHALL NOT (しないものとする)」, 「SHOULD (すべきである)」, 「SHOULD NOT (すべきではない)」, 「RECOMMENDED (推奨される)」, 「MAY (してもよい)」, 「OPTIONAL (任意である)」は<xref target='RFC2119' />で述べられている通りに解釈されるべきものである.
+        本文書で用いられる各キーワード「MUST (しなければならない)」, 「MUST NOT (してはならない)」, 「REQUIRED (必須である)」, 「SHALL (するものとする)」, 「SHALL NOT (しないものとする)」, 「SHOULD (すべきである)」, 「SHOULD NOT (すべきではない)」, 「RECOMMENDED (推奨される)」, 「MAY (してもよい)」, 「OPTIONAL (任意である)」は <xref target='RFC2119' /> で述べられている通りに解釈されるべきものである.
         </t>
         <!--t>
           This document uses the Augmented Backus-Naur Form (ABNF)
@@ -116,8 +115,8 @@
           and from <xref target='RFC3986' />: URI-Reference.
         </t-->
         <t>
-          このドキュメントでは<xref target='RFC5234' />におけるAugmented Backus-Naur Form (ABNF)表記法を元にした, <xref target='I-D.ietf-httpbis-p1-messaging' />におけるAugmented Backus-Naur Form(ABNF)表記法を利用している.
-          加えて, 次の規則(<xref target='I-D.ietf-httpbis-p7-auth' /> 記載: b64token, auth-param および realm; <xref target='I-D.ietf-httpbis-p1-messaging' />記載:  quoted-string; <xref target='RFC3986'/>記載: URI-Reference)に従う.
+          このドキュメントでは<xref target='RFC5234' />におけるAugmented Backus-Naur Form (ABNF) 表記法を元にした, <xref target='I-D.ietf-httpbis-p1-messaging' />におけるAugmented Backus-Naur Form (ABNF) 表記法を利用している.
+          加えて, 次の規則 (<xref target='I-D.ietf-httpbis-p7-auth' /> 記載: b64token, auth-param および realm; <xref target='I-D.ietf-httpbis-p1-messaging' />記載:  quoted-string; <xref target='RFC3986'/>記載: URI-Reference) に従う.
 
 
         </t>
@@ -184,7 +183,7 @@
       -->
         </t>
         <t>
-          アクセストークンはほかの認証方法(例: ユーザ名とパスワード, アサーション)をリソースサーバが理解しうる一つのトークンに置き換えるような抽象レイヤーを提供する.
+          アクセストークンはほかの認証方法 (例: ユーザ名とパスワード, アサーション) をリソースサーバが理解しうる一つのトークンに置き換えるような抽象レイヤーを提供する.
           この抽象レイヤーは有効期間の短いアクセストークンを発行することを可能にするとともに, リソースサーバから広範囲に渡る認証スキームを理解する必要を取り除く.
         <!--
           The access token provides an abstraction layer, replacing different authorization
@@ -425,7 +424,7 @@ Host: server.example.com]]>
           style='verb'>&amp;</spanx> character(s) (ASCII code 38).
           -->
           HTTPリクエストURIはリクエストに特化した他のパラメータを含むことができる.
-          その場合, <spanx style='verb'>access_token</spanx>パラメータは <spanx style='verb'>&amp;</spanx> 文字 (ASCII コード 38)を使い, 他のリクエストに特化したパラメータと適切に分離されていなければならない (MUST).
+          その場合, <spanx style='verb'>access_token</spanx>パラメータは <spanx style='verb'>&amp;</spanx> 文字 (ASCII コード 38) を使い, 他のリクエストに特化したパラメータと適切に分離されていなければならない (MUST).
         </t>
         <figure>
           <preamble>
@@ -486,7 +485,7 @@ error-uri       = "error_uri" "=" DQUOTE URI-reference DQUOTE]]>
       </figure>
       <t>
           <spanx style='verb'>scope</spanx> 属性は, スペース区切りのスコープ値のリストであり, 要求されたリソースへのアクセスに必要なアクセストークンのスコープを示す.
-          <spanx style='verb'>scope</spanx> 属性は, 2回以上現れてはならない(MUST NOT).
+          <spanx style='verb'>scope</spanx> 属性は, 2回以上現れてはならない (MUST NOT).
           <spanx style='verb'>scope</spanx> の値は, プログラム中で用いられることを目的とし, エンドユーザへ表示することは意図されていない.
       <!--
         The <spanx style='verb'>scope</spanx> attribute is a space-delimited list of scope values
@@ -498,11 +497,11 @@ error-uri       = "error_uri" "=" DQUOTE URI-reference DQUOTE]]>
         -->
       </t>
       <t>
-          保護リソースへのリクエストにアクセストークンが含まれているが認証に失敗した場合, リソースサーバはアクセス要求を拒否した理由をクライアントに対して示すために, <spanx style='verb'>error</spanx> 属性を含むべきである(SHOULD).
+          保護リソースへのリクエストにアクセストークンが含まれているが認証に失敗した場合, リソースサーバはアクセス要求を拒否した理由をクライアントに対して示すために, <spanx style='verb'>error</spanx> 属性を含むべきである (SHOULD).
           パラメータの値は <xref target='resource-error-codes' /> に記載されている.
-          さらに, リソースサーバは, 開発者にとって可読性のある説明を提供するために, エンドユーザに表示する目的ではない <spanx style='verb'>error_description</spanx> 属性を含んでもよい(MAY).
-          また, エラーについての可読性のある説明ウェブページを指し示す, 絶対URIで記載された<spanx style='verb'>error_uri</spanx> 属性を含んでもよい(MAY).
-          <spanx style='verb'>error</spanx>, <spanx style='verb'>error_description</spanx>, そして <spanx style='verb'>error_uri</spanx> 属性は, 2回以上現れてはならない(MUST NOT).
+          さらに, リソースサーバは, 開発者にとって可読性のある説明を提供するために, エンドユーザに表示する目的ではない <spanx style='verb'>error_description</spanx> 属性を含んでもよい (MAY).
+          また, エラーについての可読性のある説明ウェブページを指し示す, 絶対URIで記載された<spanx style='verb'>error_uri</spanx> 属性を含んでもよい (MAY).
+          <spanx style='verb'>error</spanx>, <spanx style='verb'>error_description</spanx>, そして <spanx style='verb'>error_uri</spanx> 属性は, 2回以上現れてはならない (MUST NOT).
       <!--
         If the protected resource request included an access token and failed authentication, the
         resource server SHOULD include the <spanx style='verb'>error</spanx> attribute to provide
@@ -522,10 +521,10 @@ error-uri       = "error_uri" "=" DQUOTE URI-reference DQUOTE]]>
       </t>
       <figure>
         <preamble>
-      例えば, 認証されていない場合の保護リソースへのリクエストに対するレスポンスは以下のようになる:
-      <!--
+          例えば, 認証されていない場合の保護リソースへのリクエストに対するレスポンスは以下のようになる:
+          <!--
           For example, in response to a protected resource request without authentication:
-      -->
+          -->
         </preamble>
         <artwork>
 <![CDATA[HTTP/1.1 401 Unauthorized
@@ -585,7 +584,7 @@ WWW-Authenticate: Bearer realm="example",
             <t hangText='insufficient_scope'>
               <vspace />
               リクエストにはアクセストークンにより提供されるよりも高い権限が必要である.
-              リソースサーバはHTTPステータスコード403 (Forbidden) の応答を返すべき(SHOULD)であり, 保護されたリソースへのアクセスに必要となるスコープを示した <spanx style='verb'>scope</spanx> 属性を含めてもよい (MAY).
+              リソースサーバはHTTPステータスコード403 (Forbidden) の応答を返すべき (SHOULD) であり, 保護されたリソースへのアクセスに必要となるスコープを示した <spanx style='verb'>scope</spanx> 属性を含めてもよい (MAY).
 <!--
               The request requires higher privileges than provided by the access token. The
               resource server SHOULD respond with the HTTP 403 (Forbidden) status code and MAY
@@ -700,9 +699,9 @@ WWW-Authenticate: Bearer realm="example"]]>
       <!--section title="Threat Mitigation" anchor="mitigation"--> 
 
     <t>
-      デジタル署名またはメッセージ認証コード(MAC)を用いてトークンの内容を保護することにより, 多くの脅威は軽減することができる
+      デジタル署名またはメッセージ認証コード (MAC) を用いてトークンの内容を保護することにより, 多くの脅威は軽減することができる
       あるいは, 署名無しトークンはエンコードされた認可情報を直接含むのではなく, 認可情報に対する参照を含むことができる.
-      その参照は, 攻撃者が推測不可能でなければならない(MUST). 参照を用いた場合, 認可情報への参照を解決するために, 認証サーバとトークン発行者の間における追加の通信が必要になることがある.
+      その参照は, 攻撃者が推測不可能でなければならない (MUST). 参照を用いた場合, 認可情報への参照を解決するために, 認証サーバとトークン発行者の間における追加の通信が必要になることがある.
       そのような通信の方法は, この仕様では定義されない.
     </t>
 
@@ -736,7 +735,7 @@ WWW-Authenticate: Bearer realm="example"]]>
     -->
 
     <t>
-      トークンリダイレクトへの対策として, トークン内に認可サーバの意図する, 一般的に一つの資源サーバまたは資源サーバのリストからなる, トークンの受領者(観衆)のアイデンティティを含むことが重要である.
+      トークンリダイレクトへの対策として, トークン内に認可サーバの意図する, 一般的に一つの資源サーバまたは資源サーバのリストからなる, トークンの受領者 (観衆) のアイデンティティを含むことが重要である.
       トークンの利用できる範囲を特定の範囲に制限することも推奨される.
     </t>
         <!--
@@ -754,7 +753,7 @@ WWW-Authenticate: Bearer realm="example"]]>
       トークン露見に対する保護を提供するために, 機密性保護は, 機密性保護を提供する暗号スイートによる <xref target='RFC5246'>TLS</xref>を通じて適用される.
       これは, クライアントと資源サーバ間と同様に, クライアントと認可サーバ間の通信においてもまた, 機密性保護を利用することを必要とする.
       この仕様においてはTLSの実装と使用が義務付けられており, それは通信経路上でのトークン漏洩を防ぐための推奨されるアプローチである.
-      クライアントがトークンの内容を覗き見るようなケースを防ぐためには, TLSによる保護に加えて, トークンの暗号化を行う必要がある(MUST).
+      クライアントがトークンの内容を覗き見るようなケースを防ぐためには, TLSによる保護に加えて, トークンの暗号化を行う必要がある (MUST).
     </t>
         <!--
     <t>
@@ -776,14 +775,14 @@ WWW-Authenticate: Bearer realm="example"]]>
         </t>
     -->
     <t>
-      トークンの覗き見と再利用(トークンリプレイ)への対策として, 以下の手段が推奨される: 
-      第一に, トークン内の保護された部分に, 有効な時間のフィールドを保持しておき, それによって有効期間を制限しなければならない(MUST).
+      トークンの覗き見と再利用 (トークンリプレイ) への対策として, 以下の手段が推奨される:
+      第一に, トークン内の保護された部分に, 有効な時間のフィールドを保持しておき, それによって有効期間を制限しなければならない (MUST).
       1時間程度, またはそれ以下の短い期間のみ有効なトークンを使うことが, トークンが漏洩した際のインパクトを減らすことを記す.
-      第二に, クライアントと認可サーバ間およびクライアントと資源サーバの間の通信における機密性保持は, 例えばTLS等を用いて機密性保持を適用しなければならない(MUST).
+      第二に, クライアントと認可サーバ間およびクライアントと資源サーバの間の通信における機密性保持は, 例えばTLS等を用いて機密性保持を適用しなければならない (MUST).
       結果として, 通信経路に存在する盗聴者は, トークンの交換を覗き見ることができなくなる.
       従って, そのような経路上の攻撃者は, トークンをリプレイすることができない.
-      さらに, クライアントはトークンを資源サーバに送信するときに, <xref target="RFC2818" />に従いサーバのアイデンティティを確認しなければならない(MUST).
-      保護リソースにリクエストを送信するとき, クライアントがTLS証明書のチェインを確認しなければならない(MUST)ことに注意すべきである.
+      さらに, クライアントはトークンを資源サーバに送信するときに, <xref target="RFC2818" />に従いサーバのアイデンティティを確認しなければならない (MUST).
+      保護リソースにリクエストを送信するとき, クライアントがTLS証明書のチェインを確認しなければならない (MUST) ことに注意すべきである.
       未認証かつ未認可な資源サーバにトークンを送信すること, あるいは証明書チェインの確認に失敗することは, 攻撃者に対して, トークンを盗み, 保護リソースへの認可されていないアクセスを許すことになる.
     </t>
     <!--
@@ -1081,7 +1080,8 @@ WWW-Authenticate: Bearer realm="example"]]>
         以下の人々は本文書の前身となる版に対して貢献を行った:
         Blaine Cook (BT), Brian Eaton (Google), Yaron Y. Goland (Microsoft), Brent Goldman (Facebook),
         Raffi Krikorian (Twitter), Luke Shepard (Facebook), and Allen Tom (Yahoo!).
-        本仕様の内容及びコンセプトはOAuthコミュニティ, WRAPコミュニティ, OAuthワーキンググループによって生み出されたものである.       </t>
+        本仕様の内容及びコンセプトはOAuthコミュニティ, WRAPコミュニティ, OAuthワーキンググループによって生み出されたものである.
+      </t>
       <t>
         <!--
         The OAuth Working Group has dozens of very active contributors who proposed ideas and
