@@ -1017,53 +1017,6 @@ WWW-Authenticate: Bearer realm="example"]]>
 
     </section>
 
-    <appendix title="翻訳者">
-      <t>
-        本仕様書の翻訳は, <xref target='oidfj'>OpenIDファウンデーションジャパン</xref> <xref target='oidfj-trans'>翻訳・教育ワーキンググループ</xref>を主体として, 有志のメンバーによって行われました.
-        質問や修正依頼などについては, <xref target='oidfj-github'>Githubレポジトリー</xref> にご連絡ください.
-      </t>
-      <t>
-        <list style='symbols'>
-          <t>
-            Boku Kihara (Lepidum)
-          </t>
-          <t>
-            Kazuki Shimizu (Lepidum)
-          </t>
-          <t>
-            Masaru Kurahayashi (Yahoo! Japan)
-          </t>
-          <t>
-            Naohiro Fujie (Itochu Techno Solutions)
-          </t>
-          <t>
-            Noboru Kurumai (Fujitsu)
-          </t>
-          <t>
-            Nov Matake (Cerego Japan)
-          </t>
-          <t>
-            Ryo Ito
-          </t>
-          <t>
-            Shunsuke Kouchi (Yahoo! Japan)
-          </t>
-          <t>
-            Taizo Matsuoka (Yahoo! Japan)
-          </t>
-          <t>
-            Tatsuya Katsuhara (NRI)
-          </t>
-          <t>
-            Yusuke Kondo (Yahoo! Japan)
-          </t>
-          <t>
-            Yutaka Obuchi
-          </t>
-        </list>
-      </t>
-    </appendix>
-
   </middle>
 
   <back>
@@ -1467,6 +1420,53 @@ WWW-Authenticate: Bearer realm="example"]]>
         <list style='symbols'>
           <t>
             Initial draft based on preliminary version of OAuth 2.0 draft 11.
+          </t>
+        </list>
+      </t>
+    </section>
+
+    <section title="翻訳者">
+      <t>
+        本仕様書の翻訳は, <xref target='oidfj'>OpenIDファウンデーションジャパン</xref> <xref target='oidfj-trans'>翻訳・教育ワーキンググループ</xref>を主体として, 有志のメンバーによって行われました.
+        質問や修正依頼などについては, <xref target='oidfj-github'>Githubレポジトリー</xref> にご連絡ください.
+      </t>
+      <t>
+        <list style='symbols'>
+          <t>
+            Boku Kihara (Lepidum)
+          </t>
+          <t>
+            Kazuki Shimizu (Lepidum)
+          </t>
+          <t>
+            Masaru Kurahayashi (Yahoo! Japan)
+          </t>
+          <t>
+            Naohiro Fujie (Itochu Techno Solutions)
+          </t>
+          <t>
+            Noboru Kurumai (Fujitsu)
+          </t>
+          <t>
+            Nov Matake (Cerego Japan)
+          </t>
+          <t>
+            Ryo Ito
+          </t>
+          <t>
+            Shunsuke Kouchi (Yahoo! Japan)
+          </t>
+          <t>
+            Taizo Matsuoka (Yahoo! Japan)
+          </t>
+          <t>
+            Tatsuya Katsuhara (NRI)
+          </t>
+          <t>
+            Yusuke Kondo (Yahoo! Japan)
+          </t>
+          <t>
+            Yutaka Obuchi (Hitachi Solutions)
           </t>
         </list>
       </t>
