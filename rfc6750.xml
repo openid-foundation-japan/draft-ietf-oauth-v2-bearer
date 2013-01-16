@@ -292,8 +292,11 @@
         -->
       </t>
 
-      <section title='Authorization Request Header Field' anchor='authz-header'>
+      <section title='Authorizationリクエストヘッダフィールド' anchor='authz-header'>
+      <!--section title='Authorization Request Header Field' anchor='authz-header'-->
         <t>
+          HTTP/1.1 <xref target='RFC2617'/> によって定義される<spanx style='verb'>Authorization</spanx>リクエストヘッダフィールド中でアクセストークンを送信する場合, クライアントは<spanx style='verb'>Bearer</spanx>認証スキームを用いる.
+          <!--
           When sending the access token in the <spanx
           style='verb'>Authorization</spanx> request header field
           defined by
@@ -301,6 +304,7 @@
           the
           client uses the <spanx style='verb'>Bearer</spanx>
           authentication scheme to transmit the access token.
+          -->
         </t>
         <figure>
           <preamble>
@@ -313,6 +317,13 @@
 ]]></artwork>
         </figure>
         <t>
+          <spanx style='verb'>Authorization</spanx>ヘッダフィールドは<xref target='I-D.ietf-httpbis-p7-auth' />により定義されるフレームワークを以下のように用いる:
+          このスキームに対する<spanx style='verb'>Authorization</spanx> ヘッダフィールドの文法は, <xref target='RFC2617'/> の第2章で定義されるBasicスキームの使用方法に従う.
+
+          ここで留意すべきは, Basic同様, <xref target='RFC2617'/>の1.2章で定義される汎用的な文法に従わないものの HTTP 1.1 向けに開発された汎用認証フレームワーク<xref target="HTTP-AUTH"/> とは互換性があるということである.
+          とはいえ, 既に展開済みの内容を考慮して, フレームワーク中で概説されている推奨される慣例には従っていない. 
+          持参人クレデンシャルの文法は次のようになる:
+          <!--
           The syntax of the <spanx style='verb'>Authorization</spanx> header
           field for this scheme follows the usage of the Basic scheme defined
           in Section 2 of <xref target='RFC2617'/>. Note that, as with Basic,
@@ -322,7 +333,8 @@
           <xref target="HTTP-AUTH"/>, although it does not
           follow the preferred practice outlined therein in order to
           reflect existing deployments. The syntax for Bearer credentials is
-          as follows: 
+          as follows:
+          --> 
         </t>
 
         <figure>
@@ -333,58 +345,91 @@
 ]]></artwork>
         </figure>
         <t>
+          クライアントが署名無しトークンを伴う認証されたリクエストを送信する際には, <spanx style='verb'>Bearer</spanx> HTTP認可スキームを用いた<spanx style='verb'>Authorization</spanx>リクエストヘッダフィールドを使用すべきである (SHOULD).
+          リソースサーバはこの方法をサポートしなければならない (MUST).
+          <!--
           Clients SHOULD make authenticated requests with a bearer
           token using the <spanx style='verb'>Authorization</spanx>
           request header field with the <spanx
           style='verb'>Bearer</spanx> HTTP authorization scheme.
           Resource servers MUST support this method.
+          -->
         </t>
       </section>
 
-      <section title='Form-Encoded Body Parameter' anchor='body-param'>
+      <section title='Formエンコードされたボディパラメータ' anchor='body-param'>
+      <!--section title='Form-Encoded Body Parameter' anchor='body-param'-->
         <t>
+          HTTPリクエストのエンティティボディ中でアクセストークンを送信する際, クライアントは<spanx style='verb'>access_token</spanx>パラメータを用いてアクセストークンをリクエストボディに付加する.
+          クライアントは以下の条件のすべてを満たさない限りこの方法を用いてはならない (MUST NOT):
+          <!--
           When sending the access token in the HTTP request entity-body,
           the client adds the access token to the request-body
           using the <spanx style='verb'>access_token</spanx>
           parameter.  The client MUST NOT use this method unless
           all of the following conditions are met:
+          -->
           <list style='symbols'>
             <t>
+              HTTPリクエストのエンティティヘッダに<spanx style='verb'>Content-Type</spanx>ヘッダフィールドが含まれており, <spanx style='verb'>application/x-www-form-urlencoded</spanx>にセットされている.
+              
+              <!--
               The HTTP request entity-header includes the <spanx style='verb'>Content-Type</spanx>
               header field set to <spanx style='verb'>application/x-www-form-urlencoded</spanx>.
+              -->
             </t>
             <t>
+              エンティティボディが HTML 4.01 <xref target='W3C.REC-html401-19991224' />によって定義される<spanx style='verb'>application/x-www-form-urlencoded</spanx>コンテントタイプのエンコード要求に従う.
+              <!--
               The entity-body follows the encoding requirements of the
               <spanx style='verb'>application/x-www-form-urlencoded</spanx> content-type as
               defined by
               HTML 4.01 <xref target='W3C.REC-html401-19991224' />.
+              -->
             </t>
             <t>
+              HTTPリクエストのエンティティボディがシングルパートである.
+              <!--
               The HTTP request entity-body is single-part.
+              -->
             </t>
             <t>
+              エンティティボディ中にエンコードされたコンテンツは全て ASCII<xref target="USASCII" /> 文字列だけで構成されなければならない (MUST).
+              <!--
               The content to be encoded in the entity-body MUST
               consist entirely of ASCII <xref target="USASCII" /> characters.
+              -->
             </t>
             <t>
+              リクエストボディが定義されたセマンティクスを持つHTTPリクエストメソッドである.
+              すなわち, <spanx style='verb'>GET</spanx> メソッドを利用してはならない (MUST NOT).
+              <!--
               The HTTP request method is one for which the request-body
               has defined semantics.  In particular,
               this means that the <spanx style='verb'>GET</spanx>
               method MUST NOT be used.
+              -->
             </t>
           </list>
         </t>
         <t>
+          エンティティボディにはリクエストに固有なパラメータを含んでもよい (MAY).
+          この場合, <spanx style='verb'>access_token</spanx>パラメータは文字 <spanx style='verb'>&amp;</spanx> (ASCIIコード38) を用いてリクエスト固有なパラメーから適切に分離されなければならない (MUST).
+          <!--
           The entity-body MAY include other request-specific
           parameters, in which case the <spanx
           style='verb'>access_token</spanx> parameter MUST be properly
           separated from the request-specific parameters using <spanx
           style='verb'>&amp;</spanx> character(s) (ASCII code 38).
+          -->
         </t>
         <figure>
           <preamble>
+            例えば, クライアントは以下のHTTPリクエストをトランスポートレイヤセキュリティを利用して送信する:
+            <!--
             For example, the client makes the following HTTP request using transport-layer
             security:
+            -->
           </preamble>
           <artwork><![CDATA[
   POST /resource HTTP/1.1
@@ -395,27 +440,37 @@
 ]]></artwork>
         </figure>
         <t>
+          この<spanx style='verb'>application/x-www-form-urlencoded</spanx>を用いる方法は, 関与しているブラウザが<spanx style='verb'>Authorization</spanx>リクエストヘッダにアクセスできない場合を除いて使用すべきではない (SHOULD NOT). リソースサーバはこの方法をサポートしてもよい (MAY).
+          <!--
           The <spanx style='verb'>application/x-www-form-urlencoded</spanx>
           method SHOULD NOT be used except in application contexts
           where participating browsers do not have access to the
           <spanx style='verb'>Authorization</spanx> request header
           field.
           Resource servers MAY support this method.
+          -->
         </t>
       </section>
 
-      <section title='URI Query Parameter' anchor='query-param'>
+      <section title='URIクエリパラメータ' anchor='query-param'>
+      <!--section title='URI Query Parameter' anchor='query-param'-->
         <t>
+          HTTPリクエストURIの中でアクセストークンを送信する際, クライアントは<spanx style='verb'>access_token</spanx>パラメータを用いてアクセストークンを"Uniform Resource Identifier (URI): Generic Syntax"<xref target='RFC3986' />で定義されているURIクエリコンポーネントに追加する.
+          <!--
           When sending the access token in the HTTP request URI, the client adds the access
           token to the request URI query component as defined by
           "Uniform Resource Identifier (URI): Generic Syntax" <xref target='RFC3986' />,
           using
           the <spanx style='verb'>access_token</spanx> parameter.
+          -->
         </t>
         <figure>
           <preamble>
+            たとえば, クライアントは次のようなHTTPリクエストをトランスポートレイヤセキュリティを利用して送信する:
+            <!--
             For example, the client makes the following HTTP request using transport-layer
             security:
+            -->
           </preamble>
           <artwork><![CDATA[
   GET /resource?access_token=mF_9.B5f-4.1JqM HTTP/1.1
@@ -423,27 +478,44 @@
 ]]></artwork>
         </figure>
         <t>
+          HTTPリクエストURIはリクエストに固有なパラメータを含むことができる.
+          その場合, <spanx style='verb'>access_token</spanx>パラメータは <spanx style='verb'>&amp;</spanx> 文字 (ASCII コード 38) を使い, 他のリクエストに特化したパラメータと適切に分離されていなければならない (MUST).
+          <!--
           The HTTP request URI query can include other
           request-specific parameters, in which case the <spanx
           style='verb'>access_token</spanx> parameter MUST be properly
           separated from the request-specific parameters using <spanx
           style='verb'>&amp;</spanx> character(s) (ASCII code 38).
+          -->
         </t>
         <figure>
           <preamble>
+            例:
+            <!--
             For example:
+            -->
           </preamble>
           <artwork><![CDATA[
  https://server.example.com/resource?access_token=mF_9.B5f-4.1JqM&p=q
 ]]></artwork>
         </figure>
         <t>
+          クライアントはURIクエリパラメータ方式を利用して, "no-stoer"オプションを含んだCache-Controlヘッダを送信すべきである(SHOULD).
+          これらのリクエストに対するサーバ正常(2XXステータス)応答は, "private"オプションを伴うCache-Controlヘッダを含んでいるべきである(SHOULD).
+          <!--
           Clients using the URI Query Parameter method SHOULD also send a
           Cache-Control header containing the "no-store" option.  Server success
           (2XX status) responses to these requests SHOULD contain a Cache-Control
           header with the "private" option.
+          -->
         </t>
         <t>
+          URLが持つアクセストークン値がログに記録される可能性が高いことを含む, 
+          URI方式に関する脆弱性(<xref target="sec-con" />参照)のため,
+          アクセストークンを<spanx
+          style='verb'>Authorization</spanx>リクエストヘッダかHTTPリクエストエンティティボディ中で送信することが不可能でない限りは, この方式を利用すべきではない(SHOULD NOT).
+          リソースサーバはこの方式をサポートしても良い(MAY).
+          <!--
           Because of the security weaknesses associated with the URI
           method (see <xref target="sec-con" />), including the high
           likelihood that the URL containing the access token will be
@@ -452,14 +524,20 @@
           style='verb'>Authorization</spanx> request header field or
           the HTTP request entity-body.
           Resource servers MAY support this method.
+          -->
         </t>
         <t>
+          この方式は現在利用されていることからドキュメントに含まれている.
+          セキュリティ上の重大な不備(<xref target="sec-con" />参照)のため, 利用は非推奨である.
+          また, 予約されたクエリパラメータ名を利用するため, URI名前空間のベストプラクティス("Architecture of the World Wide Web, Volume One" <xref target='W3C.REC-webarch-20041215' />)に逆らっていることも理由に挙げられる.
+          <!--
           This method is included to document current use; its use is
           not recommended, due to its security deficiencies (see
           <xref target="sec-con" />) and also because it uses a
           reserved query parameter name, which is counter to
           URI namespace best practices, per
           "Architecture of the World Wide Web, Volume One" <xref target='W3C.REC-webarch-20041215' />.
+          -->
         </t>
       </section>
 
