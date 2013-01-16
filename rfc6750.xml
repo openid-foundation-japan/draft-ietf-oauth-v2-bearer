@@ -13,7 +13,8 @@
   <?rfc rfcedstyle="yes"?>
 
   <front>
-    <title abbrev='OAuth 2.0 Bearer Token Usage'>The OAuth 2.0 Authorization Framework: Bearer&nbsp;Token&nbsp;Usage</title>
+    <!--title abbrev='OAuth 2.0 Bearer Token Usage'>The OAuth 2.0 Authorization Framework: Bearer&nbsp;Token&nbsp;Usage</title-->
+    <title abbrev='OAuth 2.0 Bearer Token Usage'>The OAuth 2.0 Authorization Framework: Bearer&nbsp;Token&nbsp;Usage（日本語）</title>
 
     <author fullname="Michael B. Jones" surname="Jones" initials="M.B."> <!-- role="editor" -->
       <organization>Microsoft</organization>
@@ -36,34 +37,50 @@
     <workgroup>OAuth Working Group</workgroup>
 
     <abstract>
-      <t>
+      <!--t>
         This specification describes how to use bearer tokens in HTTP
         requests to access OAuth 2.0 protected resources.
         Any party in possession of a bearer token (a "bearer") can use it to
         get access to the associated resources (without demonstrating
         possession of a cryptographic key).  To prevent misuse, bearer tokens
         need to be protected from disclosure in storage and in transport.
+      </t-->
+      <t>
+        この仕様書は, OAuth 2.0の保護リソースへアクセスするために, 署名無しトークンをHTTPリクエスト中でどのように利用するか記述したものである.
+        署名無しトークンを所有する任意のパーティ (持参人) は, 関連づけられたリソースへアクセスするために署名無しトークンを利用できる (暗号鍵の所有を示す必要はない).
+        誤った利用を避けるために, 署名無しトークンは保存場所や流通経路での値の露見から守られる必要がある.
       </t>
     </abstract>
   </front>
 
   <middle>
 
-    <section title='Introduction'>
-      <t>
+    <!--section title='Introduction'-->
+    <section title='はじめに'>
+      <!--t>
         OAuth enables clients to access protected resources by
         obtaining an access token, which is defined in "The OAuth 2.0 Authorization Framework" <xref target="RFC6749"/>
         as "a string representing an access
         authorization issued to the client", rather than using the
         resource owner's credentials directly.
-      </t>
+      </t-->
       <t>
+        OAuthは, クライアントがアクセストークンを取得することで, 保護リソースへのアクセスを可能にする.
+        アクセストークンは "The OAuth 2.0 Authorization Framework" <xref target="RFC6749"/> 中で「クライアントに対するアクセス認可の文字列表現」と定義されており,
+        リソース所有者のクレデンシャルを直接利用することではない.
+      </t>
+      <!--t>
         Tokens are issued to clients by an authorization server with the approval of
         the resource owner. The client uses the access token to access the protected resources
         hosted by the resource server. This specification describes how to make protected resource
         requests when the OAuth access token is a bearer token.
-      </t>
+      </t-->
       <t>
+        トークンはリソース所有者の承認を伴い, 認可サーバによってクライアントに対して発行される.
+        クライアントはアクセストークンを, リソースサーバが持つ保護リソースにアクセスするために利用する.
+        この仕様書では, アクセストークンが署名無しトークンである場合に, 保護リソースを要求する方法を記載する.
+      </t>
+      <!--t>
         This specification defines the use of bearer tokens over
         HTTP/1.1 <xref target='RFC2616'/>
         using Transport Layer Security
@@ -81,6 +98,14 @@
         server authentication using the WWW-Authenticate and
         Authorization HTTP headers but does not preclude its use for
         proxy authentication.
+      </t-->
+      <t>
+       この仕様書では <xref target='RFC2616'>HTTP</xref> 及び <xref target='RFC5246'>TLS</xref> で定義された, TLSを用いたHTTP上でのOAuthで, 署名無しトークンを利用する方法を定める.
+        他の仕様書がその他の転送プロトコルの元での利用について本仕様を拡張する可能性もある.
+       
+       この仕様書では Transport Layer Security
+        (TLS) <xref target='RFC5246' /> を利用した HTTP/1.1 <xref target='RFC2616'/> 上で, 保護リソースへアクセスするために署名無しトークンを利用する方法を定める.
+       TLSの利用は必須であり, 
       </t>
 
       <section title='Notational Conventions'>
