@@ -100,23 +100,32 @@
         proxy authentication.
       </t-->
       <t>
-       この仕様書では <xref target='RFC2616'>HTTP</xref> 及び <xref target='RFC5246'>TLS</xref> で定義された, TLSを用いたHTTP上でのOAuthで, 署名無しトークンを利用する方法を定める.
-        他の仕様書がその他の転送プロトコルの元での利用について本仕様を拡張する可能性もある.
-       
        この仕様書では Transport Layer Security
-        (TLS) <xref target='RFC5246' /> を利用した HTTP/1.1 <xref target='RFC2616'/> 上で, 保護リソースへアクセスするために署名無しトークンを利用する方法を定める.
-       TLSの実装と利用は, 本仕様では必須である; 他の仕様書が他のプロトコルの元手の利用について本使用を拡張する可能性がある. 
-       OAuthの保護リソースへアクセスする目的で, OAuth 2.0 認可 <xref target="RFC6749" /> フローの結果得られるアクセストークンを利用するように設計されていることに加え, 本仕様は, 署名なしトークンを利用して, 任意のソースから, 署名付きトークンによって保護されている任意のリソースに対してアクセスすることが可能な一般的なHTTP認可方式を実際に定義する.
+        (TLS) <xref target='RFC5246' /> を利用した HTTP/1.1 <xref target='RFC2616'/> 上で, 
+       保護リソースへアクセスするために署名無しトークンを利用する方法を定める.
+       TLSの実装と利用は, 本仕様では必須である; 他の仕様書が他のプロトコルの元手の利用について, 
+       本使用を拡張する可能性がある. 
+       OAuthの保護リソースへアクセスするために, OAuth 2.0 認可 <xref target="RFC6749" /> フローの
+       結果得られるアクセストークンを利用するように設計されていることに加え, 
+       本仕様は, 署名なしトークンを利用して, 任意のソースから, 署名付きトークンによって保護されている任意のリソースに対してアクセスすることが可能な一般的なHTTP認可方式を実際に定義する.
       </t>
 
-      <section title='Notational Conventions'>
-        <t>
+      <!--section title='Notational Conventions'-->
+      <section title='要求記法および規則'>
+        <!--t>
           The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD
           NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as
           described in
           "Key words for use in RFCs to Indicate Requirement Levels" <xref target='RFC2119' />.
-        </t>
+        </t-->
         <t>
+          本文書で用いられる各キーワード「MUST (しなければならない)」, 「MUST NOT (してはならない)」,
+          「REQUIRED (必須である)」, 「SHALL (するものとする)」, 「SHALL NOT (しないものとする)」, 
+          「SHOULD (すべきである)」, 「SHOULD NOT (すべきではない)」, 「RECOMMENDED (推奨される)」, 
+          「MAY (してもよい)」, 「OPTIONAL (任意である)」は <xref target='RFC2119' /> で
+          述べられている通りに解釈されるべきものである.
+        </t>
+        <!--t>
           This document uses the Augmented Backus-Naur Form (ABNF)
           notation of <xref target='RFC5234' />.
           Additionally, the following rules are included from
@@ -124,6 +133,11 @@
           auth-param and auth-scheme; and from
           "Uniform Resource Identifier (URI): Generic Syntax" <xref target='RFC3986' />:
           URI-reference.
+        </t-->
+        <t>
+          このドキュメントでは<xref target='RFC5234' />におけるAugmented Backus-Naur Form (ABNF) 表記法を元にした. 
+          加えて, 次の規則 (HTTP/1.1 <xref target='RFC2617'/>: auth-param および auth-scheme; 
+          "Uniform Resource Identifier (URI): Generic Syntax" <xref target='RFC3986' />記載: URI-reference) に従う.
         </t>
         <t>
           Unless otherwise noted, all the protocol parameter names and values are case sensitive.
