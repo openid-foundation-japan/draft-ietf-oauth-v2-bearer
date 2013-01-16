@@ -178,8 +178,17 @@
         </t>
       </section>
 
-      <section title='Overview'>
+      <!--section title='Overview'-->
+      <section title='概要'>
         <t>
+          OAuthはリソースオーナーの代わりに保護リソースにアクセスする方法をクライアントに提供する.
+          一般的なケースにおいて, クライアントが保護リソースにアクセスする前に, クライアントは初めに
+          リソースオーナーの認可を取得し, アクセス認可とアクセストークンを交換しなければならない.
+          アクセストークンは, 与えられた権限の範囲, 期間とその他の属性を示している.
+          クライアントはリソースサーバにアクセストークンを渡すことにより, 保護リソースにアクセスする.
+          いくつかのケースにおいては, クライアントは, 最初にリソースオーナーから認可を得ずに認可サーバから
+          アクセストークンを得るために, 自らのクレデンシャルを認可サーバに直接渡すこともある.
+        <!--
           OAuth provides a method for clients to access a protected resource on behalf of a
           resource owner. In the general case,
           before a client can access a protected resource, it must first obtain
@@ -193,17 +202,23 @@
           credentials to an authorization server to obtain an access
           token without having to first obtain an authorization grant from a
           resource owner.
+        -->
         </t>
 
         <t>
+          アクセストークンはほかの認証方法 (例: ユーザ名とパスワード, アサーション) をリソースサーバが理解しうる一つのトークンに置き換えるような抽象化を提供する.
+          この抽象レイヤーは有効期間の短いアクセストークンを発行することを可能にするとともに, リソースサーバーが様々な認証スキームを理解しなくともよいようにする.
+        <!--
           The access token provides an abstraction, replacing different authorization
           constructs (e.g., username and password, assertion) for a single token understood by the
           resource server. This abstraction enables issuing access tokens valid for a short time
           period, as well as removing the resource server's need to understand a wide range of
           authentication schemes.
+        -->
         </t>
 
-        <figure title='Abstract Protocol Flow' anchor='Figure-1'>
+        <!--figure title='Abstract Protocol Flow' anchor='Figure-1'-->
+        <figure title='プロトコルフロー概要' anchor='Figure-1'>
           <artwork><![CDATA[
   +--------+                               +---------------+
   |        |--(A)- Authorization Request ->|   Resource    |
@@ -225,40 +240,56 @@
 ]]></artwork></figure>
 
         <t>
+          <xref target='Figure-1' /> で示されたフロー概要は, クライアント, リソースオーナー, 認可サーバー, リソースサーバー (<xref target="RFC6749"/>に記載)の間でのやり取りについて記述したものである。
+          以下のステップはこの文書中で定義される:
+          <!--
           The abstract OAuth 2.0 flow illustrated in <xref target='Figure-1' />
           describes the interaction
           between the client, resource owner, authorization server, and
           resource server (described in <xref target="RFC6749"/>).
           The following two steps are specified within this document:
+          -->
         </t>
 
           <t>
            <list style='hanging' hangIndent="5">
             <t hangText="(E)">
+              クライアントはリソースサーバに対して保護リソースの要求を行い, アクセストークンを示すことで認証を実施する.
+              <!--
               The client requests the protected resource from the resource
               server and authenticates
               by presenting the access token.
+              -->
             </t>
             <t hangText="(F)">
+              リソースサーバはアクセストークンの正当性を検証し, 妥当な場合はリクエストに対し応答する.
+              <!--
               The resource server validates the access token, and if valid,
               serves the request.
+              -->
             </t>
           </list>
         </t>
 
         <t>
+          本文書は, ステップ(D)で返却されるアクセストークンに対する意味的要求を課す.
+          <!--
           This document also imposes semantic requirements upon the
           access token returned in step (D).
+          -->
         </t>
       </section>
     </section>
 
     <section title='Authenticated Requests'>
       <t>
+        この章では, リソースの要求において署名無しトークンをリソースサーバに送信する3つの方法を定義する.
+        クライアントは一度のリクエストにおいて, トークンを送信する方法を複数同時に用いてはならない (MUST NOT).        <!--
         This section defines three
         methods of sending bearer access tokens in resource requests
         to resource servers.  Clients MUST NOT use more than one
         method to transmit the token in each request.
+        -->
       </t>
 
       <section title='Authorization Request Header Field' anchor='authz-header'>
