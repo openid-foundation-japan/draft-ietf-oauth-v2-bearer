@@ -13,7 +13,8 @@
   <?rfc rfcedstyle="yes"?>
 
   <front>
-    <title abbrev='OAuth 2.0 Bearer Token Usage'>The OAuth 2.0 Authorization Framework: Bearer&nbsp;Token&nbsp;Usage</title>
+    <!--title abbrev='OAuth 2.0 Bearer Token Usage'>The OAuth 2.0 Authorization Framework: Bearer&nbsp;Token&nbsp;Usage</title-->
+    <title abbrev='OAuth 2.0 Bearer Token Usage'>The OAuth 2.0 Authorization Framework: Bearer&nbsp;Token&nbsp;Usage（日本語）</title>
 
     <author fullname="Michael B. Jones" surname="Jones" initials="M.B."> <!-- role="editor" -->
       <organization>Microsoft</organization>
@@ -36,34 +37,50 @@
     <workgroup>OAuth Working Group</workgroup>
 
     <abstract>
-      <t>
+      <!--t>
         This specification describes how to use bearer tokens in HTTP
         requests to access OAuth 2.0 protected resources.
         Any party in possession of a bearer token (a "bearer") can use it to
         get access to the associated resources (without demonstrating
         possession of a cryptographic key).  To prevent misuse, bearer tokens
         need to be protected from disclosure in storage and in transport.
+      </t-->
+      <t>
+        この仕様書は, OAuth 2.0の保護リソースへアクセスするために, 署名無しトークンをHTTPリクエスト中でどのように利用するか記述したものである.
+        署名無しトークンを所有する任意のパーティ (持参人) は, 関連づけられたリソースへアクセスするために署名無しトークンを利用できる (暗号鍵の所有を示す必要はない).
+        誤った利用を避けるために, 署名無しトークンは保存場所や流通経路での値の露見から守られる必要がある.
       </t>
     </abstract>
   </front>
 
   <middle>
 
-    <section title='Introduction'>
-      <t>
+    <!--section title='Introduction'-->
+    <section title='はじめに'>
+      <!--t>
         OAuth enables clients to access protected resources by
         obtaining an access token, which is defined in "The OAuth 2.0 Authorization Framework" <xref target="RFC6749"/>
         as "a string representing an access
         authorization issued to the client", rather than using the
         resource owner's credentials directly.
-      </t>
+      </t-->
       <t>
+        OAuthは, クライアントがアクセストークンを取得することで, 保護リソースへのアクセスを可能にする.
+        アクセストークンは "The OAuth 2.0 Authorization Framework" <xref target="RFC6749"/> 中で「クライアントに対するアクセス認可の文字列表現」と定義されており,
+        リソース所有者のクレデンシャルを直接利用することではない.
+      </t>
+      <!--t>
         Tokens are issued to clients by an authorization server with the approval of
         the resource owner. The client uses the access token to access the protected resources
         hosted by the resource server. This specification describes how to make protected resource
         requests when the OAuth access token is a bearer token.
-      </t>
+      </t-->
       <t>
+        トークンはリソース所有者の承認を伴い, 認可サーバによってクライアントに対して発行される.
+        クライアントはアクセストークンを, リソースサーバが持つ保護リソースにアクセスするために利用する.
+        この仕様書では, アクセストークンが署名無しトークンである場合に, 保護リソースを要求する方法を記載する.
+      </t>
+      <!--t>
         This specification defines the use of bearer tokens over
         HTTP/1.1 <xref target='RFC2616'/>
         using Transport Layer Security
@@ -81,16 +98,34 @@
         server authentication using the WWW-Authenticate and
         Authorization HTTP headers but does not preclude its use for
         proxy authentication.
+      </t-->
+      <t>
+       この仕様書では Transport Layer Security
+        (TLS) <xref target='RFC5246' /> を利用した HTTP/1.1 <xref target='RFC2616'/> 上で, 
+       保護リソースへアクセスするために署名無しトークンを利用する方法を定める.
+       TLSの実装と利用は, 本仕様では必須である; 他の仕様書が他のプロトコルの元手の利用について, 
+       本使用を拡張する可能性がある. 
+       OAuthの保護リソースへアクセスするために, OAuth 2.0 認可 <xref target="RFC6749" /> フローの
+       結果得られるアクセストークンを利用するように設計されていることに加え, 
+       本仕様は, 署名なしトークンを利用して, 任意のソースから, 署名付きトークンによって保護されている任意のリソースに対してアクセスすることが可能な一般的なHTTP認可方式を実際に定義する.
       </t>
 
-      <section title='Notational Conventions'>
-        <t>
+      <!--section title='Notational Conventions'-->
+      <section title='要求記法および規則'>
+        <!--t>
           The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD
           NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as
           described in
           "Key words for use in RFCs to Indicate Requirement Levels" <xref target='RFC2119' />.
-        </t>
+        </t-->
         <t>
+          本文書で用いられる各キーワード「MUST (しなければならない)」, 「MUST NOT (してはならない)」,
+          「REQUIRED (必須である)」, 「SHALL (するものとする)」, 「SHALL NOT (しないものとする)」, 
+          「SHOULD (すべきである)」, 「SHOULD NOT (すべきではない)」, 「RECOMMENDED (推奨される)」, 
+          「MAY (してもよい)」, 「OPTIONAL (任意である)」は <xref target='RFC2119' /> で
+          述べられている通りに解釈されるべきものである.
+        </t>
+        <!--t>
           This document uses the Augmented Backus-Naur Form (ABNF)
           notation of <xref target='RFC5234' />.
           Additionally, the following rules are included from
@@ -98,16 +133,25 @@
           auth-param and auth-scheme; and from
           "Uniform Resource Identifier (URI): Generic Syntax" <xref target='RFC3986' />:
           URI-reference.
-        </t>
+        </t-->
         <t>
+          このドキュメントでは<xref target='RFC5234' />におけるAugmented Backus-Naur Form (ABNF) 表記法を元にした. 
+          加えて, 次の規則 (HTTP/1.1 <xref target='RFC2617'/>: auth-param および auth-scheme; 
+          "Uniform Resource Identifier (URI): Generic Syntax" <xref target='RFC3986' />記載: URI-reference) に従う.
+        </t>
+        <!--t>
           Unless otherwise noted, all the protocol parameter names and values are case sensitive.
+        </t-->
+        <t>
+          特に記載が無い限り, 全てのプロトコルパラメーター名と値は, 大文字・小文字を区別する.
         </t>
       </section>
 
-      <section title='Terminology'>
+      <!--section title='Terminology'-->
+      <section title='用語定義'>
         <t>
           <list style='hanging'>
-            <t hangText="Bearer Token">
+            <!--t hangText="Bearer Token">
               <vspace />
               A security token with the property that any party in
               possession of the token (a "bearer") can use the token
@@ -115,17 +159,36 @@
               Using a bearer token does not require a bearer to prove
               possession of cryptographic key material
               (proof-of-possession).
-            </t>
+            </t-->
+            <t hangText="署名なしトークン">
+              <vspace />
+              セキュリティトークン.
+              トークンを所有する任意のパーティ (持参人) は, それを所有する他の任意のパーティーにとって
+              可能な如何なる方法でもトークンを利用することができるという特性を持っている.
+              署名無しトークンを利用する際, 持参人は, 暗号鍵の所持を証明 (proof-of-posession) するよう要求されない.            </t>
           </list>
         </t>
-        <t>
+        <!--t>
           All other terms are as defined in "The OAuth 2.0
           Authorization Framework" <xref target="RFC6749" />.
+        </t-->
+        <t>
+          他の全ての用語は "The OAuth 2.0
+          Authorization Framework" <xref target="RFC6749" /> で定義されている通りである.
         </t>
       </section>
 
-      <section title='Overview'>
+      <!--section title='Overview'-->
+      <section title='概要'>
         <t>
+          OAuthはリソースオーナーの代わりに保護リソースにアクセスする方法をクライアントに提供する.
+          一般的なケースにおいて, クライアントが保護リソースにアクセスする前に, クライアントは初めに
+          リソースオーナーの認可を取得し, アクセス認可とアクセストークンを交換しなければならない.
+          アクセストークンは, 与えられた権限の範囲, 期間とその他の属性を示している.
+          クライアントはリソースサーバにアクセストークンを渡すことにより, 保護リソースにアクセスする.
+          いくつかのケースにおいては, クライアントは, 最初にリソースオーナーから認可を得ずに認可サーバから
+          アクセストークンを得るために, 自らのクレデンシャルを認可サーバに直接渡すこともある.
+        <!--
           OAuth provides a method for clients to access a protected resource on behalf of a
           resource owner. In the general case,
           before a client can access a protected resource, it must first obtain
@@ -139,17 +202,23 @@
           credentials to an authorization server to obtain an access
           token without having to first obtain an authorization grant from a
           resource owner.
+        -->
         </t>
 
         <t>
+          アクセストークンはほかの認証方法 (例: ユーザ名とパスワード, アサーション) をリソースサーバが理解しうる一つのトークンに置き換えるような抽象化を提供する.
+          この抽象レイヤーは有効期間の短いアクセストークンを発行することを可能にするとともに, リソースサーバーが様々な認証スキームを理解しなくともよいようにする.
+        <!--
           The access token provides an abstraction, replacing different authorization
           constructs (e.g., username and password, assertion) for a single token understood by the
           resource server. This abstraction enables issuing access tokens valid for a short time
           period, as well as removing the resource server's need to understand a wide range of
           authentication schemes.
+        -->
         </t>
 
-        <figure title='Abstract Protocol Flow' anchor='Figure-1'>
+        <!--figure title='Abstract Protocol Flow' anchor='Figure-1'-->
+        <figure title='プロトコルフロー概要' anchor='Figure-1'>
           <artwork><![CDATA[
   +--------+                               +---------------+
   |        |--(A)- Authorization Request ->|   Resource    |
@@ -171,44 +240,63 @@
 ]]></artwork></figure>
 
         <t>
+          <xref target='Figure-1' /> で示されたフロー概要は, クライアント, リソースオーナー, 認可サーバー, リソースサーバー (<xref target="RFC6749"/>に記載)の間でのやり取りについて記述したものである。
+          以下のステップはこの文書中で定義される:
+          <!--
           The abstract OAuth 2.0 flow illustrated in <xref target='Figure-1' />
           describes the interaction
           between the client, resource owner, authorization server, and
           resource server (described in <xref target="RFC6749"/>).
           The following two steps are specified within this document:
+          -->
         </t>
 
           <t>
            <list style='hanging' hangIndent="5">
             <t hangText="(E)">
+              クライアントはリソースサーバに対して保護リソースの要求を行い, アクセストークンを示すことで認証を実施する.
+              <!--
               The client requests the protected resource from the resource
               server and authenticates
               by presenting the access token.
+              -->
             </t>
             <t hangText="(F)">
+              リソースサーバはアクセストークンの正当性を検証し, 妥当な場合はリクエストに対し応答する.
+              <!--
               The resource server validates the access token, and if valid,
               serves the request.
+              -->
             </t>
           </list>
         </t>
 
         <t>
+          本文書は, ステップ(D)で返却されるアクセストークンに対する意味的要求を課す.
+          <!--
           This document also imposes semantic requirements upon the
           access token returned in step (D).
+          -->
         </t>
       </section>
     </section>
 
     <section title='Authenticated Requests'>
       <t>
+        この章では, リソースの要求において署名無しトークンをリソースサーバに送信する3つの方法を定義する.
+        クライアントは一度のリクエストにおいて, トークンを送信する方法を複数同時に用いてはならない (MUST NOT).        <!--
         This section defines three
         methods of sending bearer access tokens in resource requests
         to resource servers.  Clients MUST NOT use more than one
         method to transmit the token in each request.
+        -->
       </t>
 
-      <section title='Authorization Request Header Field' anchor='authz-header'>
+      <section title='Authorizationリクエストヘッダフィールド' anchor='authz-header'>
+      <!--section title='Authorization Request Header Field' anchor='authz-header'-->
         <t>
+          HTTP/1.1 <xref target='RFC2617'/> によって定義される<spanx style='verb'>Authorization</spanx>リクエストヘッダフィールド中でアクセストークンを送信する場合, クライアントは<spanx style='verb'>Bearer</spanx>認証スキームを用いる.
+          <!--
           When sending the access token in the <spanx
           style='verb'>Authorization</spanx> request header field
           defined by
@@ -216,6 +304,7 @@
           the
           client uses the <spanx style='verb'>Bearer</spanx>
           authentication scheme to transmit the access token.
+          -->
         </t>
         <figure>
           <preamble>
@@ -228,6 +317,13 @@
 ]]></artwork>
         </figure>
         <t>
+          <spanx style='verb'>Authorization</spanx>ヘッダフィールドは<xref target='I-D.ietf-httpbis-p7-auth' />により定義されるフレームワークを以下のように用いる:
+          このスキームに対する<spanx style='verb'>Authorization</spanx> ヘッダフィールドの文法は, <xref target='RFC2617'/> の第2章で定義されるBasicスキームの使用方法に従う.
+
+          ここで留意すべきは, Basic同様, <xref target='RFC2617'/>の1.2章で定義される汎用的な文法に従わないものの HTTP 1.1 向けに開発された汎用認証フレームワーク<xref target="HTTP-AUTH"/> とは互換性があるということである.
+          とはいえ, 既に展開済みの内容を考慮して, フレームワーク中で概説されている推奨される慣例には従っていない. 
+          持参人クレデンシャルの文法は次のようになる:
+          <!--
           The syntax of the <spanx style='verb'>Authorization</spanx> header
           field for this scheme follows the usage of the Basic scheme defined
           in Section 2 of <xref target='RFC2617'/>. Note that, as with Basic,
@@ -237,7 +333,8 @@
           <xref target="HTTP-AUTH"/>, although it does not
           follow the preferred practice outlined therein in order to
           reflect existing deployments. The syntax for Bearer credentials is
-          as follows: 
+          as follows:
+          --> 
         </t>
 
         <figure>
@@ -248,58 +345,91 @@
 ]]></artwork>
         </figure>
         <t>
+          クライアントが署名無しトークンを伴う認証されたリクエストを送信する際には, <spanx style='verb'>Bearer</spanx> HTTP認可スキームを用いた<spanx style='verb'>Authorization</spanx>リクエストヘッダフィールドを使用すべきである (SHOULD).
+          リソースサーバはこの方法をサポートしなければならない (MUST).
+          <!--
           Clients SHOULD make authenticated requests with a bearer
           token using the <spanx style='verb'>Authorization</spanx>
           request header field with the <spanx
           style='verb'>Bearer</spanx> HTTP authorization scheme.
           Resource servers MUST support this method.
+          -->
         </t>
       </section>
 
-      <section title='Form-Encoded Body Parameter' anchor='body-param'>
+      <section title='Formエンコードされたボディパラメータ' anchor='body-param'>
+      <!--section title='Form-Encoded Body Parameter' anchor='body-param'-->
         <t>
+          HTTPリクエストのエンティティボディ中でアクセストークンを送信する際, クライアントは<spanx style='verb'>access_token</spanx>パラメータを用いてアクセストークンをリクエストボディに付加する.
+          クライアントは以下の条件のすべてを満たさない限りこの方法を用いてはならない (MUST NOT):
+          <!--
           When sending the access token in the HTTP request entity-body,
           the client adds the access token to the request-body
           using the <spanx style='verb'>access_token</spanx>
           parameter.  The client MUST NOT use this method unless
           all of the following conditions are met:
+          -->
           <list style='symbols'>
             <t>
+              HTTPリクエストのエンティティヘッダに<spanx style='verb'>Content-Type</spanx>ヘッダフィールドが含まれており, <spanx style='verb'>application/x-www-form-urlencoded</spanx>にセットされている.
+              
+              <!--
               The HTTP request entity-header includes the <spanx style='verb'>Content-Type</spanx>
               header field set to <spanx style='verb'>application/x-www-form-urlencoded</spanx>.
+              -->
             </t>
             <t>
+              エンティティボディが HTML 4.01 <xref target='W3C.REC-html401-19991224' />によって定義される<spanx style='verb'>application/x-www-form-urlencoded</spanx>コンテントタイプのエンコード要求に従う.
+              <!--
               The entity-body follows the encoding requirements of the
               <spanx style='verb'>application/x-www-form-urlencoded</spanx> content-type as
               defined by
               HTML 4.01 <xref target='W3C.REC-html401-19991224' />.
+              -->
             </t>
             <t>
+              HTTPリクエストのエンティティボディがシングルパートである.
+              <!--
               The HTTP request entity-body is single-part.
+              -->
             </t>
             <t>
+              エンティティボディ中にエンコードされたコンテンツは全て ASCII<xref target="USASCII" /> 文字列だけで構成されなければならない (MUST).
+              <!--
               The content to be encoded in the entity-body MUST
               consist entirely of ASCII <xref target="USASCII" /> characters.
+              -->
             </t>
             <t>
+              リクエストボディが定義されたセマンティクスを持つHTTPリクエストメソッドである.
+              すなわち, <spanx style='verb'>GET</spanx> メソッドを利用してはならない (MUST NOT).
+              <!--
               The HTTP request method is one for which the request-body
               has defined semantics.  In particular,
               this means that the <spanx style='verb'>GET</spanx>
               method MUST NOT be used.
+              -->
             </t>
           </list>
         </t>
         <t>
+          エンティティボディにはリクエストに固有なパラメータを含んでもよい (MAY).
+          この場合, <spanx style='verb'>access_token</spanx>パラメータは文字 <spanx style='verb'>&amp;</spanx> (ASCIIコード38) を用いてリクエスト固有なパラメーから適切に分離されなければならない (MUST).
+          <!--
           The entity-body MAY include other request-specific
           parameters, in which case the <spanx
           style='verb'>access_token</spanx> parameter MUST be properly
           separated from the request-specific parameters using <spanx
           style='verb'>&amp;</spanx> character(s) (ASCII code 38).
+          -->
         </t>
         <figure>
           <preamble>
+            例えば, クライアントは以下のHTTPリクエストをトランスポートレイヤセキュリティを利用して送信する:
+            <!--
             For example, the client makes the following HTTP request using transport-layer
             security:
+            -->
           </preamble>
           <artwork><![CDATA[
   POST /resource HTTP/1.1
@@ -310,27 +440,37 @@
 ]]></artwork>
         </figure>
         <t>
+          この<spanx style='verb'>application/x-www-form-urlencoded</spanx>を用いる方法は, 関与しているブラウザが<spanx style='verb'>Authorization</spanx>リクエストヘッダにアクセスできない場合を除いて使用すべきではない (SHOULD NOT). リソースサーバはこの方法をサポートしてもよい (MAY).
+          <!--
           The <spanx style='verb'>application/x-www-form-urlencoded</spanx>
           method SHOULD NOT be used except in application contexts
           where participating browsers do not have access to the
           <spanx style='verb'>Authorization</spanx> request header
           field.
           Resource servers MAY support this method.
+          -->
         </t>
       </section>
 
-      <section title='URI Query Parameter' anchor='query-param'>
+      <section title='URIクエリパラメータ' anchor='query-param'>
+      <!--section title='URI Query Parameter' anchor='query-param'-->
         <t>
+          HTTPリクエストURIの中でアクセストークンを送信する際, クライアントは<spanx style='verb'>access_token</spanx>パラメータを用いてアクセストークンを"Uniform Resource Identifier (URI): Generic Syntax"<xref target='RFC3986' />で定義されているURIクエリコンポーネントに追加する.
+          <!--
           When sending the access token in the HTTP request URI, the client adds the access
           token to the request URI query component as defined by
           "Uniform Resource Identifier (URI): Generic Syntax" <xref target='RFC3986' />,
           using
           the <spanx style='verb'>access_token</spanx> parameter.
+          -->
         </t>
         <figure>
           <preamble>
+            たとえば, クライアントは次のようなHTTPリクエストをトランスポートレイヤセキュリティを利用して送信する:
+            <!--
             For example, the client makes the following HTTP request using transport-layer
             security:
+            -->
           </preamble>
           <artwork><![CDATA[
   GET /resource?access_token=mF_9.B5f-4.1JqM HTTP/1.1
@@ -338,27 +478,44 @@
 ]]></artwork>
         </figure>
         <t>
+          HTTPリクエストURIはリクエストに固有なパラメータを含むことができる.
+          その場合, <spanx style='verb'>access_token</spanx>パラメータは <spanx style='verb'>&amp;</spanx> 文字 (ASCII コード 38) を使い, 他のリクエストに特化したパラメータと適切に分離されていなければならない (MUST).
+          <!--
           The HTTP request URI query can include other
           request-specific parameters, in which case the <spanx
           style='verb'>access_token</spanx> parameter MUST be properly
           separated from the request-specific parameters using <spanx
           style='verb'>&amp;</spanx> character(s) (ASCII code 38).
+          -->
         </t>
         <figure>
           <preamble>
+            例:
+            <!--
             For example:
+            -->
           </preamble>
           <artwork><![CDATA[
  https://server.example.com/resource?access_token=mF_9.B5f-4.1JqM&p=q
 ]]></artwork>
         </figure>
         <t>
+          クライアントはURIクエリパラメータ方式を利用して, "no-stoer"オプションを含んだCache-Controlヘッダを送信すべきである(SHOULD).
+          これらのリクエストに対するサーバ正常(2XXステータス)応答は, "private"オプションを伴うCache-Controlヘッダを含んでいるべきである(SHOULD).
+          <!--
           Clients using the URI Query Parameter method SHOULD also send a
           Cache-Control header containing the "no-store" option.  Server success
           (2XX status) responses to these requests SHOULD contain a Cache-Control
           header with the "private" option.
+          -->
         </t>
         <t>
+          URLが持つアクセストークン値がログに記録される可能性が高いことを含む, 
+          URI方式に関する脆弱性(<xref target="sec-con" />参照)のため,
+          アクセストークンを<spanx
+          style='verb'>Authorization</spanx>リクエストヘッダかHTTPリクエストエンティティボディ中で送信することが不可能でない限りは, この方式を利用すべきではない(SHOULD NOT).
+          リソースサーバはこの方式をサポートしても良い(MAY).
+          <!--
           Because of the security weaknesses associated with the URI
           method (see <xref target="sec-con" />), including the high
           likelihood that the URL containing the access token will be
@@ -367,14 +524,20 @@
           style='verb'>Authorization</spanx> request header field or
           the HTTP request entity-body.
           Resource servers MAY support this method.
+          -->
         </t>
         <t>
+          この方式は現在利用されていることからドキュメントに含まれている.
+          セキュリティ上の重大な不備(<xref target="sec-con" />参照)のため, 利用は非推奨である.
+          また, 予約されたクエリパラメータ名を利用するため, URI名前空間のベストプラクティス("Architecture of the World Wide Web, Volume One" <xref target='W3C.REC-webarch-20041215' />)に逆らっていることも理由に挙げられる.
+          <!--
           This method is included to document current use; its use is
           not recommended, due to its security deficiencies (see
           <xref target="sec-con" />) and also because it uses a
           reserved query parameter name, which is counter to
           URI namespace best practices, per
           "Architecture of the World Wide Web, Volume One" <xref target='W3C.REC-webarch-20041215' />.
+          -->
         </t>
       </section>
 
