@@ -729,14 +729,20 @@ was unaware that
     <section title='Security Considerations' anchor="sec-con">
 
       <t>
+        <!--
         This section describes the relevant security threats regarding
         token handling when using bearer tokens and describes how to
         mitigate these threats.
+        -->
+        本章では, 署名無しトークン利用時におけるトークンの取り扱い方法に関するセキュリティ上の脅威,
+        およびこれらの脅威をどのように軽減するかを記述する.
       </t>
 
-      <section title="Security Threats" anchor="threats">
+      <!--section title="Security Threats" anchor="threats"-->
+      <section title="セキュリティ上の脅威" anchor="threats">
 
         <t>
+        <!--
           The following list presents several common threats against
           protocols utilizing some form of tokens. This list of
           threats is based on
@@ -745,11 +751,16 @@ was unaware that
           OAuth 2.0 Authorization specification <xref target="RFC6749" />,
           we exclude a discussion of threats
           that are described there or in related documents.
+          -->
+          次のリストは何らかのトークン形式を取り扱うプロトコルにおける共通の脅威を表したものである.
+          この脅威リストはNIST Special Publication 800-63 <xref target="NIST800-63"/>をベースにしたものである.
+          この文書はOAuth 2.0仕様<xref target="RFC6749" />を前提として作成されたものであるため,
+          その仕様や関連文書中に記載されている脅威に関する議論は行わないものとする.
         </t>
 
         <t>
           <list style="hanging">
-            <t hangText="Token manufacture/modification:">
+            <!--<t hangText="Token manufacture/modification:">
               An attacker may generate a bogus token or modify the
               token contents (such as the authentication or attribute
               statements) of an existing token, causing the resource
@@ -758,28 +769,45 @@ was unaware that
               the validity period; a malicious client may modify the
               assertion to gain access to information that they
               should not be able to view.
+            </t>-->
+            <t hangText="トークン偽装/改ざん:">
+              攻撃者が偽装トークンを生成したり, 既存のトークンの (認証や属性の記述内容といった) コンテンツを改ざんすることで, リソースサーバはクライアントに対して不適切なアクセス権限を許してしまう可能性がある.
+              例えば, 攻撃者はトークンが妥当である期間を拡張するようにトークンを改ざんするかもしれない. 悪意のあるクライアントは本来見ることができるべきではない情報へのアクセスを得るためにアサーションを改ざんするかもしれない.
             </t>
-            <t hangText="Token disclosure:">
+
+            <!--<t hangText="Token disclosure:">
               Tokens may contain authentication and attribute
               statements that include sensitive information.
+            </t>-->
+            <t hangText="トークン露見:">
+              トークンは認証や属性の記述など機微情報を含む可能性がある.
             </t>
-            <t hangText="Token redirect:">
-              An attacker uses a token generated for consumption by
+
+            <!--<t hangText="Token redirect:">
+              An attacker uses a token generated for consumption by 
               one resource server to gain access to a different
               resource server that mistakenly believes the token to be
               for it.
+            </t>-->
+            <t hangText="トークンリダイレクト:">
+              攻撃者は, あるリソースサーバで利用することを目的として生成されたトークンを, 別のリソースサーバに対して利用し, 後者が持つリソースにアクセスを試みる.
             </t>
-            <t hangText="Token replay:">
+
+            <!--<t hangText="Token replay:">
               An attacker attempts to use a token that has already
               been used with that resource server in the past.
+            </t>-->
+            <t hangText="トークンリプレイ:">
+              攻撃者は過去にリソースサーバで利用済みのトークンの再利用を試みる.
             </t>
           </list>
         </t>
       </section>
 
-      <section title="Threat Mitigation" anchor="mitigation">
+      <!--<section title="Threat Mitigation" anchor="mitigation"> -->
+      <section title="脅威の軽減" anchor="mitigation">
 
-        <t>
+        <!--<t>
           A large range of threats can be mitigated by protecting the
           contents of the token by using a digital signature or a
           Message Authentication Code (MAC).
@@ -791,23 +819,41 @@ was unaware that
           the reference to the authorization information.
           The mechanics of such an interaction are not defined by this
           specification.
-        </t>
+        </t>-->
         <t>
+          デジタル署名またはメッセージ認証コード (MAC) を用いてトークンの内容を保護することにより, 多くの脅威は軽減することができる.
+          あるいは, 署名無しトークンはエンコードされた認可情報を直接含むのではなく, 認可情報に対する参照を含むことができる.
+          その参照は, 攻撃者が推測不可能でなければならない (MUST). 参照を用いた場合, 認可情報への参照を解決するために, 認証サーバとトークン発行者の間における追加の通信が必要になることがある.
+          そのような通信の方法は, この仕様では定義されない.
+        </t>
+
+
+        <!--<t>
           This document does not specify the encoding or the contents
           of the token; hence, detailed recommendations about the means
           of guaranteeing token integrity protection are outside the
           scope of this document.  The token integrity protection MUST
           be sufficient to prevent the token from being modified.
-        </t>
+        </t>-->
         <t>
+          このドキュメントでは, エンコード方法やトークンの内容に関しては定義しない.
+          そのため, トークンの整合性を保護するための詳細な手段についての提言は, この文章の範囲外である.
+          トークン整合性保護は, トークンの改変を防ぐのに十分でなければならない(MUST).
+        </t>
+        <!--<t>
           To deal with token redirect, it is important for the
           authorization server to include the identity of the intended
           recipients (the audience), typically a single resource
           server (or a list of resource servers), in the token.
           Restricting the use of the token to a specific scope is also
           RECOMMENDED.
-        </t>
+        </t>-->
         <t>
+          トークンリダイレクトへの対策として, トークン内に認可サーバの意図する, 一般的に一つのリソースサーバ
+またはリソースサーバのリストからなる, トークンの受領者 (観衆) のアイデンティティを含むことが重要である.
+          トークンの利用できる範囲を特定の範囲に制限することも推奨される(RECOMMENDED).
+        </t>
+        <!--<t>
           The authorization server MUST implement TLS.
           Which version(s) ought to be implemented will vary over
           time and will depend on the widespread deployment and known
@@ -820,8 +866,18 @@ was unaware that
           TLS version 1.0 <xref target='RFC2246' />
           is the most widely deployed version and will give the
           broadest interoperability.
-        </t>
+        </t>-->
         <t>
+          認可サーバは, TLSを実装しなければならない(MUST).
+          実装すべきバージョン(場合によっては複数)は, 実装時において広く使用されているバージョン, 
+          既知の脆弱性情報などにより, 時間の経過と共に変化しうる.
+          本使用が記述された時点においては, 
+          TLS version 1.2 <xref target='RFC5246' /> が最新バージョンであるが, 
+          まだ非常に狭い範囲でしか使用されておらず, 実装ツールキットが容易に入手できない可能性がある.
+          TLS version 1.0 <xref target='RFC2246' /> は, 最も広く使用されているバージョンであり,
+          広い範囲での相互接続性を提供する
+        </t>
+        <!--<t>
           To protect against token disclosure, confidentiality
           protection MUST be applied using
           TLS <xref target='RFC5246' />
@@ -842,16 +898,32 @@ was unaware that
           MUST validate the TLS certificate chain when making requests
           to protected resources, including checking the
           Certificate Revocation List (CRL) <xref target='RFC5280' />.
-        </t>
+        </t>-->
         <t>
+          トークンの露見を防ぐために, 機密性および完全性の保護を提供する暗号スイートと共に
+          TLS <xref target='RFC5246' /> を利用し, 機密性保護を行わなければならない(MUST).
+          クライアント-リソースサーバ間と同様に, クライアント-認可サーバ間の通信においても,
+          機密性および完全性の保護が必要である.
+          この仕様においてはTLSの実装と使用が義務付けられており, それは通信経路上でのトークン漏洩を防ぐための推奨されるアプローチである.
+          クライアントがトークンの内容を覗き見るようなケースを防ぐためには, TLSによる保護に加えて, トークンの暗号化を行う必要がある (MUST).
+          トークン露呈に対するさらなる防衛として, クライアントは, 保護リソースにリクエストを送信する際,
+          証明書失効リスト(CRL) <xref target='RFC5280' /> の確認を含めて, TLSの証明書チェーンを検証しなければならない(MUST).
+        </t>
+        
+        <!--<t>
           Cookies are typically transmitted in the clear.  Thus, any
           information contained in them is at risk of disclosure.
           Therefore, bearer tokens MUST NOT be stored in cookies that
           can be sent in the clear.
           See "HTTP State Management Mechanism" <xref target='RFC6265' />
           for security considerations about cookies.
-        </t>
+        </t>-->
         <t>
+          クッキーは一般的に平文で送信される.したがって, クッキーに含まれる情報は露呈する危険性をもつ.
+          そのため, クッキーを平文で送信できる場合, 署名無しトークンをクッキー内に格納してはならない(MUST NOT).
+          クッキーにおけるセキュリティ上の脅威については, "HTTP State Management Mechanism" <xref target='RFC6265' /> を参照のこと.
+        </t>
+        <!--<t>
           In some deployments, including those utilizing load
           balancers, the TLS connection to the resource server
           terminates prior to the actual server that provides the
@@ -862,8 +934,13 @@ was unaware that
           confidentiality of the token between the front-end and
           back-end servers; encryption of the token is one such possible
           measure.
-        </t>
+        </t>-->
         <t>
+          ロードバランサを用いる場合を含むいくつかの場合において, リソースサーバへのTLS接続は, リソースを提供する実際のサーバに到達する以前に, 終端されることがある.
+          これは, TLSコネクションを終端するフロントエンドサーバと実際にリソースを提供するバックエンドサーバ間において, トークンを未保護のままにする.
+          このような場合, フロントエンドサーバとバックエンドサーバ間におけるトークンの機密性を保証するために, 充分な対策を行う必要がある(MUST). トークンの暗号化は, 対策の一つである.
+        </t>
+        <!--<t>
           To deal with token capture and replay,
           the following recommendations are
           made: First, the lifetime of the token MUST be limited;
@@ -889,56 +966,95 @@ was unaware that
           failing to validate the certificate chain will allow
           adversaries to steal the token and gain unauthorized access
           to protected resources.
+        </t>-->
+        <t>
+          トークンの覗き見と再利用 (トークンリプレイ) への対策として, 以下の手段が推奨される:
+          第一に, トークンの有効期限は制限されている必要がある(MUST)が, これを実現する一つの方法は, トークン内の保護された部分に, 有効な時間のフィールドを保持しておくことである.
+          短命(1時間以下)のトークンを利用することにより, トークンが露呈した場合の影響が軽減されることに留意すべきである.
+          第二に, クライアントと認可サーバの間及びクライアントとリソースサーバ間の通信においては, 機密性保護を行わなければならない(MUST). 
+          結果として, 通信経路に存在する盗聴者は, トークンの交換を覗き見ることができなくなる.
+          従って, そのような経路上の攻撃者は, トークンをリプレイすることができない.
+
+          さらに, クライアントはトークンをリソースサーバに送信する際  "HTTP Over TLS" <xref target='RFC2818' /> の3.1項に従い, リソースサーバのアイデンティティを確認しなければならない(MUST).
+          保護リソースにリクエストを行う際, クライアントはTLSの証明書チェーンを検証しなければならない(MUST) ことに注意すべきである.
+          未認証かつ未認可なリソースサーバにトークンを送信すること, あるいは証明書チェインの確認に失敗することは, 攻撃者に対して, トークンを盗み, 保護リソースへの認可されていないアクセスを許すことになる. 
         </t>
       </section>
 
-      <section title="Summary of Recommendations">
+      <!--section title="Summary of Recommendations"-->
+      <section title="推奨事項のまとめ">
         <t>
           <list style="hanging">
-            <t hangText="Safeguard bearer tokens:">
+            <!--t hangText="Safeguard bearer tokens:">
               Client implementations MUST ensure that bearer tokens
               are not leaked to unintended parties, as they will be
               able to use them to gain access to protected resources.
               This is the primary security consideration when using
               bearer tokens and underlies all the more
               specific recommendations that follow.
+            </t-->
+            
+            <t hangText="署名なしトークンを保護する:">
+              クライアントの実装は, 保護されたリソースへのアクセスを可能とするために署名無しトークンを使う際には, それが意図されていない相手に漏洩していないことを確実にしなければならない(MUST).
+              これは署名無しトークンを用いる際に最も重要なセキュリティに関する考慮事項であり, 後述の詳細な推奨事項すべての基礎となる. 
             </t>
-            <t hangText="Validate TLS certificate chains:">
+            <!--t hangText="Validate TLS certificate chains:">
               The client MUST validate the TLS certificate chain when
               making requests to protected resources.  Failing to do
               so may enable DNS hijacking attacks to steal the token
               and gain unintended access.
+            </t-->
+            <t hangText="TLS証明書チェインを検証する:">
+              クライアントが保護リソースのリクエストを送信する際には, TLS証明書のチェインを検証しなければならない(MUST).
+              これに失敗した場合, さまざまな攻撃に対してトークンが晒されることとなり, 攻撃者に対して意図しないアクセスを許すことになる. 
             </t>
 
-            <t hangText="Always use TLS (https):">
+            <!--t hangText="Always use TLS (https):">
               Clients MUST always use
               TLS <xref target='RFC5246' />
               (https) or equivalent transport security when making requests
               with bearer tokens.  Failing to do so exposes the token
               to numerous attacks that could give attackers unintended
               access.
+            </t-->
+            <t hangText="Always use TLS (https):">
+              クライアントが署名無しトークンを用いたリクエストを送信する際には, 常に<xref target='RFC5246'>TLS</xref>(https) もしくは同等なトランスポートセキュリティを用いなければならない(MUST).
+              これに失敗した場合, 攻撃者に意図しないアクセスを可能とするさまざまな攻撃にトークンが晒されてしまう. 
             </t>
-            <t hangText="Don't store bearer tokens in cookies:">
+
+            <!--t hangText="Don't store bearer tokens in cookies:">
               Implementations MUST NOT store bearer tokens within
               cookies that can be sent in the clear (which is the
               default transmission mode for cookies).
               Implementations that do store bearer tokens in cookies
               MUST take precautions against cross-site request forgery.
+            </t-->
+
+            <t hangText="クッキーに署名無しトークンを保存しない:">
+              平文で送信されうるクッキーに署名無しトークンを保存する実装を行ってはならない (MUST NOT). (平文での送信はクッキーのデフォルト送信モードである)
+              署名無しトークンをクッキーに保存する実装では, クロスサイトリクエストフォージェリへの対処をしなければならない (MUST). 
             </t>
-            <t hangText="Issue short-lived bearer tokens:">
+            <!--t hangText="Issue short-lived bearer tokens:">
               Token servers SHOULD issue short-lived (one hour or
               less) bearer tokens, particularly when issuing tokens to
               clients that run within a web browser or other
               environments where information leakage may occur.  Using
               short-lived bearer tokens can reduce the impact of them
               being leaked.
+            </t-->
+            <t hangText="有効期間の短い署名無しトークンを発行する:">
+              トークンサーバは, 特にブラウザやその他の情報漏洩の起こりやすい環境の中で実行されるクライアントに対してトークンを発行する際には, 有効期間の短い (1時間ないしそれ以下) 署名無しトークンを発行すべきである (SHOULD).
+               有効期間の短い署名無しトークンを用いることにより, 漏洩した際の影響を減らすことができる. 
             </t>
-            <t hangText="Issue scoped bearer tokens:">
+            <!--t hangText="Issue scoped bearer tokens:">
               Token servers SHOULD issue bearer tokens that contain an audience
               restriction, scoping their use to the intended relying
               party or set of relying parties.
+            </t-->
+            <t hangText="スコープの設定された署名無しトークンを発行する:">
+              トークンサーバは, 1つまたは複数の意図されたリライングパーティによる使用に限定されるよう, オーディエンスの制限を含んだ署名無しトークンを発行すべきである (SHOULD). 
             </t>
-            <t hangText="Don't pass bearer tokens in page URLs:">
+            <!--t hangText="Don't pass bearer tokens in page URLs:">
               Bearer tokens SHOULD NOT be passed in page URLs (for
               example, as query string parameters). Instead, bearer
               tokens SHOULD be passed in HTTP message headers or
@@ -949,6 +1065,10 @@ was unaware that
               are passed in page URLs, attackers might be able to
               steal them from the history data, logs, or other
               unsecured locations.
+            </t-->
+            <t hangText="署名無しトークンをページURL中で渡さない:">
+              署名無しトークンはページURL中で渡されるべきではない (SHOULD NOT). (たとえばクエリ文字列のパラメータとして) 代わりに, 機密性対策の講じられたHTTPメッセージヘッダもしくはメッセージボディ中で渡されるべきである (SHOULD).
+              ブラウザやウェブサーバその他のソフトウェアは, ブラウザの履歴やウェブサーバのログその他のデータ構造において, 適切にURLを保護していないかもしれない. 署名無しトークンがページURLとして渡された場合, 攻撃者は履歴情報やログ, その他の保護されていない場所から盗み取ることができるかもしれない. 
             </t>
           </list>
         </t>
@@ -957,13 +1077,18 @@ was unaware that
 
     <section title='IANA Considerations'>
 
-      <section title='OAuth Access Token Type Registration'>
-        <t>
+      <!--section title='OAuth Access Token Type Registration'-->
+      <section title='OAuth アクセストークンタイプ登録'>
+        <!--t>
           This specification registers the following access token type in the
           OAuth Access Token Types registry defined in <xref target="RFC6749"/>.
+        </t-->
+        <t>
+          本仕様は, <xref target="RFC6749"/> で定義される OAuth アクセストークンタイプレジストリーに, 以下のアクセストークンの種類を登録する.
         </t>
 
-        <section title='The "Bearer" OAuth Access Token Type'>
+        <!--section title='The "Bearer" OAuth Access Token Type'-->
+        <section title='"Bearer" OAuth アクセストークンタイプ'>
           <t>
             <list style='hanging'>
               <t hangText='Type name:'>
@@ -991,13 +1116,17 @@ was unaware that
         </section>
       </section>
 
-      <section title='OAuth Extensions Error Registration'>
-        <t>
+      <!--section title='OAuth Extensions Error Registration'-->
+      <section title='OAuth 拡張エラー登録'>
+        <!--t>
           This specification registers the following error values in the
           OAuth Extensions Error registry defined in <xref target="RFC6749"/>.
+        </t-->
+        <t>
+          本仕様は, <xref target="RFC6749"/> で定義される OAuth 拡張エラーレジストリーに, 以下のエラーの種類を登録する.
         </t>
 
-        <section title='The "invalid_request" Error Value'>
+        <section title='"invalid_request" エラー'>
           <t>
             <list style='hanging'>
               <t hangText='Error name:'>
@@ -1024,7 +1153,7 @@ was unaware that
           </t>
         </section>
 
-        <section title='The "invalid_token" Error Value'>
+        <section title='"invalid_token" エラー'>
           <t>
             <list style='hanging'>
               <t hangText='Error name:'>
@@ -1051,7 +1180,7 @@ was unaware that
           </t>
         </section>
 
-        <section title='The "insufficient_scope" Error Value'>
+        <section title='"insufficient_scope" エラー'>
           <t>
             <list style='hanging'>
               <t hangText='Error name:'>
