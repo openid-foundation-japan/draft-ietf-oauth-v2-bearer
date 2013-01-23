@@ -100,13 +100,14 @@
         proxy authentication.
       </t-->
       <t>
-       この仕様書では Transport Layer Security (TLS) <xref target='RFC5246' /> を利用した HTTP/1.1 <xref target='RFC2616'/> 上で,
-       保護リソースへアクセスするために署名無しトークンを利用する方法を定める.
-       TLSの実装と利用は, 本仕様では必須である; 他の仕様書が他のプロトコルの元手の利用について,
-       本使用を拡張する可能性がある.
-       OAuthの保護リソースへアクセスするために, OAuth 2.0 認可 <xref target="RFC6749" /> フローの
-       結果得られるアクセストークンを利用するように設計されていることに加え,
-       本仕様は, 署名なしトークンを利用して, 任意のソースから, 署名付きトークンによって保護されている任意のリソースに対してアクセスすることが可能な一般的なHTTP認可方式を実際に定義する.
+        この仕様書では Transport Layer Security (TLS) <xref target='RFC5246' /> を利用した HTTP/1.1 <xref target='RFC2616'/> 上で,
+        保護リソースへアクセスするために署名無しトークンを利用する方法を定める.
+        TLSの実装と利用は, 本仕様では必須である; 他の仕様書が他のプロトコルの元での利用について,
+        本使用を拡張する可能性がある.
+        OAuthの保護リソースへアクセスするために, OAuth 2.0 認可 <xref target="RFC6749" /> フローの
+        結果得られるアクセストークンを利用するように設計されていることに加え,
+        本仕様は, 署名なしトークンを利用して, 任意のソースから, 署名付きトークンによって保護されている任意のリソースに対してアクセスすることが可能な一般的なHTTP認可方式を定義する.
+        なおBearer認証スキームは, WWW-AuthenticateおよびAuthorization HTTPヘッダー中でサーバー認証の為に利用されることを想定しているが, プロキシ認証に用いることも禁止はしない.
       </t>
 
       <!--section title='Notational Conventions'-->
@@ -159,11 +160,10 @@
               possession of cryptographic key material
               (proof-of-possession).
             </t-->
-            <t hangText="署名なしトークン">
+            <t hangText="署名なしトークン (Bearer Token)">
               <vspace />
               セキュリティトークン.
-              トークンを所有する任意のパーティ (持参人) は, それを所有する他の任意のパーティーにとって
-              可能な如何なる方法でもトークンを利用することができるという特性を持っている.
+              トークンを所有する任意のパーティ (持参人 = bearer) は, 「トークンを所有している」という条件を満たしさえすればそのトークンを利用することができる.
               署名無しトークンを利用する際, 持参人は, 暗号鍵の所持を証明 (proof-of-posession) するよう要求されない.
             </t>
           </list>
@@ -173,8 +173,7 @@
           Authorization Framework" <xref target="RFC6749" />.
         </t-->
         <t>
-          他の全ての用語は "The OAuth 2.0
-          Authorization Framework" <xref target="RFC6749" /> で定義されている通りである.
+          他の全ての用語は "The OAuth 2.0 Authorization Framework" <xref target="RFC6749" /> で定義されている通りである.
         </t>
       </section>
 
@@ -182,12 +181,10 @@
       <section title='概要'>
         <t>
           OAuthはリソースオーナーの代わりに保護リソースにアクセスする方法をクライアントに提供する.
-          一般的なケースにおいて, クライアントが保護リソースにアクセスする前に, クライアントは初めに
-          リソースオーナーの認可を取得し, アクセス認可とアクセストークンを交換しなければならない.
+          一般的なケースにおいて, クライアントが保護リソースにアクセスする前に, クライアントは初めにリソースオーナーの認可を取得し, アクセス認可とアクセストークンを交換しなければならない.
           アクセストークンは, 与えられた権限の範囲, 期間とその他の属性を示している.
           クライアントはリソースサーバにアクセストークンを渡すことにより, 保護リソースにアクセスする.
-          いくつかのケースにおいては, クライアントは, 最初にリソースオーナーから認可を得ずに認可サーバから
-          アクセストークンを得るために, 自らのクレデンシャルを認可サーバに直接渡すこともある.
+          いくつかのケースにおいては, クライアントは, 最初にリソースオーナーから認可を得ずに認可サーバからアクセストークンを得るために, 自らのクレデンシャルを認可サーバに直接渡すこともある.
         <!--
           OAuth provides a method for clients to access a protected resource on behalf of a
           resource owner. In the general case,
@@ -254,7 +251,7 @@
           <t>
            <list style='hanging' hangIndent="5">
             <t hangText="(E)">
-              クライアントはリソースサーバに対して保護リソースの要求を行い, アクセストークンを示すことで認証を実施する.
+              クライアントはリソースサーバに対して保護リソースの要求を行い, アクセストークンを提示することで認証を実施する.
               <!--
               The client requests the protected resource from the resource
               server and authenticates
@@ -272,7 +269,7 @@
         </t>
 
         <t>
-          本文書は, ステップ(D)で返却されるアクセストークンに対する意味的要求を課す.
+          本文書は, ステップ(D)で返却されるアクセストークンの利用方法について定める.
           <!--
           This document also imposes semantic requirements upon the
           access token returned in step (D).
@@ -318,9 +315,9 @@
 ]]></artwork>
         </figure>
         <t>
-          このスキームに対する<spanx style='verb'>Authorization</spanx> ヘッダフィールドの文法は, <xref target='RFC2617'/> の第2章で定義されるBasicスキームの使用方法に従う.
+          このスキームに対する<spanx style='verb'>Authorization</spanx> ヘッダフィールドの文法は, <xref target='RFC2617'/> の第2章で定義されるBasicスキームに従う.
           ここで留意すべきは, Basic同様, <xref target='RFC2617'/>の1.2章で定義される汎用的な文法に従わないものの HTTP 1.1 向けに開発された汎用認証フレームワーク<xref target="HTTP-AUTH"/> とは互換性があるということである.
-          とはいえ, 既に展開済みの内容を考慮して, フレームワーク中で概説されている推奨される慣例には従っていない.
+          とはいえ, 既存の実装を考慮して, Basic仕様中で概説されている推奨される慣例には従っていない.
           持参人クレデンシャルの文法は次のようになる:
           <!--
           The syntax of the <spanx style='verb'>Authorization</spanx> header
@@ -399,7 +396,7 @@
               -->
             </t>
             <t>
-              リクエストボディが定義されたセマンティクスを持つHTTPリクエストメソッドである.
+              リクエストボディが利用できるHTTPリクエストメソッドである.
               すなわち, <spanx style='verb'>GET</spanx> メソッドを利用してはならない (MUST NOT).
               <!--
               The HTTP request method is one for which the request-body
@@ -498,7 +495,7 @@
 ]]></artwork>
         </figure>
         <t>
-          クライアントはURIクエリパラメータ方式を利用して, "no-stoer" オプションを含んだCache-Controlヘッダを送信すべきである (SHOULD).
+          クライアントはURIクエリパラメータ方式を利用して, "no-store" オプションを含んだCache-Controlヘッダを送信すべきである (SHOULD).
           これらのリクエストに対するサーバ正常 (2XXステータス) 応答は, "private" オプションを伴うCache-Controlヘッダを含んでいるべきである (SHOULD).
           <!--
           Clients using the URI Query Parameter method SHOULD also send a
@@ -508,8 +505,8 @@
           -->
         </t>
         <t>
-          URLが持つアクセストークン値がログに記録される可能性が高いことを含む,
-          URI方式に関する脆弱性 (<xref target="sec-con" />参照) のため,
+          URL中のアクセストークン値がログに記録される可能性が高いことなど,
+          URIを利用した場合はセキュリティレベルが低下 (<xref target="sec-con" />参照) するため,
           アクセストークンを<spanx
           style='verb'>Authorization</spanx>リクエストヘッダかHTTPリクエストエンティティボディ中で送信することが不可能でない限りは, この方式を利用すべきではない (SHOULD NOT).
           リソースサーバはこの方式をサポートしても良い (MAY).
@@ -547,11 +544,9 @@
       <t>
         保護リソースへのリクエストが, 認証クレデンシャルを含んでいない,
         または保護リソースへアクセスすることができるアクセストークンを含んでいない場合,
-        リソースサーバはHTTP <spanx style='verb'>WWW-Authenticate</spanx>
-        レスポンスヘッダフィールドを含めなければならない (MUST).
+        リソースサーバはHTTP <spanx style='verb'>WWW-Authenticate</spanx> レスポンスヘッダフィールドを含めなければならない (MUST).
         同様に, その他の条件下でもリソースサーバはそれをレスポンスに含めてよい (MAY).
-        <spanx style='verb'>WWW-Authenticate</spanx> ヘッダフィールドはHTTP/1.1
-        <xref target='RFC2617'/> で定義されているフレームワークを使用する.
+        <spanx style='verb'>WWW-Authenticate</spanx> ヘッダフィールドはHTTP/1.1 <xref target='RFC2617'/> で定義されているフレームワークを使用する.
         <!--
         If the protected resource request does not include
         authentication credentials or does not contain an access
@@ -565,8 +560,7 @@
         -->
       </t>
       <t>
-        この仕様により定義される全ての challange は auth-scheme の値に
-        <spanx style='verb'>Bearer</spanx> を用いなければならない (MUST).
+        この仕様により定義される全ての challange は auth-scheme の値に <spanx style='verb'>Bearer</spanx> を用いなければならない (MUST).
         また, auth-scheme の後ろには1つ以上の auth-param 値を置かなければならない (MUST).
         この仕様により定義される auth-param 属性は後述する.
         同様に, 他の auth-param 属性を用いてよい (MAY).
@@ -580,8 +574,7 @@
         -->
       </t>
       <t>
-        保護の範囲を表すため, HTTP/1.1 <xref target='RFC2617'/> で記述されている方法で
-        <spanx style='verb'>realm</spanx> 属性が含まれてもよい (MAY).
+        保護の範囲を表すため, HTTP/1.1 <xref target='RFC2617'/> で記述されている方法で <spanx style='verb'>realm</spanx> 属性が含まれてもよい (MAY).
         <spanx style='verb'>realm</spanx> 属性は2回以上現れてはならない (MUST NOT).
         <!--
         A <spanx style='verb'>realm</spanx> attribute MAY be included
@@ -594,8 +587,7 @@
         <spanx style='verb'>scope</spanx> 属性は <xref target="RFC6749"/> の3.3章で定義されている.
         <spanx style='verb'>scope</spanx> 属性は, 大文字と小文字を区別するスコープ値のスペース区切りリストであり,
         要求されたリソースへのアクセスに必要なアクセストークンのスコープを示す.
-        <spanx style='verb'>scope</spanx> の値は処理系定義であり,
-        これを一元的に管理する組織は存在せず, 許容される値は認可サーバによって定義される.
+        <spanx style='verb'>scope</spanx> の値を一元的に管理する組織は存在せず, 許容される値は認可サーバによって定義される.
         <spanx style='verb'>scope</spanx> の値の順序は意味を持たない.
         場合によっては, 保護リソースを利用するのに十分なスコープを持った新しいアクセストークンを要求するために,
         <spanx style='verb'>scope</spanx> の値が用いられるかもしれない.
@@ -626,10 +618,7 @@
       <figure>
         <preamble>
           scope の値の例を以下に2つ例示する.
-          これらの例は OpenID Connect <xref target="OpenID.Messages" /> および
-          Open Authentication Technology Committee (OATC) の
-          Online Multimedia Authorization Protocol <xref target="OMAP" />
-          OAuth 2.0 ユースケースからそれぞれ引用している:
+          これらの例は OpenID Connect <xref target="OpenID.Messages" /> および Open Authentication Technology Committee (OATC) の Online Multimedia Authorization Protocol <xref target="OMAP" /> OAuth 2.0 ユースケースからそれぞれ引用している:
           <!--
           Two example scope values follow; these are taken from the
           OpenID Connect <xref target="OpenID.Messages" /> and the
@@ -672,16 +661,11 @@
         -->
       </t>
       <t>
-        <spanx style='verb'>scope</spanx> 属性の値
-        (<xref target="RFC6749"/> の Appendix A.4 で定義されている) は,
-        意図するスコープの値として %x21 / %x23-5B / %x5D-7E の集合およびスコープの値の区切りとして
-        %x20 以外の文字を含んではならない (MUST NOT).
-        <spanx style='verb'>error</spanx> 属性および
-        <spanx style='verb'>error_description</spanx> 属性の値
-        (<xref target="RFC6749"/> の Appendix A.7 および A.8 で定義されている) は,
+        <spanx style='verb'>scope</spanx> 属性の値 (<xref target="RFC6749"/> の Appendix A.4 で定義されている) は,
+        意図するスコープの値として %x21 / %x23-5B / %x5D-7E の集合およびスコープの値の区切りとして %x20 以外の文字を含んではならない (MUST NOT).
+        <spanx style='verb'>error</spanx> 属性および <spanx style='verb'>error_description</spanx> 属性の値 (<xref target="RFC6749"/> の Appendix A.7 および A.8 で定義されている) は,
         %x20-21 / %x23-5B / %x5D-7E の集合以外の文字を含んではならない (MUST NOT).
-        <spanx style='verb'>error_uri</spanx> 属性の値
-        (<xref target="RFC6749"/> の Appendix A.9 で定義されている) は,
+        <spanx style='verb'>error_uri</spanx> 属性の値 (<xref target="RFC6749"/> の Appendix A.9 で定義されている) は,
         URI-reference の構文に従わなければならず (MUST),
         したがって %x21 / %x23-5B / %x5D-7E の集合以外の文字を含んではならない (MUST NOT).
         <!--
@@ -717,7 +701,7 @@
         </figure>
         <figure>
           <preamble>
-            また, 有効期限の切れたアクセストークンを用いて認証を試みた場合の保護リソースへのリクエストに対するレスポンスは以下のようになる: 
+            また, 有効期限の切れたアクセストークンを用いて認証を試みた場合の保護リソースへのリクエストに対するレスポンスは以下のようになる:
             <!--
             And in response to a protected resource request with an authentication attempt using an
             expired access token:
@@ -791,10 +775,9 @@
           リクエストが一切の認証情報を含まない場合
           (つまり, 認証が必要であることをクライアントが認識していなかった場合か,
           対応していない認証方法をクライアントが試行した場合),
-          リソースサーバはエラーコードやその他のエラー情報を応答に含めるべきではない (SHOULD NOT). 
+          リソースサーバはエラーコードやその他のエラー情報を応答に含めるべきではない (SHOULD NOT).
           <!--
-          If the request lacks any authentication information (e.g., the client
-was unaware that
+          If the request lacks any authentication information (e.g., the client was unaware that
           authentication is necessary or attempted using an unsupported authentication method),
           the resource server SHOULD NOT include an error code or other error information.
           -->
@@ -815,8 +798,7 @@ was unaware that
     <section title="アクセストークンレスポンスの例" anchor="ExAccTokResp">
     <!--section title="Example Access Token Response" anchor="ExAccTokResp"-->
       <t>
-        典型的には, 署名無しトークンは OAuth 2.0 <xref target="RFC6749" />
-        のアクセストークンレスポンスの一部としてクライアントに返される.
+        典型的には, 署名無しトークンは OAuth 2.0 <xref target="RFC6749" /> のアクセストークンレスポンスの一部としてクライアントに返される.
         そのようなレスポンスは以下のようになる:
         <!--
         Typically, a bearer token is returned to the client as part of
@@ -898,7 +880,7 @@ was unaware that
             </t>
 
             <!--<t hangText="Token redirect:">
-              An attacker uses a token generated for consumption by 
+              An attacker uses a token generated for consumption by
               one resource server to gain access to a different
               resource server that mistakenly believes the token to be
               for it.
@@ -963,9 +945,8 @@ was unaware that
           RECOMMENDED.
         </t>-->
         <t>
-          トークンリダイレクトへの対策として, トークン内に認可サーバの意図する, 一般的に一つのリソースサーバ
-またはリソースサーバのリストからなる, トークンの受領者 (観衆) のアイデンティティを含むことが重要である.
-          トークンの利用できる範囲を特定の範囲に制限することも推奨される(RECOMMENDED).
+          トークンリダイレクトへの対策として, トークン内に認可サーバの意図する, 一般的に一つのリソースサーバまたはリソースサーバのリストからなる, トークンの受領者 (観衆 = audience) のアイデンティティを含むことが重要である.
+          トークンの利用できる範囲を特定の範囲に制限することも推奨される (RECOMMENDED).
         </t>
         <!--<t>
           The authorization server MUST implement TLS.
@@ -982,14 +963,14 @@ was unaware that
           broadest interoperability.
         </t>-->
         <t>
-          認可サーバは, TLSを実装しなければならない(MUST).
-          実装すべきバージョン(場合によっては複数)は, 実装時において広く使用されているバージョン, 
+          認可サーバは, TLSを実装しなければならない (MUST).
+          実装すべきバージョン (場合によっては複数) は, 実装時において広く使用されているバージョン,
           既知の脆弱性情報などにより, 時間の経過と共に変化しうる.
-          本使用が記述された時点においては, 
-          TLS version 1.2 <xref target='RFC5246' /> が最新バージョンであるが, 
+          本使用が記述された時点においては,
+          TLS version 1.2 <xref target='RFC5246' /> が最新バージョンであるが,
           まだ非常に狭い範囲でしか使用されておらず, 実装ツールキットが容易に入手できない可能性がある.
           TLS version 1.0 <xref target='RFC2246' /> は, 最も広く使用されているバージョンであり,
-          広い範囲での相互接続性を提供する
+          広い範囲での相互接続性を提供する.
         </t>
         <!--<t>
           To protect against token disclosure, confidentiality
@@ -1014,16 +995,15 @@ was unaware that
           Certificate Revocation List (CRL) <xref target='RFC5280' />.
         </t>-->
         <t>
-          トークンの露見を防ぐために, 機密性および完全性の保護を提供する暗号スイートと共に
-          TLS <xref target='RFC5246' /> を利用し, 機密性保護を行わなければならない(MUST).
+          トークンの露見を防ぐために, 機密性および完全性の保護を提供する暗号スイートと共に TLS <xref target='RFC5246' /> を利用し, 機密性保護を行わなければならない(MUST).
           クライアント-リソースサーバ間と同様に, クライアント-認可サーバ間の通信においても,
           機密性および完全性の保護が必要である.
           この仕様においてはTLSの実装と使用が義務付けられており, それは通信経路上でのトークン漏洩を防ぐための推奨されるアプローチである.
           クライアントがトークンの内容を覗き見るようなケースを防ぐためには, TLSによる保護に加えて, トークンの暗号化を行う必要がある (MUST).
           トークン露呈に対するさらなる防衛として, クライアントは, 保護リソースにリクエストを送信する際,
-          証明書失効リスト(CRL) <xref target='RFC5280' /> の確認を含めて, TLSの証明書チェーンを検証しなければならない(MUST).
+          証明書失効リスト (CRL) <xref target='RFC5280' /> の確認を含めて, TLSの証明書チェーンを検証しなければならない(MUST).
         </t>
-        
+
         <!--<t>
           Cookies are typically transmitted in the clear.  Thus, any
           information contained in them is at risk of disclosure.
@@ -1034,7 +1014,7 @@ was unaware that
         </t>-->
         <t>
           クッキーは一般的に平文で送信される.したがって, クッキーに含まれる情報は露呈する危険性をもつ.
-          そのため, クッキーを平文で送信できる場合, 署名無しトークンをクッキー内に格納してはならない(MUST NOT).
+          そのため, クッキーを平文で送信できる場合, 署名無しトークンをクッキー内に格納してはならない (MUST NOT).
           クッキーにおけるセキュリティ上の脅威については, "HTTP State Management Mechanism" <xref target='RFC6265' /> を参照のこと.
         </t>
         <!--<t>
@@ -1083,15 +1063,14 @@ was unaware that
         </t>-->
         <t>
           トークンの覗き見と再利用 (トークンリプレイ) への対策として, 以下の手段が推奨される:
-          第一に, トークンの有効期限は制限されている必要がある(MUST)が, これを実現する一つの方法は, トークン内の保護された部分に, 有効な時間のフィールドを保持しておくことである.
-          短命(1時間以下)のトークンを利用することにより, トークンが露呈した場合の影響が軽減されることに留意すべきである.
-          第二に, クライアントと認可サーバの間及びクライアントとリソースサーバ間の通信においては, 機密性保護を行わなければならない(MUST). 
+          第一に, トークンの有効期限は制限されている必要がある (MUST) が, これを実現する一つの方法は, トークン内の保護された部分に, 有効な時間のフィールドを保持しておくことである.
+          短命 (1時間以下) のトークンを利用することにより, トークンが露呈した場合の影響が軽減されることに留意すべきである.
+          第二に, クライアントと認可サーバの間及びクライアントとリソースサーバ間の通信においては, 機密性保護を行わなければならない (MUST).
           結果として, 通信経路に存在する盗聴者は, トークンの交換を覗き見ることができなくなる.
           従って, そのような経路上の攻撃者は, トークンをリプレイすることができない.
-
-          さらに, クライアントはトークンをリソースサーバに送信する際  "HTTP Over TLS" <xref target='RFC2818' /> の3.1項に従い, リソースサーバのアイデンティティを確認しなければならない(MUST).
-          保護リソースにリクエストを行う際, クライアントはTLSの証明書チェーンを検証しなければならない(MUST) ことに注意すべきである.
-          未認証かつ未認可なリソースサーバにトークンを送信すること, あるいは証明書チェインの確認に失敗することは, 攻撃者に対して, トークンを盗み, 保護リソースへの認可されていないアクセスを許すことになる. 
+          さらに, クライアントはトークンをリソースサーバに送信する際  "HTTP Over TLS" <xref target='RFC2818' /> の3.1項に従い, リソースサーバのアイデンティティを確認しなければならない (MUST).
+          保護リソースにリクエストを行う際, クライアントはTLSの証明書チェーンを検証しなければならない (MUST) ことに注意すべきである.
+          未認証かつ未認可なリソースサーバにトークンを送信すること, あるいは証明書チェインの確認に失敗することは, 攻撃者に対して, トークンを盗み, 保護リソースへの認可されていないアクセスを許すことになる.
         </t>
       </section>
 
@@ -1107,10 +1086,10 @@ was unaware that
               bearer tokens and underlies all the more
               specific recommendations that follow.
             </t-->
-            
+
             <t hangText="署名なしトークンを保護する:">
-              クライアントの実装は, 保護されたリソースへのアクセスを可能とするために署名無しトークンを使う際には, それが意図されていない相手に漏洩していないことを確実にしなければならない(MUST).
-              これは署名無しトークンを用いる際に最も重要なセキュリティに関する考慮事項であり, 後述の詳細な推奨事項すべての基礎となる. 
+              クライアントの実装は, 保護されたリソースへのアクセスを可能とするために署名無しトークンを使う際には, それが意図されていない相手に漏洩していないことを確実にしなければならない (MUST).
+              これは署名無しトークンを用いる際に最も重要なセキュリティに関する考慮事項であり, 後述の詳細な推奨事項すべての基礎となる.
             </t>
             <!--t hangText="Validate TLS certificate chains:">
               The client MUST validate the TLS certificate chain when
@@ -1119,8 +1098,8 @@ was unaware that
               and gain unintended access.
             </t-->
             <t hangText="TLS証明書チェインを検証する:">
-              クライアントが保護リソースのリクエストを送信する際には, TLS証明書のチェインを検証しなければならない(MUST).
-              これに失敗した場合, さまざまな攻撃に対してトークンが晒されることとなり, 攻撃者に対して意図しないアクセスを許すことになる. 
+              クライアントが保護リソースのリクエストを送信する際には, TLS証明書のチェインを検証しなければならない (MUST).
+              これに失敗した場合, さまざまな攻撃に対してトークンが晒されることとなり, 攻撃者に対して意図しないアクセスを許すことになる.
             </t>
 
             <!--t hangText="Always use TLS (https):">
@@ -1132,8 +1111,8 @@ was unaware that
               access.
             </t-->
             <t hangText="Always use TLS (https):">
-              クライアントが署名無しトークンを用いたリクエストを送信する際には, 常に<xref target='RFC5246'>TLS</xref>(https) もしくは同等なトランスポートセキュリティを用いなければならない(MUST).
-              これに失敗した場合, 攻撃者に意図しないアクセスを可能とするさまざまな攻撃にトークンが晒されてしまう. 
+              クライアントが署名無しトークンを用いたリクエストを送信する際には, 常に <xref target='RFC5246'>TLS</xref> (https) もしくは同等なトランスポートセキュリティを用いなければならない (MUST).
+              これに失敗した場合, 攻撃者に意図しないアクセスを可能とするさまざまな攻撃にトークンが晒されてしまう.
             </t>
 
             <!--t hangText="Don't store bearer tokens in cookies:">
@@ -1146,7 +1125,7 @@ was unaware that
 
             <t hangText="クッキーに署名無しトークンを保存しない:">
               平文で送信されうるクッキーに署名無しトークンを保存する実装を行ってはならない (MUST NOT). (平文での送信はクッキーのデフォルト送信モードである)
-              署名無しトークンをクッキーに保存する実装では, クロスサイトリクエストフォージェリへの対処をしなければならない (MUST). 
+              署名無しトークンをクッキーに保存する実装では, クロスサイトリクエストフォージェリへの対処をしなければならない (MUST).
             </t>
             <!--t hangText="Issue short-lived bearer tokens:">
               Token servers SHOULD issue short-lived (one hour or
@@ -1158,7 +1137,7 @@ was unaware that
             </t-->
             <t hangText="有効期間の短い署名無しトークンを発行する:">
               トークンサーバは, 特にブラウザやその他の情報漏洩の起こりやすい環境の中で実行されるクライアントに対してトークンを発行する際には, 有効期間の短い (1時間ないしそれ以下) 署名無しトークンを発行すべきである (SHOULD).
-               有効期間の短い署名無しトークンを用いることにより, 漏洩した際の影響を減らすことができる. 
+              有効期間の短い署名無しトークンを用いることにより, 漏洩した際の影響を減らすことができる.
             </t>
             <!--t hangText="Issue scoped bearer tokens:">
               Token servers SHOULD issue bearer tokens that contain an audience
@@ -1166,7 +1145,7 @@ was unaware that
               party or set of relying parties.
             </t-->
             <t hangText="スコープの設定された署名無しトークンを発行する:">
-              トークンサーバは, 1つまたは複数の意図されたリライングパーティによる使用に限定されるよう, オーディエンスの制限を含んだ署名無しトークンを発行すべきである (SHOULD). 
+              トークンサーバは, 1つまたは複数の意図されたリライングパーティによる使用に限定されるよう, オーディエンスの制限を含んだ署名無しトークンを発行すべきである (SHOULD).
             </t>
             <!--t hangText="Don't pass bearer tokens in page URLs:">
               Bearer tokens SHOULD NOT be passed in page URLs (for
@@ -1182,7 +1161,7 @@ was unaware that
             </t-->
             <t hangText="署名無しトークンをページURL中で渡さない:">
               署名無しトークンはページURL中で渡されるべきではない (SHOULD NOT). (たとえばクエリ文字列のパラメータとして) 代わりに, 機密性対策の講じられたHTTPメッセージヘッダもしくはメッセージボディ中で渡されるべきである (SHOULD).
-              ブラウザやウェブサーバその他のソフトウェアは, ブラウザの履歴やウェブサーバのログその他のデータ構造において, 適切にURLを保護していないかもしれない. 署名無しトークンがページURLとして渡された場合, 攻撃者は履歴情報やログ, その他の保護されていない場所から盗み取ることができるかもしれない. 
+              ブラウザやウェブサーバその他のソフトウェアは, ブラウザの履歴やウェブサーバのログその他のデータ構造において, 適切にURLを保護していないかもしれない. 署名無しトークンがページURLとして渡された場合, 攻撃者は履歴情報やログ, その他の保護されていない場所から盗み取ることができるかもしれない.
             </t>
           </list>
         </t>
